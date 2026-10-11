@@ -10,7 +10,7 @@ on:
         description: 'Book Title'
         required: true
       author:
-        description: 'Author / Faculty '
+        description: 'Author / Faculty'
         required: false
         default: 'Medical Faculty'
       edition:
@@ -89,7 +89,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install pymupdf gdown requests pillow
+          pip install pymupdf gdown requests pillow cryptography
 
       - name: Run Ingestion Engine
         env:
@@ -104,10 +104,11 @@ jobs:
           UPLOADER_NAME: ${{ github.event.inputs.uploader }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+          VAULT_ENCRYPTION_KEY: ${{ secrets.VAULT_ENCRYPTION_KEY }}
         run: |
           python scripts/process_book.py
 
-      - name: Push PDF to Target Vault Release
+      - name: Push Encrypted Payload to Vault Release
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
@@ -115,18 +116,18 @@ jobs:
           echo "Target Vault Repository: $TARGET_VAULT"
           
           if ! gh release view v1-books --repo "$TARGET_VAULT" > /dev/null 2>&1; then
-            echo "[*] Initializing v1-books release in $TARGET_VAULT..."
-            gh release create v1-books --repo "$TARGET_VAULT" --title "Medical Vault Assets" --notes "Direct PDF storage"
+            echo "[*] Creating release v1-books in $TARGET_VAULT..."
+            gh release create v1-books --repo "$TARGET_VAULT" --title "Medical Vault Assets" --notes "Encrypted payloads"
           fi
           
-          gh release upload v1-books *.pdf --repo "$TARGET_VAULT" --clobber
-          echo "[✓] Asset uploaded successfully to $TARGET_VAULT"
+          gh release upload v1-books *.bin --repo "$TARGET_VAULT" --clobber
+          echo "[✓] Encrypted asset uploaded successfully to $TARGET_VAULT"
 
       - name: Commit Updated Metadata & Cover
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          rm -f target_vault.txt *.pdf
+          rm -f target_vault.txt *.bin *.pdf
           git add assets/covers/ catalog.json
           git commit -m "Cataloged: '${{ github.event.inputs.title }}' [${{ github.event.inputs.subject }}]" || echo "No changes to commit"
           git push origin main
