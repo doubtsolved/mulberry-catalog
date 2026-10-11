@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdated": 0,
+  "lastUpdated": 1791719743991,
   "categories": [
     "All",
     "Anatomy",
@@ -10,5 +10,17 @@
     "Pharmacology",
     "Handwritten Notes"
   ],
-  "books": []
+  "books": [
+    {
+      "id": "marrow_physiology_notes",
+      "title": "Marrow Physiology Notes",
+      "author": "Medical Faculty",
+      "category": "Physiology",
+      "totalPages": 441,
+      "sizeMb": 33.3,
+      "coverUrl": "https://raw.githubusercontent.com/doubtsolved/mulberry-catalog/main/assets/covers/marrow_physiology_notes.webp",
+      "downloadUrl": "https://github.com/doubtsolved/mulberry-catalog/releases/download/v1-books/marrow_physiology_notes.pdf",
+      "uploader": "Sahabul"
+    }
+  ]
 }
