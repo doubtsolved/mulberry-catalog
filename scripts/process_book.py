@@ -2,17 +2,19 @@ import os
 import sys
 import json
 import re
-import fitz  # PyMuPDF
-import gdown
+import io
+import time
 import requests
 from PIL import Image
+import pymupdf
+import gdown
 
 def slugify(text):
     text = re.sub(r'[^\w\s-]', '', text).strip().lower()
     return re.sub(r'[-\s]+', '_', text)
 
 def extract_drive_id(url):
-    """Extract clean Google Drive file ID from any URL format."""
+    """Extract clean Google Drive file ID from common URL formats."""
     patterns = [
         r'/file/d/([a-zA-Z0-9_-]+)',
         r'id=([a-zA-Z0-9_-]+)',
@@ -44,15 +46,26 @@ def main():
     cover_filename = f"{book_id}.webp"
     cover_rel_path = f"assets/covers/{cover_filename}"
 
-    # 1. Download PDF
+    # 1. Download PDF using extracted File ID
     file_id = extract_drive_id(raw_drive_url)
-    clean_drive_url = f"https://drive.google.com/uc?id={file_id}"
-    print(f"[*] Downloading '{title}' (ID: {file_id})...")
+    print(f"[*] Downloading '{title}' (Drive ID: {file_id})...")
     
+    download_success = False
+    # Attempt download by Google Drive ID directly
     try:
-        gdown.download(clean_drive_url, pdf_filename, quiet=False, fuzzy=True)
+        output = gdown.download(id=file_id, output=pdf_filename, quiet=False)
+        if output and os.path.exists(pdf_filename):
+            download_success = True
     except Exception as e:
-        print(f"[-] gdown encountered an error: {e}")
+        print(f"[-] gdown ID download error: {e}")
+
+    # Fallback to direct URL if ID method failed
+    if not download_success:
+        try:
+            print("[*] Retrying with URL directly...")
+            gdown.download(url=raw_drive_url, output=pdf_filename, quiet=False)
+        except Exception as e:
+            print(f"[-] gdown URL download error: {e}")
 
     if not os.path.exists(pdf_filename) or os.path.getsize(pdf_filename) == 0:
         print("[-] Download failed. Ensure Google Drive sharing is set to 'Anyone with the link'.")
@@ -62,35 +75,32 @@ def main():
     file_size_mb = round(file_size_bytes / (1024 * 1024), 1)
     print(f"[+] Download complete: {file_size_mb} MB")
 
-    # 2. Extract Cover (Safely handling RGB/CMYK)
+    # 2. Extract Cover (Safely handling RGB and CMYK)
     print("[*] Extracting cover image (Page 1)...")
     os.makedirs("assets/covers", exist_ok=True)
     
-    doc = fitz.open(pdf_filename)
+    doc = pymupdf.open(pdf_filename)
     total_pages = len(doc)
     page_1 = doc.load_page(0)
     
     pix = page_1.get_pixmap(dpi=150)
-    # Convert CMYK to RGB if necessary to avoid WebP conversion errors
     if pix.colorspace and pix.colorspace.name == "DeviceCMYK":
-        pix = fitz.Pixmap(fitz.csRGB, pix)
+        pix = pymupdf.Pixmap(pymupdf.csRGB, pix)
     
-    # Save pixmap as PNG in memory, then export as compressed WebP
     img_data = pix.tobytes("png")
     doc.close()
     
-    import io
     img = Image.open(io.BytesIO(img_data)).convert("RGB")
     img.save(cover_rel_path, format="WEBP", quality=80)
     print(f"[+] Cover saved to {cover_rel_path} ({total_pages} total pages)")
 
     # 3. Direct Download Link via GitHub Releases
-    download_url = f"https://github/{repo}/releases/download/v1-books/{pdf_filename}"
+    download_url = f"https://github.com/{repo}/releases/download/v1-books/{pdf_filename}"
     cover_cdn_url = f"https://raw.githubusercontent.com/{repo}/main/{cover_rel_path}"
 
     # 4. Telegram Notification
     if bot_token and channel_id:
-        print("[*] Sending to Telegram channel...")
+        print("[*] Sending notification to Telegram...")
         caption = (
             f"📚 <b>{title}</b>\n"
             f"👤 Author: {author}\n"
@@ -117,12 +127,16 @@ def main():
                         timeout=30
                     )
         except Exception as e:
-            print(f"[!] Telegram alert skipped due to network notice: {e}")
+            print(f"[!] Telegram alert notice: {e}")
 
     # 5. Update catalog.json
     print("[*] Updating catalog.json...")
     catalog_path = "catalog.json"
-    catalog = {"version": 1, "categories": ["All", "Anatomy", "Physiology", "Biochemistry", "Pathology", "Pharmacology", "Handwritten Notes"], "books": []}
+    catalog = {
+        "version": 1,
+        "categories": ["All", "Anatomy", "Physiology", "Biochemistry", "Pathology", "Pharmacology", "Handwritten Notes"],
+        "books": []
+    }
     
     if os.path.exists(catalog_path):
         try:
@@ -144,8 +158,6 @@ def main():
         "uploader": uploader
     }
     catalog["books"].insert(0, new_entry)
-    
-    import time
     catalog["lastUpdated"] = int(time.time() * 1000)
 
     with open(catalog_path, "w", encoding="utf-8") as f:
