@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdated": 1791719743991,
+  "lastUpdated": 1791732410959,
   "categories": [
     "All",
     "Anatomy",
@@ -14,12 +14,40 @@
     {
       "id": "marrow_physiology_notes",
       "title": "Marrow Physiology Notes",
-      "author": "Medical Faculty",
-      "category": "Physiology",
+      "author": "Marrow 6",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Handwritten Notes",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "handwritten notes",
+        "marrow",
+        "notes",
+        "physiology"
+      ],
       "totalPages": 441,
       "sizeMb": 33.3,
-      "coverUrl": "https://raw.githubusercontent.com/doubtsolved/mulberry-catalog/main/assets/covers/marrow_physiology_notes.webp",
-      "downloadUrl": "https://github.com/doubtsolved/mulberry-catalog/releases/download/v1-books/marrow_physiology_notes.pdf",
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/marrow_physiology_notes.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/marrow_physiology_notes.pdf"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1wwVtm5YJlQQkiSW1ZLQnpC8KhMhvvlIy"
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=marrow_physiology_notes"
+        }
+      },
       "uploader": "Sahabul"
     }
   ]
