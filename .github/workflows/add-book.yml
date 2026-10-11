@@ -1,0 +1,81 @@
+name: Ingest New Textbook
+
+on:
+  workflow_dispatch:
+    inputs:
+      drive_url:
+        description: 'Google Drive Share Link'
+        required: true
+      title:
+        description: 'Book Title (e.g. Gray Anatomy 33rd Ed)'
+        required: true
+      author:
+        description: 'Author / Publisher'
+        required: false
+        default: 'Medical Faculty'
+      category:
+        description: 'Category / Subject'
+        required: true
+        default: 'Anatomy'
+        type: choice
+        options:
+          - Anatomy
+          - Physiology
+          - Biochemistry
+          - Pathology
+          - Pharmacology
+          - Handwritten Notes
+      uploader:
+        description: 'Contributor Credit'
+        required: false
+        default: 'Sahabul'
+
+permissions:
+  contents: write
+
+jobs:
+  process-and-catalog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          pip install PyMuPDF gdown requests pillow
+
+      - name: Run Ingestion Engine
+        env:
+          DRIVE_URL: ${{ github.event.inputs.drive_url }}
+          BOOK_TITLE: ${{ github.event.inputs.title }}
+          BOOK_AUTHOR: ${{ github.event.inputs.author }}
+          BOOK_CATEGORY: ${{ github.event.inputs.category }}
+          UPLOADER_NAME: ${{ github.event.inputs.uploader }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+        run: |
+          python scripts/process_book.py
+
+      - name: Release or Update PDF File
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Create a permanent release tag 'v1-books' if it doesn't already exist
+          if ! gh release view v1-books > /dev/null 2>&1; then
+            gh release create v1-books --title "Mulberry Book Vault Assets" --notes "Direct PDF storage"
+          fi
+          # Upload the newly generated PDF into this release
+          gh release upload v1-books *.pdf --clobber
+
+      - name: Commit Cover & catalog.json
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets/covers/ catalog.json
+          git commit -m "Add '${{ github.event.inputs.title }}' to catalog" || echo "No changes to commit"
+          git push
