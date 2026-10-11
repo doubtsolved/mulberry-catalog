@@ -63,13 +63,11 @@ jobs:
 
       - name: Release or Update PDF File
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
         run: |
-          # Create a permanent release tag 'v1-books' if it doesn't already exist
           if ! gh release view v1-books > /dev/null 2>&1; then
             gh release create v1-books --title "Mulberry Book Vault Assets" --notes "Direct PDF storage"
           fi
-          # Upload the newly generated PDF into this release
           gh release upload v1-books *.pdf --clobber
 
       - name: Commit Cover & catalog.json
@@ -78,4 +76,4 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add assets/covers/ catalog.json
           git commit -m "Add '${{ github.event.inputs.title }}' to catalog" || echo "No changes to commit"
-          git push
+          git push origin main
