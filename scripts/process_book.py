@@ -8,6 +8,7 @@ import requests
 from PIL import Image
 import pymupdf
 import gdown
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
 VAULT_ROUTING = {
     # Prof 1
@@ -79,6 +80,20 @@ def build_tag_array(title, author, subject, prof, book_type, extra_tags):
                 
     return sorted(list(filter(None, tags)))
 
+def encrypt_file(input_path, output_path, hex_key):
+    """Encrypts raw PDF using AES-256-GCM. Prepend 12-byte Nonce to ciphertext."""
+    key = bytes.fromhex(hex_key)
+    aesgcm = AESGCM(key)
+    nonce = os.urandom(12)  # 96-bit initialization vector
+    
+    with open(input_path, "rb") as f:
+        plaintext = f.read()
+        
+    ciphertext = aesgcm.encrypt(nonce, plaintext, None)
+    
+    with open(output_path, "wb") as f:
+        f.write(nonce + ciphertext)
+
 def main():
     raw_drive_url = os.environ.get("DRIVE_URL", "").strip()
     title = os.environ.get("BOOK_TITLE", "").strip()
@@ -92,6 +107,7 @@ def main():
     
     bot_token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
     channel_id = os.environ.get("TELEGRAM_CHANNEL_ID", "").strip()
+    vault_key = os.environ.get("VAULT_ENCRYPTION_KEY", "").strip()
     catalog_repo = os.environ.get("GITHUB_REPOSITORY", "")
     owner = catalog_repo.split("/")[0] if "/" in catalog_repo else "user"
 
@@ -99,16 +115,20 @@ def main():
         print("[-] Error: DRIVE_URL and BOOK_TITLE are required.")
         sys.exit(1)
 
+    if not vault_key or len(vault_key) != 64:
+        print("[-] Error: VAULT_ENCRYPTION_KEY must be a valid 64-char hex string.")
+        sys.exit(1)
+
     book_id = slugify(title)
     pdf_filename = f"{book_id}.pdf"
+    bin_filename = f"{book_id}.bin"
     cover_filename = f"{book_id}.webp"
     cover_rel_path = f"assets/covers/{cover_filename}"
 
     vault_repo_name = VAULT_ROUTING.get(subject, "mulberry-vault-prof1")
     target_vault_repo = f"{owner}/{vault_repo_name}"
-    print(f"[*] Target Vault: {target_vault_repo} for subject '{subject}'")
 
-    # 1. Download PDF from Google Drive
+    # 1. Download raw PDF
     file_id = extract_drive_id(raw_drive_url)
     print(f"[*] Downloading '{title}' (Drive ID: {file_id})...")
     
@@ -128,15 +148,14 @@ def main():
             print(f"[-] gdown URL download error: {e}")
 
     if not os.path.exists(pdf_filename) or os.path.getsize(pdf_filename) == 0:
-        print("[-] Download failed. Ensure Google Drive sharing is set to 'Anyone with the link'.")
+        print("[-] Download failed. Check sharing settings.")
         sys.exit(1)
 
     file_size_bytes = os.path.getsize(pdf_filename)
     file_size_mb = round(file_size_bytes / (1024 * 1024), 1)
-    print(f"[+] Download complete: {file_size_mb} MB")
 
-    # 2. Extract WebP Cover
-    print("[*] Extracting Page 1 as WebP cover...")
+    # 2. Extract WebP cover before encryption
+    print("[*] Extracting Page 1 cover...")
     os.makedirs("assets/covers", exist_ok=True)
     doc = pymupdf.open(pdf_filename)
     total_pages = len(doc)
@@ -149,19 +168,21 @@ def main():
     
     img = Image.open(io.BytesIO(img_data)).convert("RGB")
     img.save(cover_rel_path, format="WEBP", quality=80)
-    print(f"[+] Cover saved to {cover_rel_path} ({total_pages} total pages)")
 
-    # 3. Assemble Mirror URLs
-    github_release_url = f"https://github.com/{target_vault_repo}/releases/download/v1-books/{pdf_filename}"
+    # 3. Encrypt PDF to .bin payload
+    print("[*] Encrypting PDF payload with AES-256-GCM...")
+    encrypt_file(pdf_filename, bin_filename, vault_key)
+    print(f"[+] Created encrypted asset: {bin_filename}")
+
+    # 4. URLs
+    github_release_url = f"https://github.com/{target_vault_repo}/releases/download/v1-books/{bin_filename}"
     direct_drive_url = f"https://drive.google.com/uc?export=download&id={file_id}"
-    
-    # jsDelivr global edge CDN link for cover
     cover_cdn_url = f"https://cdn.jsdelivr.net/gh/{catalog_repo}@main/{cover_rel_path}"
     telegram_deeplink = f"https://t.me/MulberryIngestionBot?start={book_id}"
 
-    # 4. Telegram Alert & Vault Backup
+    # 5. Telegram backup (posts unencrypted file to private archive)
     if bot_token and channel_id:
-        print("[*] Sending notification to Telegram...")
+        print("[*] Updating private Telegram vault...")
         caption = (
             f"📚 <b>{title}</b> ({edition})\n"
             f"👤 Author: {author}\n"
@@ -169,7 +190,7 @@ def main():
             f"📑 Type: {book_type}\n"
             f"📄 Pages: {total_pages} ({file_size_mb} MB)\n"
             f"✨ Added by: {uploader}\n\n"
-            f"⬇️ <a href=\"{github_release_url}\">Direct Release Download</a>"
+            f"⬇️ <a href=\"{github_release_url}\">Encrypted Release Asset (.bin)</a>"
         )
         try:
             if file_size_mb <= 49.0:
@@ -191,7 +212,7 @@ def main():
         except Exception as e:
             print(f"[!] Telegram alert notice: {e}")
 
-    # 5. Update catalog.json
+    # 6. Update catalog.json
     print("[*] Updating catalog.json...")
     catalog_path = "catalog.json"
     catalog = {"version": 2, "lastUpdated": 0, "books": []}
@@ -224,11 +245,14 @@ def main():
                 {
                     "provider": "github",
                     "repo": vault_repo_name,
-                    "url": github_release_url
+                    "url": github_release_url,
+                    "isEncrypted": True,
+                    "format": "aes-256-gcm"
                 },
                 {
                     "provider": "drive",
-                    "url": direct_drive_url
+                    "url": direct_drive_url,
+                    "isEncrypted": False
                 }
             ],
             "telegram": {
@@ -247,7 +271,7 @@ def main():
     with open("target_vault.txt", "w") as f:
         f.write(target_vault_repo)
 
-    print(f"[✓] Processed: '{title}' -> Routed to {target_vault_repo}")
+    print(f"[✓] Processed and encrypted: '{title}' -> Released as {bin_filename}")
 
 if __name__ == "__main__":
     main()
