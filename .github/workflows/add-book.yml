@@ -7,14 +7,28 @@ on:
         description: 'Google Drive Share Link'
         required: true
       title:
-        description: 'Book Title (e.g. Gray Anatomy 33rd Ed)'
+        description: 'Book Title (e.g., Guyton and Hall Textbook of Medical Physiology)'
         required: true
       author:
-        description: 'Author / Publisher'
+        description: 'Author / Faculty (e.g., John E. Hall)'
         required: false
         default: 'Medical Faculty'
-      category:
-        description: 'Category / Subject'
+      edition:
+        description: 'Edition (e.g., 14th Edition)'
+        required: false
+        default: 'Standard Edition'
+      prof:
+        description: 'Academic Phase'
+        required: true
+        default: '1st Prof'
+        type: choice
+        options:
+          - 1st Prof
+          - 2nd Prof
+          - 3rd Prof Part 1
+          - Final Prof
+      subject:
+        description: 'Medical Subject'
         required: true
         default: 'Anatomy'
         type: choice
@@ -24,9 +38,37 @@ on:
           - Biochemistry
           - Pathology
           - Pharmacology
+          - Microbiology
+          - Forensic Medicine
+          - Community Medicine
+          - Ophthalmology
+          - ENT
+          - General Medicine
+          - General Surgery
+          - Obstetrics & Gynaecology
+          - Paediatrics
+          - Orthopaedics
+          - Dermatology
+          - Psychiatry
+          - Radiology
+          - Anaesthesiology
+      book_type:
+        description: 'Resource Type'
+        required: true
+        default: 'Standard Textbook'
+        type: choice
+        options:
+          - Standard Textbook
           - Handwritten Notes
+          - Review / High-Yield
+          - Atlas / Practical
+          - Question Bank (PYQ)
+      extra_tags:
+        description: 'Extra Tags (comma-separated, e.g., marrow, diagram, rapid)'
+        required: false
+        default: ''
       uploader:
-        description: 'Contributor Credit'
+        description: 'Contributor Name'
         required: false
         default: 'Sahabul'
 
@@ -34,10 +76,10 @@ permissions:
   contents: write
 
 jobs:
-  process-and-catalog:
+  process-and-route:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout mulberry-catalog
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -47,33 +89,44 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install PyMuPDF gdown requests pillow
+          pip install pymupdf gdown requests pillow
 
       - name: Run Ingestion Engine
         env:
           DRIVE_URL: ${{ github.event.inputs.drive_url }}
           BOOK_TITLE: ${{ github.event.inputs.title }}
           BOOK_AUTHOR: ${{ github.event.inputs.author }}
-          BOOK_CATEGORY: ${{ github.event.inputs.category }}
+          BOOK_EDITION: ${{ github.event.inputs.edition }}
+          BOOK_PROF: ${{ github.event.inputs.prof }}
+          BOOK_SUBJECT: ${{ github.event.inputs.subject }}
+          BOOK_TYPE: ${{ github.event.inputs.book_type }}
+          EXTRA_TAGS: ${{ github.event.inputs.extra_tags }}
           UPLOADER_NAME: ${{ github.event.inputs.uploader }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
         run: |
           python scripts/process_book.py
 
-      - name: Release or Update PDF File
+      - name: Push PDF to Target Vault Release
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
-          if ! gh release view v1-books > /dev/null 2>&1; then
-            gh release create v1-books --title "Mulberry Book Vault Assets" --notes "Direct PDF storage"
+          TARGET_VAULT=$(cat target_vault.txt)
+          echo "Target Vault Repository: $TARGET_VAULT"
+          
+          if ! gh release view v1-books --repo "$TARGET_VAULT" > /dev/null 2>&1; then
+            echo "[*] Initializing v1-books release in $TARGET_VAULT..."
+            gh release create v1-books --repo "$TARGET_VAULT" --title "Medical Vault Assets" --notes "Direct PDF storage"
           fi
-          gh release upload v1-books *.pdf --clobber
+          
+          gh release upload v1-books *.pdf --repo "$TARGET_VAULT" --clobber
+          echo "[✓] Asset uploaded successfully to $TARGET_VAULT"
 
-      - name: Commit Cover & catalog.json
+      - name: Commit Updated Metadata & Cover
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          rm -f target_vault.txt *.pdf
           git add assets/covers/ catalog.json
-          git commit -m "Add '${{ github.event.inputs.title }}' to catalog" || echo "No changes to commit"
+          git commit -m "Cataloged: '${{ github.event.inputs.title }}' [${{ github.event.inputs.subject }}]" || echo "No changes to commit"
           git push origin main
