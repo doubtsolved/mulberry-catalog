@@ -7,14 +7,14 @@ on:
         description: 'Google Drive Share Link'
         required: true
       title:
-        description: 'Book Title (e.g., Guyton and Hall Textbook of Medical Physiology)'
+        description: 'Book Title'
         required: true
       author:
-        description: 'Author / Faculty (e.g., John E. Hall)'
+        description: 'Author / Faculty '
         required: false
         default: 'Medical Faculty'
       edition:
-        description: 'Edition (e.g., 14th Edition)'
+        description: 'Edition'
         required: false
         default: 'Standard Edition'
       prof:
