@@ -9,12 +9,44 @@ from PIL import Image
 import pymupdf
 import gdown
 
+VAULT_ROUTING = {
+    # Prof 1
+    "Anatomy": "mulberry-vault-prof1",
+    "Physiology": "mulberry-vault-prof1",
+    "Biochemistry": "mulberry-vault-prof1",
+    # Prof 2
+    "Pathology": "mulberry-vault-prof2",
+    "Pharmacology": "mulberry-vault-prof2",
+    "Microbiology": "mulberry-vault-prof2",
+    "Forensic Medicine": "mulberry-vault-prof2",
+    # Prof 3 Part 1
+    "Community Medicine": "mulberry-vault-prof3",
+    "Ophthalmology": "mulberry-vault-prof3",
+    "ENT": "mulberry-vault-prof3",
+    # Final Prof
+    "General Medicine": "mulberry-vault-prof4",
+    "General Surgery": "mulberry-vault-prof4",
+    "Obstetrics & Gynaecology": "mulberry-vault-prof4",
+    "Paediatrics": "mulberry-vault-prof4",
+    "Orthopaedics": "mulberry-vault-prof4",
+    "Dermatology": "mulberry-vault-prof4",
+    "Psychiatry": "mulberry-vault-prof4",
+    "Radiology": "mulberry-vault-prof4",
+    "Anaesthesiology": "mulberry-vault-prof4"
+}
+
+PROF_TO_YEAR = {
+    "1st Prof": "1st Year",
+    "2nd Prof": "2nd Year",
+    "3rd Prof Part 1": "3rd Year",
+    "Final Prof": "Final Year"
+}
+
 def slugify(text):
     text = re.sub(r'[^\w\s-]', '', text).strip().lower()
     return re.sub(r'[-\s]+', '_', text)
 
 def extract_drive_id(url):
-    """Extract clean Google Drive file ID from common URL formats."""
     patterns = [
         r'/file/d/([a-zA-Z0-9_-]+)',
         r'id=([a-zA-Z0-9_-]+)',
@@ -26,16 +58,42 @@ def extract_drive_id(url):
             return match.group(1)
     return url
 
+def build_tag_array(title, author, subject, prof, book_type, extra_tags):
+    tags = set()
+    tags.add(prof.lower())
+    tags.add(PROF_TO_YEAR.get(prof, "").lower())
+    tags.add(subject.lower())
+    tags.add(book_type.lower())
+    
+    for word in re.findall(r'\b\w{3,}\b', title.lower()):
+        tags.add(word)
+    for word in re.findall(r'\b\w{3,}\b', author.lower()):
+        if word not in ["faculty", "medical", "books"]:
+            tags.add(word)
+            
+    if extra_tags:
+        for t in extra_tags.split(","):
+            cleaned = t.strip().lower()
+            if cleaned:
+                tags.add(cleaned)
+                
+    return sorted(list(filter(None, tags)))
+
 def main():
     raw_drive_url = os.environ.get("DRIVE_URL", "").strip()
     title = os.environ.get("BOOK_TITLE", "").strip()
     author = os.environ.get("BOOK_AUTHOR", "Medical Faculty").strip()
-    category = os.environ.get("BOOK_CATEGORY", "Anatomy").strip()
+    edition = os.environ.get("BOOK_EDITION", "Standard Edition").strip()
+    subject = os.environ.get("BOOK_SUBJECT", "Anatomy").strip()
+    prof = os.environ.get("BOOK_PROF", "1st Prof").strip()
+    book_type = os.environ.get("BOOK_TYPE", "Standard Textbook").strip()
+    extra_tags = os.environ.get("EXTRA_TAGS", "").strip()
     uploader = os.environ.get("UPLOADER_NAME", "Sahabul").strip()
     
     bot_token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
     channel_id = os.environ.get("TELEGRAM_CHANNEL_ID", "").strip()
-    repo = os.environ.get("GITHUB_REPOSITORY", "")
+    catalog_repo = os.environ.get("GITHUB_REPOSITORY", "")
+    owner = catalog_repo.split("/")[0] if "/" in catalog_repo else "user"
 
     if not raw_drive_url or not title:
         print("[-] Error: DRIVE_URL and BOOK_TITLE are required.")
@@ -46,12 +104,15 @@ def main():
     cover_filename = f"{book_id}.webp"
     cover_rel_path = f"assets/covers/{cover_filename}"
 
-    # 1. Download PDF using extracted File ID
+    vault_repo_name = VAULT_ROUTING.get(subject, "mulberry-vault-prof1")
+    target_vault_repo = f"{owner}/{vault_repo_name}"
+    print(f"[*] Target Vault: {target_vault_repo} for subject '{subject}'")
+
+    # 1. Download PDF from Google Drive
     file_id = extract_drive_id(raw_drive_url)
     print(f"[*] Downloading '{title}' (Drive ID: {file_id})...")
     
     download_success = False
-    # Attempt download by Google Drive ID directly
     try:
         output = gdown.download(id=file_id, output=pdf_filename, quiet=False)
         if output and os.path.exists(pdf_filename):
@@ -59,10 +120,9 @@ def main():
     except Exception as e:
         print(f"[-] gdown ID download error: {e}")
 
-    # Fallback to direct URL if ID method failed
     if not download_success:
         try:
-            print("[*] Retrying with URL directly...")
+            print("[*] Retrying with direct Drive URL...")
             gdown.download(url=raw_drive_url, output=pdf_filename, quiet=False)
         except Exception as e:
             print(f"[-] gdown URL download error: {e}")
@@ -75,18 +135,15 @@ def main():
     file_size_mb = round(file_size_bytes / (1024 * 1024), 1)
     print(f"[+] Download complete: {file_size_mb} MB")
 
-    # 2. Extract Cover (Safely handling RGB and CMYK)
-    print("[*] Extracting cover image (Page 1)...")
+    # 2. Extract WebP Cover
+    print("[*] Extracting Page 1 as WebP cover...")
     os.makedirs("assets/covers", exist_ok=True)
-    
     doc = pymupdf.open(pdf_filename)
     total_pages = len(doc)
     page_1 = doc.load_page(0)
-    
     pix = page_1.get_pixmap(dpi=150)
     if pix.colorspace and pix.colorspace.name == "DeviceCMYK":
         pix = pymupdf.Pixmap(pymupdf.csRGB, pix)
-    
     img_data = pix.tobytes("png")
     doc.close()
     
@@ -94,20 +151,25 @@ def main():
     img.save(cover_rel_path, format="WEBP", quality=80)
     print(f"[+] Cover saved to {cover_rel_path} ({total_pages} total pages)")
 
-    # 3. Direct Download Link via GitHub Releases
-    download_url = f"https://github.com/{repo}/releases/download/v1-books/{pdf_filename}"
-    cover_cdn_url = f"https://raw.githubusercontent.com/{repo}/main/{cover_rel_path}"
+    # 3. Assemble Mirror URLs
+    github_release_url = f"https://github.com/{target_vault_repo}/releases/download/v1-books/{pdf_filename}"
+    direct_drive_url = f"https://drive.google.com/uc?export=download&id={file_id}"
+    
+    # jsDelivr global edge CDN link for cover
+    cover_cdn_url = f"https://cdn.jsdelivr.net/gh/{catalog_repo}@main/{cover_rel_path}"
+    telegram_deeplink = f"https://t.me/MulberryIngestionBot?start={book_id}"
 
-    # 4. Telegram Notification
+    # 4. Telegram Alert & Vault Backup
     if bot_token and channel_id:
         print("[*] Sending notification to Telegram...")
         caption = (
-            f"📚 <b>{title}</b>\n"
+            f"📚 <b>{title}</b> ({edition})\n"
             f"👤 Author: {author}\n"
-            f"🏷️ Category: {category}\n"
+            f"🏥 Prof: {prof} | {subject}\n"
+            f"📑 Type: {book_type}\n"
             f"📄 Pages: {total_pages} ({file_size_mb} MB)\n"
             f"✨ Added by: {uploader}\n\n"
-            f"⬇️ <a href=\"{download_url}\">Direct PDF Download</a>"
+            f"⬇️ <a href=\"{github_release_url}\">Direct Release Download</a>"
         )
         try:
             if file_size_mb <= 49.0:
@@ -132,11 +194,7 @@ def main():
     # 5. Update catalog.json
     print("[*] Updating catalog.json...")
     catalog_path = "catalog.json"
-    catalog = {
-        "version": 1,
-        "categories": ["All", "Anatomy", "Physiology", "Biochemistry", "Pathology", "Pharmacology", "Handwritten Notes"],
-        "books": []
-    }
+    catalog = {"version": 2, "lastUpdated": 0, "books": []}
     
     if os.path.exists(catalog_path):
         try:
@@ -145,25 +203,51 @@ def main():
         except Exception:
             pass
 
+    tags_list = build_tag_array(title, author, subject, prof, book_type, extra_tags)
     catalog["books"] = [b for b in catalog.get("books", []) if b.get("id") != book_id]
-    new_entry = {
+    
+    new_book_record = {
         "id": book_id,
         "title": title,
         "author": author,
-        "category": category,
+        "edition": edition,
+        "prof": prof,
+        "year": PROF_TO_YEAR.get(prof, "1st Year"),
+        "subject": subject,
+        "type": book_type,
+        "tags": tags_list,
         "totalPages": total_pages,
         "sizeMb": file_size_mb,
         "coverUrl": cover_cdn_url,
-        "downloadUrl": download_url,
+        "download": {
+            "mirrors": [
+                {
+                    "provider": "github",
+                    "repo": vault_repo_name,
+                    "url": github_release_url
+                },
+                {
+                    "provider": "drive",
+                    "url": direct_drive_url
+                }
+            ],
+            "telegram": {
+                "deepLink": telegram_deeplink
+            }
+        },
         "uploader": uploader
     }
-    catalog["books"].insert(0, new_entry)
+
+    catalog["books"].insert(0, new_book_record)
     catalog["lastUpdated"] = int(time.time() * 1000)
 
     with open(catalog_path, "w", encoding="utf-8") as f:
         json.dump(catalog, f, indent=2, ensure_ascii=False)
 
-    print(f"[✓] Successfully cataloged: '{title}'")
+    with open("target_vault.txt", "w") as f:
+        f.write(target_vault_repo)
+
+    print(f"[✓] Processed: '{title}' -> Routed to {target_vault_repo}")
 
 if __name__ == "__main__":
     main()
