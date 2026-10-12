@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1791787082794,
+  "lastUpdated": 1791789400942,
   "filters": {
     "profs": [
       "1st Prof",
@@ -38,6 +38,48 @@
     ]
   },
   "books": [
+    {
+      "id": "ak_dutta_physiology_vol_1",
+      "title": "AK Dutta Physiology Vol 1",
+      "author": "AK Dutta",
+      "edition": "N/A",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "dutta",
+        "physiology",
+        "standard book",
+        "standard textbook",
+        "vol"
+      ],
+      "totalPages": 416,
+      "sizeMb": 325.1,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/ak_dutta_physiology_vol_1.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/ak_dutta_physiology_vol_1.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1zCX-JwCBJwVcMX-udcy6Nnf3WvN2o1Ib",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=ak_dutta_physiology_vol_1"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "indu_khurana_medical_physiology",
       "title": "Indu Khurana Medical Physiology",
