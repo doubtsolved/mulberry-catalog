@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1791784934066,
+  "lastUpdated": 1791787082794,
   "filters": {
     "profs": [
       "1st Prof",
@@ -38,6 +38,49 @@
     ]
   },
   "books": [
+    {
+      "id": "indu_khurana_medical_physiology",
+      "title": "Indu Khurana Medical Physiology",
+      "author": "Dr. Indu Khurana",
+      "edition": "General",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "indian author",
+        "indu",
+        "khurana",
+        "medical",
+        "physiology",
+        "standard textbook"
+      ],
+      "totalPages": 1014,
+      "sizeMb": 66.9,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/indu_khurana_medical_physiology.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/indu_khurana_medical_physiology.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1PrvTayc0HcxcAguNZkLYq-qUKCihAx-7",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=indu_khurana_medical_physiology"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "guyton_and_hall_physiology",
       "title": "Guyton and Hall Physiology",
