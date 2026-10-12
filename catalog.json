@@ -80,50 +80,6 @@
         }
       },
       "uploader": "Sahabul"
-    },
-    {
-      "id": "guyton_and_hall_physiology",
-      "title": "Guyton and Hall Physiology",
-      "author": "Arthur C. Guyton, John E. Hall",
-      "edition": "14th Edition",
-      "prof": "1st Prof",
-      "year": "1st Year",
-      "subject": "Physiology",
-      "type": "Standard Textbook",
-      "tags": [
-        "1st prof",
-        "1st year",
-        "and",
-        "arthur",
-        "guyton",
-        "hall",
-        "john",
-        "physiology",
-        "standard textbook"
-      ],
-      "totalPages": 1028,
-      "sizeMb": 59.6,
-      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/guyton_and_hall_physiology.webp",
-      "download": {
-        "mirrors": [
-          {
-            "provider": "github",
-            "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/guyton_and_hall_physiology.bin",
-            "isEncrypted": true,
-            "format": "aes-256-gcm"
-          },
-          {
-            "provider": "drive",
-            "url": "https://drive.google.com/uc?export=download&id=1FKddrgeHiCiUPLq-kmiaLL_HUTa6Gj3Y",
-            "isEncrypted": false
-          }
-        ],
-        "telegram": {
-          "deepLink": "https://t.me/MulberryIngestionBot?start=guyton_and_hall_physiology"
-        }
-      },
-      "uploader": "Sahabul"
     }
   ]
 }
