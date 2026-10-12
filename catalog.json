@@ -1,15 +1,42 @@
 {
-  "version": 1,
+  "version": 2,
   "lastUpdated": 1791781297662,
-  "categories": [
-    "All",
-    "Anatomy",
-    "Physiology",
-    "Biochemistry",
-    "Pathology",
-    "Pharmacology",
-    "Handwritten Notes"
-  ],
+  "filters": {
+    "profs": [
+      "1st Prof",
+      "2nd Prof",
+      "3rd Prof Part 1",
+      "Final Prof"
+    ],
+    "types": [
+      "Standard Textbook",
+      "Handwritten Notes",
+      "Review / High-Yield",
+      "Atlas / Practical",
+      "Question Bank (PYQ)"
+    ],
+    "subjects": [
+      "Anatomy",
+      "Physiology",
+      "Biochemistry",
+      "Pathology",
+      "Pharmacology",
+      "Microbiology",
+      "Forensic Medicine",
+      "Community Medicine",
+      "Ophthalmology",
+      "ENT",
+      "General Medicine",
+      "General Surgery",
+      "Obstetrics & Gynaecology",
+      "Paediatrics",
+      "Orthopaedics",
+      "Dermatology",
+      "Psychiatry",
+      "Radiology",
+      "Anaesthesiology"
+    ]
+  },
   "books": [
     {
       "id": "bdc_handbook_of_general_anatomy",
