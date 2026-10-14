@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1791958508577,
+  "lastUpdated": 1791958681678,
   "filters": {
     "profs": [
       "1st Prof",
@@ -38,6 +38,48 @@
     ]
   },
   "books": [
+    {
+      "id": "inderbir_singh_textbook_of_anatomy",
+      "title": "Inderbir Singh Textbook of Anatomy",
+      "author": "Inderbir Singh",
+      "edition": "N/A",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "inderbir",
+        "singh",
+        "standard textbook",
+        "textbook"
+      ],
+      "totalPages": 1207,
+      "sizeMb": 63.4,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/inderbir_singh_textbook_of_anatomy.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/inderbir_singh_textbook_of_anatomy.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1QajkpdRovRjVNLppbSiCTzUiV046Gvuw",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=inderbir_singh_textbook_of_anatomy"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "volume_3_superior_and_inferior_extremities",
       "title": "Volume 3: Superior and Inferior Extremities",
