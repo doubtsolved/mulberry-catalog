@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1791953932127,
+  "lastUpdated": 1791954204352,
   "filters": {
     "profs": [
       "1st Prof",
@@ -38,6 +38,50 @@
     ]
   },
   "books": [
+    {
+      "id": "bd_chaurasias_human_anatomy_volume_3_4",
+      "title": "BD Chaurasia's Human Anatomy, Volume 3 & 4",
+      "author": "BD Chaurasia",
+      "edition": "8th",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "brain-neuroanatomy (volume 4)",
+        "chaurasia",
+        "head & neck (volume 3)",
+        "human",
+        "standard textbook",
+        "volume"
+      ],
+      "totalPages": 640,
+      "sizeMb": 214.4,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/bd_chaurasias_human_anatomy_volume_3_4.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/bd_chaurasias_human_anatomy_volume_3_4.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1WRfXLZnLvOxoJPcGg38Tl-eUt4CynrIA",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=bd_chaurasias_human_anatomy_volume_3_4"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "bd_chaurasias_human_anatomy_volume_2",
       "title": "BD Chaurasia's Human Anatomy, Volume 2",
