@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1791789400942,
+  "lastUpdated": 1791953779420,
   "filters": {
     "profs": [
       "1st Prof",
@@ -38,6 +38,50 @@
     ]
   },
   "books": [
+    {
+      "id": "bdc_handbook_of_general_anatomy",
+      "title": "BDC Handbook of General Anatomy",
+      "author": "BD Chaurasia",
+      "edition": "4th",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "bdc",
+        "chaurasia",
+        "general",
+        "general anatomy",
+        "handbook",
+        "standard textbook"
+      ],
+      "totalPages": 276,
+      "sizeMb": 20.5,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/bdc_handbook_of_general_anatomy.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/bdc_handbook_of_general_anatomy.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1FR8wj5B9FUVAzXIMx57q0H2BaJzFNJOU",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=bdc_handbook_of_general_anatomy"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "indu_khurana_medical_physiology",
       "title": "Indu Khurana Medical Physiology",
