@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1791954204352,
+  "lastUpdated": 1791957587362,
   "filters": {
     "profs": [
       "1st Prof",
@@ -38,6 +38,50 @@
     ]
   },
   "books": [
+    {
+      "id": "vishram_singh_clinical_and_surgical_anatomy",
+      "title": "Vishram Singh Clinical and Surgical Anatomy",
+      "author": "Vishram Singh",
+      "edition": "N/A",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "and",
+        "clinical",
+        "singh",
+        "standard textbook",
+        "surgical",
+        "vishram"
+      ],
+      "totalPages": 346,
+      "sizeMb": 45.3,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/vishram_singh_clinical_and_surgical_anatomy.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/vishram_singh_clinical_and_surgical_anatomy.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1EHzmp9pUW20ZPbYpSHto-vUllfi9D_v6",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=vishram_singh_clinical_and_surgical_anatomy"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "bd_chaurasias_human_anatomy_volume_3_4",
       "title": "BD Chaurasia's Human Anatomy, Volume 3 & 4",
