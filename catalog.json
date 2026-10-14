@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1791964645778,
+  "lastUpdated": 1791964765528,
   "filters": {
     "profs": [
       "1st Prof",
@@ -38,6 +38,57 @@
     ]
   },
   "books": [
+    {
+      "id": "grays_atlas_of_anatomy",
+      "title": "Gray’s Atlas of Anatomy",
+      "author": "Richard L. Drake, A. Wayne Vogl, Adam W.M. Mitchell, Richard Tibbitts, and Paul Richardson",
+      "edition": "N/A",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Atlas / Practical",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "adam",
+        "anatomy",
+        "and",
+        "atlas",
+        "atlas / practical",
+        "drake",
+        "gray",
+        "mitchell",
+        "paul",
+        "richard",
+        "richardson",
+        "tibbitts",
+        "vogl",
+        "wayne"
+      ],
+      "totalPages": 577,
+      "sizeMb": 61.4,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/grays_atlas_of_anatomy.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/grays_atlas_of_anatomy.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1jx1IBvjpHAUmdweLiMx9VTf-3UMqHFhy",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=grays_atlas_of_anatomy"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "mcminns_clinical_atlas_of_human_anatomy",
       "title": "McMinn's clinical atlas of human anatomy",
