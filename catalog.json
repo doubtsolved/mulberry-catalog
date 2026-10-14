@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1791958396383,
+  "lastUpdated": 1791958508577,
   "filters": {
     "profs": [
       "1st Prof",
@@ -38,6 +38,52 @@
     ]
   },
   "books": [
+    {
+      "id": "volume_3_superior_and_inferior_extremities",
+      "title": "Volume 3: Superior and Inferior Extremities",
+      "author": "AK Dutta",
+      "edition": "N/A",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "and",
+        "dutta",
+        "extremities",
+        "gross anatomy",
+        "inferior",
+        "standard textbook",
+        "superior",
+        "volume"
+      ],
+      "totalPages": 275,
+      "sizeMb": 185.3,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/volume_3_superior_and_inferior_extremities.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/volume_3_superior_and_inferior_extremities.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=12gy0eFbXa8OL8QQYFycRgLyzK73d5rxY",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=volume_3_superior_and_inferior_extremities"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "ak_dutta_anatomy_volume_2_head_and_neck",
       "title": "AK Dutta  Anatomy Volume 2: Head and Neck",
