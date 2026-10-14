@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1791953836532,
+  "lastUpdated": 1791953932127,
   "filters": {
     "profs": [
       "1st Prof",
@@ -38,6 +38,50 @@
     ]
   },
   "books": [
+    {
+      "id": "bd_chaurasias_human_anatomy_volume_2",
+      "title": "BD Chaurasia's Human Anatomy, Volume 2",
+      "author": "BD Chaurasia",
+      "edition": "8th",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "abdomen and pelvis",
+        "anatomy",
+        "chaurasia",
+        "human",
+        "lower limb",
+        "standard textbook",
+        "volume"
+      ],
+      "totalPages": 562,
+      "sizeMb": 211.5,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/bd_chaurasias_human_anatomy_volume_2.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/bd_chaurasias_human_anatomy_volume_2.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1ePwNPqvSNSJt44_LS5x8IQy3u-g89NOM",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=bd_chaurasias_human_anatomy_volume_2"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "bd_chaurasias_human_anatomy_volume_1",
       "title": "BD Chaurasia's Human Anatomy, Volume 1",
