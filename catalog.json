@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1791965094841,
+  "lastUpdated": 1791965862174,
   "filters": {
     "profs": [
       "1st Prof",
@@ -38,6 +38,52 @@
     ]
   },
   "books": [
+    {
+      "id": "guyton_and_hall_textbook_of_medical_physiology",
+      "title": "Guyton and Hall Textbook of Medical Physiology",
+      "author": "Dr. John E. Hall and Dr. Michael E. Hall",
+      "edition": "14th",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "and",
+        "guyton",
+        "hall",
+        "john",
+        "medical",
+        "michael",
+        "physiology",
+        "standard textbook",
+        "textbook"
+      ],
+      "totalPages": 1028,
+      "sizeMb": 59.6,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/guyton_and_hall_textbook_of_medical_physiology.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/guyton_and_hall_textbook_of_medical_physiology.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1FKddrgeHiCiUPLq-kmiaLL_HUTa6Gj3Y",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=guyton_and_hall_textbook_of_medical_physiology"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "lehninger_principles_of_biochemistry",
       "title": "Lehninger Principles of Biochemistry",
