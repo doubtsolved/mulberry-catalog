@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1791958681678,
+  "lastUpdated": 1791964603585,
   "filters": {
     "profs": [
       "1st Prof",
@@ -38,6 +38,49 @@
     ]
   },
   "books": [
+    {
+      "id": "netters_atlas_of_human_anatomy",
+      "title": "Netter's Atlas of Human Anatomy",
+      "author": "Dr. Frank H. Netter",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Atlas / Practical",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "atlas",
+        "atlas / practical",
+        "frank",
+        "human",
+        "netter"
+      ],
+      "totalPages": 791,
+      "sizeMb": 120.9,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/netters_atlas_of_human_anatomy.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/netters_atlas_of_human_anatomy.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1WXbLyhxbyfgnEAHTJdElVIeeKZ3qSVyV",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=netters_atlas_of_human_anatomy"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "inderbir_singh_textbook_of_anatomy",
       "title": "Inderbir Singh Textbook of Anatomy",
