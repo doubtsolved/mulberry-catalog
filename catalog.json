@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1791957786986,
+  "lastUpdated": 1791958396383,
   "filters": {
     "profs": [
       "1st Prof",
@@ -38,6 +38,50 @@
     ]
   },
   "books": [
+    {
+      "id": "ak_dutta_anatomy_volume_2_head_and_neck",
+      "title": "AK Dutta  Anatomy Volume 2: Head and Neck",
+      "author": "AK Dutta",
+      "edition": "N/A",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "and",
+        "dutta",
+        "head",
+        "neck",
+        "standard textbook",
+        "volume"
+      ],
+      "totalPages": 358,
+      "sizeMb": 256.3,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/ak_dutta_anatomy_volume_2_head_and_neck.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/ak_dutta_anatomy_volume_2_head_and_neck.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1q4_d084XxagH7QtBx0dyfbQc0W7VyD9f",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=ak_dutta_anatomy_volume_2_head_and_neck"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "ak_datta_volume_1_thorax_abdomen_and_pelvis",
       "title": "AK Datta Volume 1: Thorax, Abdomen, and Pelvis",
