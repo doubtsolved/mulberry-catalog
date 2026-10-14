@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1791957587362,
+  "lastUpdated": 1791957786986,
   "filters": {
     "profs": [
       "1st Prof",
@@ -38,6 +38,52 @@
     ]
   },
   "books": [
+    {
+      "id": "ak_datta_volume_1_thorax_abdomen_and_pelvis",
+      "title": "AK Datta Volume 1: Thorax, Abdomen, and Pelvis",
+      "author": "AK Dutta",
+      "edition": "N/A",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "abdomen",
+        "anatomy",
+        "and",
+        "datta",
+        "dutta",
+        "pelvis",
+        "standard textbook",
+        "thorax",
+        "volume"
+      ],
+      "totalPages": 416,
+      "sizeMb": 325.1,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/ak_datta_volume_1_thorax_abdomen_and_pelvis.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/ak_datta_volume_1_thorax_abdomen_and_pelvis.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1zCX-JwCBJwVcMX-udcy6Nnf3WvN2o1Ib",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=ak_datta_volume_1_thorax_abdomen_and_pelvis"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "vishram_singh_clinical_and_surgical_anatomy",
       "title": "Vishram Singh Clinical and Surgical Anatomy",
