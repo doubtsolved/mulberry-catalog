@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792134682664,
+  "lastUpdated": 1792159526057,
   "filters": {
     "profs": [
       "1st Prof",
@@ -38,6 +38,52 @@
     ]
   },
   "books": [
+    {
+      "id": "comprehensive_textbook_of_medical_physiology_2_volume_set",
+      "title": "Comprehensive Textbook of Medical Physiology (2-Volume Set)",
+      "author": "GK Pal",
+      "edition": "N/A",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "comprehensive",
+        "medical",
+        "pal",
+        "physiology",
+        "physiology pdf",
+        "set",
+        "standard textbook",
+        "textbook",
+        "volume"
+      ],
+      "totalPages": 1395,
+      "sizeMb": 182.2,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/comprehensive_textbook_of_medical_physiology_2_volume_set.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/comprehensive_textbook_of_medical_physiology_2_volume_set.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1nSRGu129ID_IvDz80XkH5O_EyUia7rii",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=comprehensive_textbook_of_medical_physiology_2_volume_set"
+        }
+      },
+      "uploader": "GK Pal"
+    },
     {
       "id": "genosys_exam_preparatory_manual_for_undergraduates_biochemistry",
       "title": "GENOSYS – Exam Preparatory Manual for Undergraduates: Biochemistry",
