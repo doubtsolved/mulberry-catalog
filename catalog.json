@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792134547742,
+  "lastUpdated": 1792134584372,
   "filters": {
     "profs": [
       "1st Prof",
@@ -38,6 +38,52 @@
     ]
   },
   "books": [
+    {
+      "id": "practical_clinical_biochemistry",
+      "title": "Practical Clinical Biochemistry",
+      "author": ": Dr. Shruti Mohanty and Dr. Aparna Verma",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Review / High-Yield",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "and",
+        "aparna",
+        "biochemistry",
+        "clinical",
+        "mohanty",
+        "practical",
+        "review / high-yield",
+        "shruti",
+        "verma"
+      ],
+      "totalPages": 156,
+      "sizeMb": 8.9,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/practical_clinical_biochemistry.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/practical_clinical_biochemistry.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=15G76xo3hZzIydDRSKLYec9xA_E4BCDH5",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=practical_clinical_biochemistry"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "quick_review_of_biochemistry",
       "title": "Quick Review of BIochemistry",
