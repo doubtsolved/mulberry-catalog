@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792134457571,
+  "lastUpdated": 1792134501919,
   "filters": {
     "profs": [
       "1st Prof",
@@ -38,6 +38,50 @@
     ]
   },
   "books": [
+    {
+      "id": "essentials_of_biochemistry",
+      "title": "Essentials of Biochemistry",
+      "author": "Dr. U. Satyanarayana and Dr. U. Chakrapani",
+      "edition": "4th",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "and",
+        "biochemistry",
+        "chakrapani",
+        "essentials",
+        "indian author",
+        "satyanarayana",
+        "standard textbook"
+      ],
+      "totalPages": 809,
+      "sizeMb": 222.8,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/essentials_of_biochemistry.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/essentials_of_biochemistry.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=19Y5iSkohsBFDndEe_pKG7hmm0Jr4F9-F",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=essentials_of_biochemistry"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "self_assessment_and_review_of_biochemistry",
       "title": "Self Assessment and Review of  BIOCHEMISTRY",
