@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792134376550,
+  "lastUpdated": 1792134408619,
   "filters": {
     "profs": [
       "1st Prof",
@@ -38,6 +38,55 @@
     ]
   },
   "books": [
+    {
+      "id": "practical_textbook_of_biochemistry_for_medical_students",
+      "title": "Practical Textbook of Biochemistry for Medical Students",
+      "author": "DM Vasudevan and Subir Kumar Das",
+      "edition": "2nd",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Atlas / Practical",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "and",
+        "atlas / practical",
+        "biochemistry",
+        "das",
+        "for",
+        "kumar",
+        "medical",
+        "practical",
+        "students",
+        "subir",
+        "textbook",
+        "vasudevan"
+      ],
+      "totalPages": 161,
+      "sizeMb": 11.7,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/practical_textbook_of_biochemistry_for_medical_students.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/practical_textbook_of_biochemistry_for_medical_students.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1C5vGXtFm8ODvgOcGQAwluT7po4aK_Jx4",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=practical_textbook_of_biochemistry_for_medical_students"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "textbook_of_biochemistry_for_medical_students",
       "title": "Textbook of Biochemistry for Medical Students",
