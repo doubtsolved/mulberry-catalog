@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792134408619,
+  "lastUpdated": 1792134457571,
   "filters": {
     "profs": [
       "1st Prof",
@@ -38,6 +38,52 @@
     ]
   },
   "books": [
+    {
+      "id": "self_assessment_and_review_of_biochemistry",
+      "title": "Self Assessment and Review of  BIOCHEMISTRY",
+      "author": "Rebecca James Perumcheril",
+      "edition": "2nd",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Review / High-Yield",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "and",
+        "assessment",
+        "biochemistry",
+        "james",
+        "perumcheril",
+        "rebecca",
+        "review",
+        "review / high-yield",
+        "self"
+      ],
+      "totalPages": 454,
+      "sizeMb": 38.0,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/self_assessment_and_review_of_biochemistry.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/self_assessment_and_review_of_biochemistry.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1GxkjBheZFdNr-6GI95MpC0BkYj1fkvrV",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=self_assessment_and_review_of_biochemistry"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "practical_textbook_of_biochemistry_for_medical_students",
       "title": "Practical Textbook of Biochemistry for Medical Students",
