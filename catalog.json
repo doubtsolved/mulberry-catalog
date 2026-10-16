@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792134501919,
+  "lastUpdated": 1792134547742,
   "filters": {
     "profs": [
       "1st Prof",
@@ -38,6 +38,51 @@
     ]
   },
   "books": [
+    {
+      "id": "quick_review_of_biochemistry",
+      "title": "Quick Review of BIochemistry",
+      "author": "Krishnananda Prabhu Jeevan K Shetty",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Review / High-Yield",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "biochemistry",
+        "jeevan",
+        "krishnananda",
+        "prabhu",
+        "quick",
+        "review",
+        "review / high-yield",
+        "shetty"
+      ],
+      "totalPages": 313,
+      "sizeMb": 15.2,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/quick_review_of_biochemistry.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/quick_review_of_biochemistry.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1EPZLRzTkSnYkCEttfUyUJLRDLNPupMUm",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=quick_review_of_biochemistry"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "essentials_of_biochemistry",
       "title": "Essentials of Biochemistry",
