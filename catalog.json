@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792163200413,
+  "lastUpdated": 1792165563395,
   "filters": {
     "profs": [
       "1st Prof",
@@ -38,6 +38,55 @@
     ]
   },
   "books": [
+    {
+      "id": "grays_anatomy_for_students",
+      "title": "Gray's Anatomy for Students",
+      "author": "Richard L. Drake, A. Wayne Vogl, and Adam W. M. Mitchell",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "adam",
+        "anatomy",
+        "and",
+        "drake",
+        "for",
+        "gray",
+        "mitchell",
+        "richard",
+        "standard textbook",
+        "students",
+        "vogl",
+        "wayne"
+      ],
+      "totalPages": 1234,
+      "sizeMb": 190.5,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/grays_anatomy_for_students.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/grays_anatomy_for_students.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1VIJ8TzjAEO3CRzLrBxr00-DAJNSMy9Ny",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=grays_anatomy_for_students"
+        }
+      },
+      "uploader": "Contributor"
+    },
     {
       "id": "essentials_of_medical_physiology",
       "title": "Essentials of Medical Physiology",
