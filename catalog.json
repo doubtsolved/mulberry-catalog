@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792134622729,
+  "lastUpdated": 1792134682664,
   "filters": {
     "profs": [
       "1st Prof",
@@ -38,6 +38,53 @@
     ]
   },
   "books": [
+    {
+      "id": "genosys_exam_preparatory_manual_for_undergraduates_biochemistry",
+      "title": "GENOSYS – Exam Preparatory Manual for Undergraduates: Biochemistry",
+      "author": "Neethu Lakshmi N.",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Atlas / Practical",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "atlas / practical",
+        "biochemistry",
+        "exam",
+        "for",
+        "genosys",
+        "lakshmi",
+        "manual",
+        "neethu",
+        "preparatory",
+        "undergraduates"
+      ],
+      "totalPages": 180,
+      "sizeMb": 13.2,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/genosys_exam_preparatory_manual_for_undergraduates_biochemistry.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/genosys_exam_preparatory_manual_for_undergraduates_biochemistry.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1El0794NHydL5LqR46nwy64j8_0R5VS5o",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=genosys_exam_preparatory_manual_for_undergraduates_biochemistry"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "practical_biochemistry",
       "title": "Practical Biochemistry",
