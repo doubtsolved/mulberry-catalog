@@ -38,7 +38,132 @@
     ]
   },
   "books": [
-   
+         { 
+      "id": "physiology_aetcom_johari_mbbs",
+      "title": "Physiology Aetcom   Johari Mbbs",
+      "author": "Johari Mbbs",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "aetcom",
+        "johari",
+        "mbbs",
+        "physiology",
+        "standard textbook"
+      ],
+      "totalPages": 15,
+      "sizeMb": 1.0,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/physiology_aetcom_johari_mbbs.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/physiology_aetcom_johari_mbbs.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1iLrTM5ObXC9mkiiwvxaPUW7MYTVuF_dc",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=physiology_aetcom_johari_mbbs"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "biochemistry_aetcom_johari_mbbs",
+      "title": "Biochemistry Aetcom   Johari Mbbs",
+      "author": "Johari Mbbs",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Review / High-Yield",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "aetcom",
+        "biochemistry",
+        "johari",
+        "mbbs",
+        "review / high-yield"
+      ],
+      "totalPages": 14,
+      "sizeMb": 0.6,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/biochemistry_aetcom_johari_mbbs.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/biochemistry_aetcom_johari_mbbs.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1FQGWa3YipKecrPFvYf1OJQEc_J1BXBuk",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=biochemistry_aetcom_johari_mbbs"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "aetcom_anatomy_johari_mbbs",
+      "title": "Aetcom Anatomy   Johari Mbbs",
+      "author": "Johari Mbbs",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Review / High-Yield",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "aetcom",
+        "anatomy",
+        "johari",
+        "mbbs",
+        "review / high-yield"
+      ],
+      "totalPages": 16,
+      "sizeMb": 4.5,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/aetcom_anatomy_johari_mbbs.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/aetcom_anatomy_johari_mbbs.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1oX_STfM4V1mk8iCKRZffMMA6JT6qy7GL",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=aetcom_anatomy_johari_mbbs"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "thorax_pyq_by_auxilia",
       "title": "Thorax pyq by Auxilia",
