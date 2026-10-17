@@ -38,6 +38,278 @@
     ]
   },
   "books": [
+   
+    {
+      "id": "thorax_pyq_by_auxilia",
+      "title": "Thorax pyq by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "auxilia",
+        "pyq",
+        "rgmc",
+        "standard textbook",
+        "students",
+        "thorax"
+      ],
+      "totalPages": 31,
+      "sizeMb": 19.0,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/thorax_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/thorax_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1-kPnZYVF2phcVGO1Po9qMH3TxG2rYqUc",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=thorax_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "superior_extremity_pyq_by_auxilia",
+      "title": "SUPERIOR EXTREMITY pyq by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Question Bank (PYQ)",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "auxilia",
+        "extremity",
+        "pyq",
+        "question bank (pyq)",
+        "rgmc",
+        "students",
+        "superior",
+        "superior extremity"
+      ],
+      "totalPages": 55,
+      "sizeMb": 26.4,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/superior_extremity_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/superior_extremity_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=16ffvCD2A-L7teVcH2XD_l9KeJ54Kkejo",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=superior_extremity_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "neuroanatomy_pyq_by_auxilia",
+      "title": "Neuroanatomy pyq by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Question Bank (PYQ)",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "auxilia",
+        "neuroanatomy",
+        "pyq",
+        "question bank (pyq)",
+        "rgmc",
+        "students"
+      ],
+      "totalPages": 26,
+      "sizeMb": 16.2,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/neuroanatomy_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/neuroanatomy_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1-bgr6wy6xhL258vmu5RSZa26SwPr8HjU",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=neuroanatomy_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "lower_limbs_pyq_by_auxilia",
+      "title": "Lower Limbs PYQ by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Question Bank (PYQ)",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "auxilia",
+        "limbs",
+        "lower",
+        "lower limbs",
+        "pyq",
+        "question bank (pyq)",
+        "rgmc",
+        "students"
+      ],
+      "totalPages": 39,
+      "sizeMb": 17.9,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/lower_limbs_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/lower_limbs_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=127UMq7MjKTjenVem9mcQ4b9zo9CKlrpg",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=lower_limbs_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "head_neck_pyq_by_auxilia",
+      "title": "Head & Neck PYQ by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Question Bank (PYQ)",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "auxilia",
+        "head",
+        "neck",
+        "pyq",
+        "question bank (pyq)",
+        "rgmc",
+        "students"
+      ],
+      "totalPages": 61,
+      "sizeMb": 35.2,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/head_neck_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/head_neck_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1-Vwwrn4uqTn44NIEFuQdLy9jvAYkdfPP",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=head_neck_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "abdomen_pyq_by_auxilia",
+      "title": "Abdomen PYQ by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Question Bank (PYQ)",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "abdomen",
+        "anatomy",
+        "anatomy abdomen",
+        "auxilia",
+        "pyq",
+        "question bank (pyq)",
+        "rgmc",
+        "students"
+      ],
+      "totalPages": 56,
+      "sizeMb": 34.1,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/abdomen_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "github",
+            "repo": "mulberry-vault-prof1",
+            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/abdomen_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1-edB6t6IG4ukzYAVqM5j4gHel6HCv4tf",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=abdomen_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    }
+  
     {
       "id": "grays_anatomy_for_students",
       "title": "Gray's Anatomy for Students",
