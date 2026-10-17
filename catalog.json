@@ -13,7 +13,8 @@
       "Handwritten Notes",
       "Review / High-Yield",
       "Atlas / Practical",
-      "Question Bank (PYQ)"
+      "Question Bank (PYQ)",
+      "Aetcom"
     ],
     "subjects": [
       "Anatomy",
@@ -46,7 +47,7 @@
       "prof": "1st Prof",
       "year": "1st Year",
       "subject": "Physiology",
-      "type": "Standard Textbook",
+      "type": "Aetcom",
       "tags": [
         "1st prof",
         "1st year",
@@ -88,7 +89,7 @@
       "prof": "1st Prof",
       "year": "1st Year",
       "subject": "Biochemistry",
-      "type": "Review / High-Yield",
+      "type": "Aetcom",
       "tags": [
         "1st prof",
         "1st year",
@@ -130,7 +131,7 @@
       "prof": "1st Prof",
       "year": "1st Year",
       "subject": "Anatomy",
-      "type": "Review / High-Yield",
+      "type": "Aetcom",
       "tags": [
         "1st prof",
         "1st year",
