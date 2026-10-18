@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792345757053,
+  "lastUpdated": 1792346283996,
   "filters": {
     "profs": [
       "1st Prof",
@@ -39,6 +39,774 @@
     ]
   },
   "books": [
+    {
+      "id": "vitamins_minerals_neutrition_biochemistry_pyq_by_auxilia",
+      "title": "Vitamins Minerals & Neutrition Biochemistry PYQ by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilia",
+        "biochemistry",
+        "minerals",
+        "neutrition",
+        "pyq",
+        "rgmc",
+        "standard textbook",
+        "students",
+        "vitamins"
+      ],
+      "totalPages": 13,
+      "sizeMb": 5.4,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/vitamins_minerals_neutrition_biochemistry_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/vitamins_minerals_neutrition_biochemistry_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1_I__VG591-XWywCwSWS1TBAiaVXCMRM-",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=vitamins_minerals_neutrition_biochemistry_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "protein_metabolism_biochemistry_pyq_by_auxilia",
+      "title": "Protein Metabolism Biochemistry PYQ by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilia",
+        "biochemistry",
+        "metabolism",
+        "protein",
+        "pyq",
+        "rgmc",
+        "standard textbook",
+        "students"
+      ],
+      "totalPages": 22,
+      "sizeMb": 8.7,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/protein_metabolism_biochemistry_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/protein_metabolism_biochemistry_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1iu8E_glrRH3d8gC8VgfI4cn4R2wyV4OF",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=protein_metabolism_biochemistry_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "protein_chemistry_biochemistry_pyq_by_auxilia",
+      "title": "Protein Chemistry Biochemistry PYQ by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilia",
+        "biochemistry",
+        "chemistry",
+        "protein",
+        "pyq",
+        "rgmc",
+        "standard textbook",
+        "students"
+      ],
+      "totalPages": 45,
+      "sizeMb": 19.2,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/protein_chemistry_biochemistry_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/protein_chemistry_biochemistry_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1aa3xaP3aCACF0P7EFMDVcq2-XI45h87-",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=protein_chemistry_biochemistry_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "nucleotide_metabolism_biochemistry_pyq_by_auxilia",
+      "title": "Nucleotide Metabolism Biochemistry PYQ by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilia",
+        "biochemistry",
+        "metabolism",
+        "nucleotide",
+        "pyq",
+        "rgmc",
+        "standard textbook",
+        "students"
+      ],
+      "totalPages": 6,
+      "sizeMb": 2.6,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/nucleotide_metabolism_biochemistry_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/nucleotide_metabolism_biochemistry_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1mM4TD4sjkzhHARzwN7sW6dm1qf4c74Za",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=nucleotide_metabolism_biochemistry_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "nucleotide_chemistry_biochemistry_pyq_by_auxilia",
+      "title": "Nucleotide Chemistry Biochemistry PYQ by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilia",
+        "biochemistry",
+        "chemistry",
+        "nucleotide",
+        "pyq",
+        "rgmc",
+        "standard textbook",
+        "students"
+      ],
+      "totalPages": 12,
+      "sizeMb": 4.8,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/nucleotide_chemistry_biochemistry_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/nucleotide_chemistry_biochemistry_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1Ip6DPK-BtiZ9HYMpToDS7rswp1uPEpGg",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=nucleotide_chemistry_biochemistry_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "molecular_biology_genetics_biochemistry_pyq_by_auxilia",
+      "title": "Molecular Biology & Genetics Biochemistry PYQ by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilia",
+        "biochemistry",
+        "biology",
+        "genetics",
+        "molecular",
+        "pyq",
+        "rgmc",
+        "standard textbook",
+        "students"
+      ],
+      "totalPages": 36,
+      "sizeMb": 14.9,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/molecular_biology_genetics_biochemistry_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/molecular_biology_genetics_biochemistry_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1eJrNjDlPpBDNUas8xya2frLwtuhOy4FO",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=molecular_biology_genetics_biochemistry_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "lipid_metabolismbiochemistry_pyq_by_auxilia",
+      "title": "Lipid MetabolismBiochemistry PYQ by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilia",
+        "biochemistry",
+        "lipid",
+        "metabolismbiochemistry",
+        "pyq",
+        "rgmc",
+        "standard textbook",
+        "students"
+      ],
+      "totalPages": 28,
+      "sizeMb": 10.2,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/lipid_metabolismbiochemistry_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/lipid_metabolismbiochemistry_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1Z567-zMSd71jYRhEWMYFj-REp-HHBEIH",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=lipid_metabolismbiochemistry_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "lipid_chemistry_biochemistry_pyq_by_auxilia",
+      "title": "Lipid Chemistry Biochemistry PYQ by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilia",
+        "biochemistry",
+        "chemistry",
+        "lipid",
+        "pyq",
+        "rgmc",
+        "standard textbook",
+        "students"
+      ],
+      "totalPages": 31,
+      "sizeMb": 11.4,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/lipid_chemistry_biochemistry_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/lipid_chemistry_biochemistry_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=19un0GJxBilWUy48XCCePvFjM9EEiJaP6",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=lipid_chemistry_biochemistry_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "immune_chemistry_cancer_biochemistry_pyq_by_auxilia",
+      "title": "Immune Chemistry & Cancer Biochemistry PYQ by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilia",
+        "biochemistry",
+        "cancer",
+        "chemistry",
+        "immune",
+        "pyq",
+        "rgmc",
+        "standard textbook",
+        "students"
+      ],
+      "totalPages": 24,
+      "sizeMb": 11.1,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/immune_chemistry_cancer_biochemistry_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/immune_chemistry_cancer_biochemistry_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1sbBrD0_-TSwcq3V6JN2NIOOGUexRgDmi",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=immune_chemistry_cancer_biochemistry_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "free_radicals_anitoxidants_xenobiotics_biochemistry_pyq_by_auxilia",
+      "title": "Free Radicals, Anitoxidants & Xenobiotics Biochemistry PYQ by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anitoxidants",
+        "auxilia",
+        "biochemistry",
+        "free",
+        "pyq",
+        "radicals",
+        "rgmc",
+        "standard textbook",
+        "students",
+        "xenobiotics"
+      ],
+      "totalPages": 9,
+      "sizeMb": 4.8,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/free_radicals_anitoxidants_xenobiotics_biochemistry_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/free_radicals_anitoxidants_xenobiotics_biochemistry_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1VFZxbMxgBFDONuHsufA-copwVbwXSlGX",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=free_radicals_anitoxidants_xenobiotics_biochemistry_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "enzymes_biochemistry_pyq_by_auxilia",
+      "title": "Enzymes Biochemistry PYQ by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilia",
+        "biochemistry",
+        "enzymes",
+        "pyq",
+        "rgmc",
+        "standard textbook",
+        "students"
+      ],
+      "totalPages": 30,
+      "sizeMb": 13.7,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/enzymes_biochemistry_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/enzymes_biochemistry_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1fXOLRADwdrymyDGDxe7PQzcUq8EQj65v",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=enzymes_biochemistry_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "cell_biochemistry_pyq_by_auxilia",
+      "title": "Cell & Biochemistry PYQ by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilia",
+        "biochemistry",
+        "cell",
+        "pyq",
+        "rgmc",
+        "standard textbook",
+        "students"
+      ],
+      "totalPages": 14,
+      "sizeMb": 6.2,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/cell_biochemistry_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/cell_biochemistry_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1jK4nwbUcZKm-bL24McGbOktBnDa023Je",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=cell_biochemistry_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "carbohydrate_metabolism_biochemistry_pyq_by_auxilia",
+      "title": "Carbohydrate Metabolism Biochemistry PYQ by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilia",
+        "biochemistry",
+        "carbohydrate",
+        "metabolism",
+        "pyq",
+        "rgmc",
+        "standard textbook",
+        "students"
+      ],
+      "totalPages": 30,
+      "sizeMb": 11.5,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/carbohydrate_metabolism_biochemistry_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/carbohydrate_metabolism_biochemistry_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1ikniBsV1pm4lXg1BGDWlPNC_UUo6DTvT",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=carbohydrate_metabolism_biochemistry_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "carbohydrate_chemistry_biochemistry_pyq_by_auxilia",
+      "title": "Carbohydrate Chemistry Biochemistry PYQ by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilia",
+        "biochemistry",
+        "carbohydrate",
+        "chemistry",
+        "pyq",
+        "rgmc",
+        "standard textbook",
+        "students"
+      ],
+      "totalPages": 19,
+      "sizeMb": 6.6,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/carbohydrate_chemistry_biochemistry_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/carbohydrate_chemistry_biochemistry_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1T_Yg1z9ecrpqWdpV6DVarsJwhPbnhINd",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=carbohydrate_chemistry_biochemistry_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "biological_oxidation_biochemistry_pyq_by_auxilia",
+      "title": "Biological Oxidation Biochemistry PYQ by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilia",
+        "biochemistry",
+        "biological",
+        "oxidation",
+        "pyq",
+        "rgmc",
+        "standard textbook",
+        "students"
+      ],
+      "totalPages": 14,
+      "sizeMb": 5.1,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/biological_oxidation_biochemistry_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/biological_oxidation_biochemistry_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1dmXjg_55uZYm31j-6jKg8NmhCdBO30cc",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=biological_oxidation_biochemistry_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "aetcom_biochemistry_pyq_by_auxilia",
+      "title": "Aetcom  Biochemistry PYQ by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "aetcom",
+        "auxilia",
+        "biochemistry",
+        "pyq",
+        "rgmc",
+        "standard textbook",
+        "students"
+      ],
+      "totalPages": 4,
+      "sizeMb": 2.4,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/aetcom_biochemistry_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/aetcom_biochemistry_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1PaHBfU1esPkBfCDv9Ym8g-HSEWsmrTRx",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=aetcom_biochemistry_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "acid_base_balance_biochemistry_pyq_by_auxilia",
+      "title": "Acid Base Balance Biochemistry PYQ by Auxilia",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "acid",
+        "auxilia",
+        "balance",
+        "base",
+        "biochemistry",
+        "pyq",
+        "rgmc",
+        "standard textbook",
+        "students"
+      ],
+      "totalPages": 15,
+      "sizeMb": 6.0,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/acid_base_balance_biochemistry_pyq_by_auxilia.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/acid_base_balance_biochemistry_pyq_by_auxilia.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1NjjgiVvZp1tc2QH0HMAXn7YraHE-hc1V",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=acid_base_balance_biochemistry_pyq_by_auxilia"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "special_senses_phisiology_pyq_by_auxilla",
       "title": "Special Senses  Phisiology PYQ by Auxilla",
