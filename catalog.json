@@ -65,7 +65,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/physiology_aetcom_johari_mbbs.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/physiology_aetcom_johari_mbbs.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -107,7 +107,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/biochemistry_aetcom_johari_mbbs.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/biochemistry_aetcom_johari_mbbs.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -149,7 +149,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/aetcom_anatomy_johari_mbbs.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/aetcom_anatomy_johari_mbbs.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -193,7 +193,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/thorax_pyq_by_auxilia.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/thorax_pyq_by_auxilia.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -239,7 +239,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/superior_extremity_pyq_by_auxilia.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/superior_extremity_pyq_by_auxilia.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -283,7 +283,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/neuroanatomy_pyq_by_auxilia.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/neuroanatomy_pyq_by_auxilia.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -329,7 +329,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/lower_limbs_pyq_by_auxilia.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/lower_limbs_pyq_by_auxilia.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -374,7 +374,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/head_neck_pyq_by_auxilia.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/head_neck_pyq_by_auxilia.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -419,7 +419,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/abdomen_pyq_by_auxilia.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/abdomen_pyq_by_auxilia.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -469,7 +469,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/grays_anatomy_for_students.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/grays_anatomy_for_students.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -514,7 +514,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/essentials_of_medical_physiology.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/essentials_of_medical_physiology.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -560,7 +560,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/comprehensive_textbook_of_medical_physiology_2_volume_set.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/comprehensive_textbook_of_medical_physiology_2_volume_set.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -607,7 +607,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/genosys_exam_preparatory_manual_for_undergraduates_biochemistry.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/genosys_exam_preparatory_manual_for_undergraduates_biochemistry.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -649,7 +649,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/practical_biochemistry.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/practical_biochemistry.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -695,7 +695,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/practical_clinical_biochemistry.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/practical_clinical_biochemistry.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -740,7 +740,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/quick_review_of_biochemistry.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/quick_review_of_biochemistry.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -784,7 +784,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/essentials_of_biochemistry.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/essentials_of_biochemistry.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -830,7 +830,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/self_assessment_and_review_of_biochemistry.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/self_assessment_and_review_of_biochemistry.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -879,7 +879,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/practical_textbook_of_biochemistry_for_medical_students.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/practical_textbook_of_biochemistry_for_medical_students.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -928,7 +928,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/textbook_of_biochemistry_for_medical_students.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/textbook_of_biochemistry_for_medical_students.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -972,7 +972,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/textbook_of_clinical_embryology.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/textbook_of_clinical_embryology.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -1013,7 +1013,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/marrow_biochemistry_notes.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/marrow_biochemistry_notes.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -1054,7 +1054,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/marrow_physiology_notes.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/marrow_physiology_notes.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -1096,7 +1096,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/marrow_anatomy_notes.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/marrow_anatomy_notes.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -1142,7 +1142,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/guyton_and_hall_textbook_of_medical_physiology.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/guyton_and_hall_textbook_of_medical_physiology.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -1187,7 +1187,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/lehninger_principles_of_biochemistry.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/lehninger_principles_of_biochemistry.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -1239,7 +1239,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/harpers_illustrated_biochemistry.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/harpers_illustrated_biochemistry.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -1290,7 +1290,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/grays_atlas_of_anatomy.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/grays_atlas_of_anatomy.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -1344,7 +1344,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/mcminns_clinical_atlas_of_human_anatomy.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/mcminns_clinical_atlas_of_human_anatomy.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -1387,7 +1387,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/netters_atlas_of_human_anatomy.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/netters_atlas_of_human_anatomy.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -1429,7 +1429,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/inderbir_singh_textbook_of_anatomy.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/inderbir_singh_textbook_of_anatomy.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -1475,7 +1475,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/volume_3_superior_and_inferior_extremities.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/volume_3_superior_and_inferior_extremities.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -1519,7 +1519,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/ak_dutta_anatomy_volume_2_head_and_neck.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/ak_dutta_anatomy_volume_2_head_and_neck.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -1565,7 +1565,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/ak_datta_volume_1_thorax_abdomen_and_pelvis.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/ak_datta_volume_1_thorax_abdomen_and_pelvis.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -1609,7 +1609,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/vishram_singh_clinical_and_surgical_anatomy.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/vishram_singh_clinical_and_surgical_anatomy.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -1653,7 +1653,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/bd_chaurasias_human_anatomy_volume_3_4.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/bd_chaurasias_human_anatomy_volume_3_4.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -1697,7 +1697,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/bd_chaurasias_human_anatomy_volume_2.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/bd_chaurasias_human_anatomy_volume_2.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -1740,7 +1740,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/bd_chaurasias_human_anatomy_volume_1.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/bd_chaurasias_human_anatomy_volume_1.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -1784,7 +1784,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/bdc_handbook_of_general_anatomy.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/bdc_handbook_of_general_anatomy.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
@@ -1827,7 +1827,7 @@
           {
             "provider": "github",
             "repo": "mulberry-vault-prof1",
-            "url": "https://github.com/doubtsolved/mulberry-vault-prof1/releases/download/v1-books/indu_khurana_medical_physiology.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/indu_khurana_medical_physiology.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
