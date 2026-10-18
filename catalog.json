@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792349369609,
+  "lastUpdated": 1792349756068,
   "filters": {
     "profs": [
       "1st Prof",
@@ -40,6 +40,283 @@
     ]
   },
   "books": [
+    {
+      "id": "vishram_singh_upper_limb_thorax",
+      "title": "Vishram Singh Upper Limb Thorax",
+      "author": "Vishram Singh",
+      "edition": "2nd",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "limb",
+        "singh",
+        "standard textbook",
+        "thorax",
+        "upper",
+        "vishram"
+      ],
+      "totalPages": 345,
+      "sizeMb": 97.4,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/vishram_singh_upper_limb_thorax.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/vishram_singh_upper_limb_thorax.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1a6bFknbER-B78sNlpK70aSgvtaMoIjb1",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=vishram_singh_upper_limb_thorax"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "vishram_singh_head_neck_and_brain",
+      "title": "Vishram Singh Head, Neck, And Brain",
+      "author": "Vishram Singh",
+      "edition": "2nd",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "and",
+        "brain",
+        "head",
+        "neck",
+        "singh",
+        "standard textbook",
+        "vishram"
+      ],
+      "totalPages": 460,
+      "sizeMb": 56.0,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/vishram_singh_head_neck_and_brain.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/vishram_singh_head_neck_and_brain.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=18bi0rhfl0B1DUHWOoSHxE9F4kFOzEAGm",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=vishram_singh_head_neck_and_brain"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "vishram_singh_general_anatomy",
+      "title": "Vishram Singh   General Anatomy",
+      "author": "Vishram Singh",
+      "edition": "2nd",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "general",
+        "singh",
+        "standard textbook",
+        "vishram"
+      ],
+      "totalPages": 269,
+      "sizeMb": 47.9,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/vishram_singh_general_anatomy.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/vishram_singh_general_anatomy.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1E_cR6Vma_sc0ZWyUSPWhFMYiEEUrlHRT",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=vishram_singh_general_anatomy"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "snell_clinical_anatomy_by_regions",
+      "title": "Snell Clinical Anatomy By Regions",
+      "author": "Lawrence E. Wineski",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "clinical",
+        "lawrence",
+        "regions",
+        "snell",
+        "standard textbook",
+        "wineski"
+      ],
+      "totalPages": 766,
+      "sizeMb": 327.8,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/snell_clinical_anatomy_by_regions.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/snell_clinical_anatomy_by_regions.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1Pk-OvPvgvqgNH0kAr45zgwKm2C0Wmjkb",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=snell_clinical_anatomy_by_regions"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "exam_oriented_anatomy_questions_and_answers_general_embryology_genetics_abdomen_and_pelvis",
+      "title": "Exam-Oriented Anatomy: Questions and Answers: General Embryology, Genetics, Abdomen, and Pelvis",
+      "author": "Dr. Shoukat N. Kazi (Dr. S. N. Kazi)",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "abdomen",
+        "anatomy",
+        "and",
+        "answers",
+        "embryology",
+        "exam",
+        "general",
+        "genetics",
+        "kazi",
+        "oriented",
+        "pelvis",
+        "questions",
+        "shoukat",
+        "standard textbook"
+      ],
+      "totalPages": 322,
+      "sizeMb": 39.6,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/exam_oriented_anatomy_questions_and_answers_general_embryology_genetics_abdomen_and_pelvis.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/exam_oriented_anatomy_questions_and_answers_general_embryology_genetics_abdomen_and_pelvis.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1ERozwQl8aZNLYaydobZez9hjgRL3Hd_o",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=exam_oriented_anatomy_questions_and_answers_general_embryology_genetics_abdomen_and_pelvis"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "exam_oriented_anatomy_questions_and_answers_general_anatomy_upper_limb_and_lower_limb",
+      "title": "Exam-Oriented Anatomy: Questions and Answers,  General Anatomy, Upper Limb, and Lower Limb.",
+      "author": "Dr. Shoukat N. Kazi (Dr. S. N. Kazi)",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "and",
+        "answers",
+        "exam",
+        "general",
+        "kazi",
+        "limb",
+        "lower",
+        "oriented",
+        "questions",
+        "shoukat",
+        "sn kazi",
+        "standard textbook",
+        "upper"
+      ],
+      "totalPages": 425,
+      "sizeMb": 19.4,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/exam_oriented_anatomy_questions_and_answers_general_anatomy_upper_limb_and_lower_limb.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/exam_oriented_anatomy_questions_and_answers_general_anatomy_upper_limb_and_lower_limb.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1EOL25ofsBlIJCpkcXS-y3CIji_I2e-Ys",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=exam_oriented_anatomy_questions_and_answers_general_anatomy_upper_limb_and_lower_limb"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "vitamins_minerals_neutrition_biochemistry_pyq_by_auxilia",
       "title": "Vitamins Minerals & Neutrition Biochemistry PYQ by Auxilia",
