@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792349756068,
+  "lastUpdated": 1792349898778,
   "filters": {
     "profs": [
       "1st Prof",
@@ -40,6 +40,52 @@
     ]
   },
   "books": [
+    {
+      "id": "vishram_singh_vol_2_abdomen_and_lower_limb",
+      "title": "Vishram Singh Vol 2 ABDOMEN AND LOWER LIMB",
+      "author": "Vishram Singh Vishram Singh",
+      "edition": "2nd",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "abdomen",
+        "anatomy",
+        "and",
+        "limb",
+        "lower",
+        "singh",
+        "standard textbook",
+        "vishram",
+        "vol"
+      ],
+      "totalPages": 521,
+      "sizeMb": 45.1,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/vishram_singh_vol_2_abdomen_and_lower_limb.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/vishram_singh_vol_2_abdomen_and_lower_limb.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1F87RKAYg084h2dYBfNArOqMkYgHreccJ",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=vishram_singh_vol_2_abdomen_and_lower_limb"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "vishram_singh_upper_limb_thorax",
       "title": "Vishram Singh Upper Limb Thorax",
