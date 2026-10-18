@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792346466258,
+  "lastUpdated": 1792349369609,
   "filters": {
     "profs": [
       "1st Prof",
@@ -14,7 +14,8 @@
       "Review / High-Yield",
       "Atlas / Practical",
       "Question Bank (PYQ)",
-      "Aetcom"
+      "Aetcom",
+      "Question Bank"
     ],
     "subjects": [
       "Anatomy",
