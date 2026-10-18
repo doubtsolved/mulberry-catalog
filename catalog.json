@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792165563395,
+  "lastUpdated": 1792345757053,
   "filters": {
     "profs": [
       "1st Prof",
@@ -39,7 +39,470 @@
     ]
   },
   "books": [
-         { 
+    {
+      "id": "special_senses_phisiology_pyq_by_auxilla",
+      "title": "Special Senses  Phisiology PYQ by Auxilla",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Question Bank (PYQ)",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilla",
+        "phisiology",
+        "physiology",
+        "pyq",
+        "question bank (pyq)",
+        "rgmc",
+        "senses",
+        "special",
+        "students",
+        "wbuhs"
+      ],
+      "totalPages": 16,
+      "sizeMb": 8.6,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/special_senses_phisiology_pyq_by_auxilla.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/pyqs/special_senses_phisiology_pyq_by_auxilla.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=10bcdLw36PciHUYbG2yZ0OEG551G7A1ny",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=special_senses_phisiology_pyq_by_auxilla"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "respiratory_phisiology_pyq_by_auxilla",
+      "title": "Respiratory  Phisiology PYQ by Auxilla",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Question Bank (PYQ)",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilla",
+        "phisiology",
+        "physiology",
+        "pyq",
+        "question bank (pyq)",
+        "respiratory",
+        "rgmc",
+        "students",
+        "wbuhs"
+      ],
+      "totalPages": 24,
+      "sizeMb": 13.9,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/respiratory_phisiology_pyq_by_auxilla.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/pyqs/respiratory_phisiology_pyq_by_auxilla.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=112Nf-EbsLRvuLK657uBz_3ob0q6JU3iY",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=respiratory_phisiology_pyq_by_auxilla"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "reproductive_phisiology_pyq_by_auxilla",
+      "title": "Reproductive  Phisiology PYQ by Auxilla",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Question Bank (PYQ)",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilla",
+        "phisiology",
+        "physiology",
+        "pyq",
+        "question bank (pyq)",
+        "reproductive",
+        "rgmc",
+        "students",
+        "wbuhs"
+      ],
+      "totalPages": 16,
+      "sizeMb": 8.1,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/reproductive_phisiology_pyq_by_auxilla.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/pyqs/reproductive_phisiology_pyq_by_auxilla.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=10iYkStQqspqVZUGZwyuL546APqpBGEub",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=reproductive_phisiology_pyq_by_auxilla"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "renal_phisiology_pyq_by_auxilla",
+      "title": "Renal  Phisiology PYQ by Auxilla",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Question Bank (PYQ)",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilla",
+        "phisiology",
+        "physiology",
+        "pyq",
+        "question bank (pyq)",
+        "renal",
+        "rgmc",
+        "students",
+        "wbuhs"
+      ],
+      "totalPages": 17,
+      "sizeMb": 9.4,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/renal_phisiology_pyq_by_auxilla.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/pyqs/renal_phisiology_pyq_by_auxilla.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=10dvjcMPbO-kxYR6s3T13TB9aK-CjW1pN",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=renal_phisiology_pyq_by_auxilla"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "hematology_phisiology_pyq_by_auxilla",
+      "title": "Hematology  Phisiology PYQ by Auxilla",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Question Bank (PYQ)",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilla",
+        "hematology",
+        "phisiology",
+        "physiology",
+        "pyq",
+        "question bank (pyq)",
+        "rgmc",
+        "students",
+        "wbuhs"
+      ],
+      "totalPages": 35,
+      "sizeMb": 18.9,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/hematology_phisiology_pyq_by_auxilla.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/pyqs/hematology_phisiology_pyq_by_auxilla.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=112EpLFmXS-reh3MSwOV_WMU1MHrD6r0B",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=hematology_phisiology_pyq_by_auxilla"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "gastrointestinal_system_phisiology_pyq_by_auxilla",
+      "title": "Gastrointestinal System  Phisiology PYQ by Auxilla",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Question Bank (PYQ)",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilla",
+        "gastrointestinal",
+        "phisiology",
+        "physiology",
+        "pyq",
+        "question bank (pyq)",
+        "rgmc",
+        "students",
+        "system",
+        "wbuhs"
+      ],
+      "totalPages": 22,
+      "sizeMb": 12.9,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/gastrointestinal_system_phisiology_pyq_by_auxilla.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/pyqs/gastrointestinal_system_phisiology_pyq_by_auxilla.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=10tbryETesEKTahVRVK6DXlVsl69smV-N",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=gastrointestinal_system_phisiology_pyq_by_auxilla"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "general_nervemuscle_phisiology_pyq_by_auxilla",
+      "title": "General & Nervemuscle  Phisiology PYQ by Auxilla",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Question Bank (PYQ)",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilla",
+        "general",
+        "nervemuscle",
+        "phisiology",
+        "physiology",
+        "pyq",
+        "question bank (pyq)",
+        "rgmc",
+        "students",
+        "wbuhs"
+      ],
+      "totalPages": 27,
+      "sizeMb": 15.5,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/general_nervemuscle_phisiology_pyq_by_auxilla.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/pyqs/general_nervemuscle_phisiology_pyq_by_auxilla.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=10n23pzOQaCzfVsxrmlItj9FlKZc-XYil",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=general_nervemuscle_phisiology_pyq_by_auxilla"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "endocrine_phisiology_pyq_by_auxilla",
+      "title": "Endocrine  Phisiology PYQ by Auxilla",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Question Bank (PYQ)",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilla",
+        "endocrine",
+        "phisiology",
+        "physiology",
+        "pyq",
+        "question bank (pyq)",
+        "rgmc",
+        "students",
+        "wbuhs"
+      ],
+      "totalPages": 26,
+      "sizeMb": 13.6,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/endocrine_phisiology_pyq_by_auxilla.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/pyqs/endocrine_phisiology_pyq_by_auxilla.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=10lpKtsoZwTosgsY5-Dl9mOozX0ea3WhW",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=endocrine_phisiology_pyq_by_auxilla"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "cns_phisiology_pyq_by_auxilla",
+      "title": "Cns  Phisiology PYQ by Auxilla",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Question Bank (PYQ)",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilla",
+        "cns",
+        "phisiology",
+        "physiology",
+        "pyq",
+        "question bank (pyq)",
+        "rgmc",
+        "students",
+        "wbuhs"
+      ],
+      "totalPages": 30,
+      "sizeMb": 15.3,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/cns_phisiology_pyq_by_auxilla.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/pyqs/cns_phisiology_pyq_by_auxilla.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=10luBTfk5tQimy0foVyaR6OfPcl9cP9B5",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=cns_phisiology_pyq_by_auxilla"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "cardiovascular_phisiology_pyq_by_auxilla",
+      "title": "Cardiovascular Phisiology PYQ by Auxilla",
+      "author": "Students of RGMC&H",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Question Bank (PYQ)",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "auxilla",
+        "cardiovascular",
+        "phisiology",
+        "physiology",
+        "pyq",
+        "question bank (pyq)",
+        "rgmc",
+        "students",
+        "wbuhs"
+      ],
+      "totalPages": 25,
+      "sizeMb": 14.3,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/cardiovascular_phisiology_pyq_by_auxilla.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/pyqs/cardiovascular_phisiology_pyq_by_auxilla.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=10nu43eoRg_1TR6APQSpRswkPHBpxOuxY",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=cardiovascular_phisiology_pyq_by_auxilla"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
       "id": "physiology_aetcom_johari_mbbs",
       "title": "Physiology Aetcom   Johari Mbbs",
       "author": "Johari Mbbs",
@@ -434,8 +897,7 @@
         }
       },
       "uploader": "Sahabul"
-    }
-  ,
+    },
     {
       "id": "grays_anatomy_for_students",
       "title": "Gray's Anatomy for Students",
