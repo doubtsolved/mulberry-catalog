@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792346456115,
+  "lastUpdated": 1792346466258,
   "filters": {
     "profs": [
       "1st Prof",
@@ -228,7 +228,7 @@
       "prof": "1st Prof",
       "year": "1st Year",
       "subject": "Biochemistry",
-      "type": "Standard Textbook",
+      "type": "Question Bank (PYQ)",
       "tags": [
         "1st prof",
         "1st year",
@@ -249,7 +249,7 @@
           {
             "provider": "mulberry-vault",
             "repo": "sahabul1064/mulberry-archives",
-            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/nucleotide_chemistry_biochemistry_pyq_by_auxilia.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/pyqs/nucleotide_chemistry_biochemistry_pyq_by_auxilia.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
