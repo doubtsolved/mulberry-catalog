@@ -57,9 +57,9 @@
         "neutrition",
         "pyq",
         "rgmc",
-        "standard textbook",
         "students",
-        "vitamins"
+        "vitamins",
+        "question bank (pyq)"
       ],
       "totalPages": 13,
       "sizeMb": 5.4,
@@ -103,8 +103,8 @@
         "protein",
         "pyq",
         "rgmc",
-        "standard textbook",
-        "students"
+        "students",
+        "question bank (pyq)"
       ],
       "totalPages": 22,
       "sizeMb": 8.7,
@@ -148,8 +148,8 @@
         "protein",
         "pyq",
         "rgmc",
-        "standard textbook",
-        "students"
+        "students",
+        "question bank (pyq)"
       ],
       "totalPages": 45,
       "sizeMb": 19.2,
@@ -193,8 +193,8 @@
         "nucleotide",
         "pyq",
         "rgmc",
-        "standard textbook",
-        "students"
+        "students",
+        "question bank (pyq)"
       ],
       "totalPages": 6,
       "sizeMb": 2.6,
@@ -238,8 +238,8 @@
         "nucleotide",
         "pyq",
         "rgmc",
-        "standard textbook",
-        "students"
+        "students",
+        "question bank (pyq)"
       ],
       "totalPages": 12,
       "sizeMb": 4.8,
@@ -273,7 +273,7 @@
       "prof": "1st Prof",
       "year": "1st Year",
       "subject": "Biochemistry",
-      "type": "Standard Textbook",
+      "type": "Question Bank (PYQ)",
       "tags": [
         "1st prof",
         "1st year",
@@ -284,8 +284,8 @@
         "molecular",
         "pyq",
         "rgmc",
-        "standard textbook",
-        "students"
+        "students",
+        "question bank (pyq)"
       ],
       "totalPages": 36,
       "sizeMb": 14.9,
@@ -319,7 +319,7 @@
       "prof": "1st Prof",
       "year": "1st Year",
       "subject": "Biochemistry",
-      "type": "Standard Textbook",
+      "type": "Question Bank (PYQ)",
       "tags": [
         "1st prof",
         "1st year",
@@ -329,8 +329,8 @@
         "metabolismbiochemistry",
         "pyq",
         "rgmc",
-        "standard textbook",
-        "students"
+        "students",
+        "question bank (pyq)"
       ],
       "totalPages": 28,
       "sizeMb": 10.2,
@@ -364,7 +364,7 @@
       "prof": "1st Prof",
       "year": "1st Year",
       "subject": "Biochemistry",
-      "type": "Standard Textbook",
+      "type": "Question Bank (PYQ)",
       "tags": [
         "1st prof",
         "1st year",
@@ -374,8 +374,8 @@
         "lipid",
         "pyq",
         "rgmc",
-        "standard textbook",
-        "students"
+        "students",
+        "question bank (pyq)"
       ],
       "totalPages": 31,
       "sizeMb": 11.4,
@@ -409,7 +409,7 @@
       "prof": "1st Prof",
       "year": "1st Year",
       "subject": "Biochemistry",
-      "type": "Standard Textbook",
+      "type": "Question Bank (PYQ)",
       "tags": [
         "1st prof",
         "1st year",
@@ -420,8 +420,8 @@
         "immune",
         "pyq",
         "rgmc",
-        "standard textbook",
-        "students"
+        "students",
+        "question bank (pyq)"
       ],
       "totalPages": 24,
       "sizeMb": 11.1,
@@ -455,7 +455,7 @@
       "prof": "1st Prof",
       "year": "1st Year",
       "subject": "Biochemistry",
-      "type": "Standard Textbook",
+      "type": "Question Bank (PYQ)",
       "tags": [
         "1st prof",
         "1st year",
@@ -466,9 +466,9 @@
         "pyq",
         "radicals",
         "rgmc",
-        "standard textbook",
         "students",
-        "xenobiotics"
+        "xenobiotics",
+        "question bank (pyq)"
       ],
       "totalPages": 9,
       "sizeMb": 4.8,
@@ -502,7 +502,7 @@
       "prof": "1st Prof",
       "year": "1st Year",
       "subject": "Biochemistry",
-      "type": "Standard Textbook",
+      "type": "Question Bank (PYQ)",
       "tags": [
         "1st prof",
         "1st year",
@@ -511,8 +511,8 @@
         "enzymes",
         "pyq",
         "rgmc",
-        "standard textbook",
-        "students"
+        "students",
+        "question bank (pyq)"
       ],
       "totalPages": 30,
       "sizeMb": 13.7,
@@ -546,7 +546,7 @@
       "prof": "1st Prof",
       "year": "1st Year",
       "subject": "Biochemistry",
-      "type": "Standard Textbook",
+      "type": "Question Bank (PYQ)",
       "tags": [
         "1st prof",
         "1st year",
@@ -555,8 +555,8 @@
         "cell",
         "pyq",
         "rgmc",
-        "standard textbook",
-        "students"
+        "students",
+        "question bank (pyq)"
       ],
       "totalPages": 14,
       "sizeMb": 6.2,
@@ -590,7 +590,7 @@
       "prof": "1st Prof",
       "year": "1st Year",
       "subject": "Biochemistry",
-      "type": "Standard Textbook",
+      "type": "Question Bank (PYQ)",
       "tags": [
         "1st prof",
         "1st year",
@@ -600,8 +600,8 @@
         "metabolism",
         "pyq",
         "rgmc",
-        "standard textbook",
-        "students"
+        "students",
+        "question bank (pyq)"
       ],
       "totalPages": 30,
       "sizeMb": 11.5,
@@ -635,7 +635,7 @@
       "prof": "1st Prof",
       "year": "1st Year",
       "subject": "Biochemistry",
-      "type": "Standard Textbook",
+      "type": "Question Bank (PYQ)",
       "tags": [
         "1st prof",
         "1st year",
@@ -645,8 +645,8 @@
         "chemistry",
         "pyq",
         "rgmc",
-        "standard textbook",
-        "students"
+        "students",
+        "question bank (pyq)"
       ],
       "totalPages": 19,
       "sizeMb": 6.6,
@@ -680,7 +680,7 @@
       "prof": "1st Prof",
       "year": "1st Year",
       "subject": "Biochemistry",
-      "type": "Standard Textbook",
+      "type": "Question Bank (PYQ)",
       "tags": [
         "1st prof",
         "1st year",
@@ -690,8 +690,8 @@
         "oxidation",
         "pyq",
         "rgmc",
-        "standard textbook",
-        "students"
+        "students",
+        "question bank (pyq)"
       ],
       "totalPages": 14,
       "sizeMb": 5.1,
@@ -725,7 +725,7 @@
       "prof": "1st Prof",
       "year": "1st Year",
       "subject": "Biochemistry",
-      "type": "Standard Textbook",
+      "type": "Question Bank (PYQ)",
       "tags": [
         "1st prof",
         "1st year",
@@ -734,8 +734,8 @@
         "biochemistry",
         "pyq",
         "rgmc",
-        "standard textbook",
-        "students"
+        "students",
+        "question bank (pyq)"
       ],
       "totalPages": 4,
       "sizeMb": 2.4,
@@ -769,7 +769,7 @@
       "prof": "1st Prof",
       "year": "1st Year",
       "subject": "Biochemistry",
-      "type": "Standard Textbook",
+      "type": "Question Bank (PYQ)",
       "tags": [
         "1st prof",
         "1st year",
@@ -780,8 +780,8 @@
         "biochemistry",
         "pyq",
         "rgmc",
-        "standard textbook",
-        "students"
+        "students",
+        "question bank (pyq)"
       ],
       "totalPages": 15,
       "sizeMb": 6.0,
@@ -1404,7 +1404,7 @@
       "prof": "1st Prof",
       "year": "1st Year",
       "subject": "Anatomy",
-      "type": "Standard Textbook",
+      "type": "Question Bank (PYQ)",
       "tags": [
         "1st prof",
         "1st year",
@@ -1412,9 +1412,9 @@
         "auxilia",
         "pyq",
         "rgmc",
-        "standard textbook",
         "students",
-        "thorax"
+        "thorax",
+        "question bank (pyq)"
       ],
       "totalPages": 31,
       "sizeMb": 19.0,
