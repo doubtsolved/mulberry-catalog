@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792349898778,
+  "lastUpdated": 1792350256587,
   "filters": {
     "profs": [
       "1st Prof",
@@ -40,6 +40,180 @@
     ]
   },
   "books": [
+    {
+      "id": "inderbir_singhs_human_embryology",
+      "title": "Inderbir Singh's Human Embryology",
+      "author": "Medical Faculty",
+      "edition": "11th",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "embryology",
+        "human",
+        "ib singh",
+        "inderbir",
+        "singh",
+        "standard textbook"
+      ],
+      "totalPages": 374,
+      "sizeMb": 28.5,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/inderbir_singhs_human_embryology.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/inderbir_singhs_human_embryology.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1qyplBQ-c1gKcb7OE3LYWNszcDaK33fL1",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=inderbir_singhs_human_embryology"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "human_genetics",
+      "title": "Human Genetics",
+      "author": "Dr. S. D. Gangane",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "gangane",
+        "genetics",
+        "human",
+        "standard textbook"
+      ],
+      "totalPages": 301,
+      "sizeMb": 7.3,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/human_genetics.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/human_genetics.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=10IvebsdimDWhZlDKewr-FXMNNxY4WQox",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=human_genetics"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "netters_atlas_of_human_embryology",
+      "title": "Netter'S Atlas Of Human Embryology",
+      "author": "Larry R. Cochard",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Atlas / Practical",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "atlas",
+        "atlas / practical",
+        "cochard",
+        "embryology",
+        "human",
+        "larry",
+        "netter"
+      ],
+      "totalPages": 318,
+      "sizeMb": 25.7,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/netters_atlas_of_human_embryology.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/practicals/netters_atlas_of_human_embryology.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=11q7x96E4GR1dTRXk61ukpqmBI6jq1fD2",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=netters_atlas_of_human_embryology"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "human_embryology_by_yogesh_sontakke",
+      "title": "Human Embryology By Yogesh Sontakke",
+      "author": "dr.  Yogesh Sontakke",
+      "edition": "",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "embryology",
+        "human",
+        "sontakke",
+        "standard textbook",
+        "yogesh"
+      ],
+      "totalPages": 329,
+      "sizeMb": 165.0,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/human_embryology_by_yogesh_sontakke.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/human_embryology_by_yogesh_sontakke.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1YHM8_t9UtYCuOrJGtUxj-rjutfSainX5",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=human_embryology_by_yogesh_sontakke"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "vishram_singh_vol_2_abdomen_and_lower_limb",
       "title": "Vishram Singh Vol 2 ABDOMEN AND LOWER LIMB",
