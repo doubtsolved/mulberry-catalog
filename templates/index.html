@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mulberry CMS & Vault Console</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background-color: #0b1116; color: #e2e8f0; font-family: system-ui, -apple-system, sans-serif; }
+    .glass { background: rgba(18, 28, 36, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(45, 212, 191, 0.15); }
+  </style>
+</head>
+<body class="min-h-screen pb-16">
+
+  <!-- Top Header -->
+  <header class="border-b border-slate-800 bg-slate-950/80 sticky top-0 z-30 backdrop-blur">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-bold">M</div>
+        <div>
+          <h1 class="text-lg font-bold tracking-tight text-white">Mulberry Operations Desk</h1>
+          <p class="text-xs text-slate-400">Hugging Face Vault + GitHub Catalog CMS</p>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="flex gap-2 bg-slate-900 p-1 rounded-xl border border-slate-800">
+        <button onclick="switchTab('catalog')" id="tab-btn-catalog" class="px-4 py-1.5 rounded-lg text-sm font-medium bg-emerald-600 text-white">
+          Catalog & Live Editor
+        </button>
+        <button onclick="switchTab('ingest')" id="tab-btn-ingest" class="px-4 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white">
+          + Ingest Books
+        </button>
+        <button onclick="switchTab('vault')" id="tab-btn-vault" class="px-4 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white">
+          HF Storage & Orphans
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 mt-6">
+
+    <!-- ==================== TAB 1: CATALOG MANAGER ==================== -->
+    <section id="tab-catalog" class="space-y-6">
+      <!-- Stats & Action Bar -->
+      <div class="glass rounded-2xl p-5 flex flex-wrap items-center justify-between gap-4">
+        <div class="flex flex-wrap items-center gap-4 flex-1">
+          <input id="search-input" oninput="renderCatalog()" type="text" placeholder="Search title, author, ID, or tag..."
+            class="bg-slate-900/90 border border-slate-700 rounded-xl px-4 py-2 text-sm w-full md:w-72 focus:outline-none focus:border-emerald-500" />
+
+          <select id="filter-prof" onchange="renderCatalog()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm">
+            <option value="">All Profs</option>
+          </select>
+
+          <select id="filter-type" onchange="renderCatalog()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm">
+            <option value="">All Asset Types</option>
+          </select>
+
+          <select id="filter-subject" onchange="renderCatalog()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm">
+            <option value="">All Subjects</option>
+          </select>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <span id="book-count-badge" class="text-xs px-3 py-1.5 rounded-lg bg-slate-800 text-emerald-400 font-mono">0 Books</span>
+          <button onclick="openCategoryModal()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-medium text-emerald-400">
+            + Add Asset Type
+          </button>
+          <button onclick="fetchCatalog()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs">
+            Refresh
+          </button>
+        </div>
+      </div>
+
+      <!-- Books Grid -->
+      <div id="books-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </section>
+
+    <!-- ==================== TAB 2: INGESTION PIPELINE ==================== -->
+    <section id="tab-ingest" class="hidden space-y-6">
+      <div class="glass rounded-2xl p-6 space-y-4">
+        <h2 class="text-base font-semibold text-white">1. Scan Google Drive Sources</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="text-xs text-slate-400 block mb-1">Public Google Drive Folder URL</label>
+            <input id="scan-folder-url" type="text" placeholder="https://drive.google.com/drive/folders/..."
+              class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm" />
+          </div>
+          <div>
+            <label class="text-xs text-slate-400 block mb-1">Or Direct Drive File Links (One per line)</label>
+            <textarea id="scan-direct-links" rows="2" placeholder="https://drive.google.com/file/d/..."
+              class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm"></textarea>
+          </div>
+        </div>
+        <button onclick="scanDrive()" id="btn-scan" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium">
+          Scan Drive Sources
+        </button>
+      </div>
+
+      <!-- Scanned Queue Table -->
+      <div id="ingest-queue-card" class="glass rounded-2xl p-6 hidden space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-base font-semibold text-white">2. Configure Metadata & Target HF Path</h2>
+          <button onclick="startIngestionBatch()" id="btn-start-ingest" class="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm">
+            Encrypt & Upload Selected to HF
+          </button>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-slate-800 text-slate-400">
+                <th class="p-2">Select</th>
+                <th class="p-2">Title</th>
+                <th class="p-2">Author</th>
+                <th class="p-2">Ed.</th>
+                <th class="p-2">Prof</th>
+                <th class="p-2">Subject</th>
+                <th class="p-2">Asset Type</th>
+                <th class="p-2">Extra Tags</th>
+              </tr>
+            </thead>
+            <tbody id="scan-results-body" class="divide-y divide-slate-800/60"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Live Terminal Logs -->
+      <div class="glass rounded-2xl p-5">
+        <h3 class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">Live Cloud Worker Terminal</h3>
+        <pre id="terminal-box" class="bg-black/80 text-emerald-400 font-mono text-xs p-4 rounded-xl h-64 overflow-y-auto border border-slate-800">Ready.</pre>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: HF STORAGE & ORPHANS ==================== -->
+    <section id="tab-vault" class="hidden space-y-6">
+      <div class="glass rounded-2xl p-6 space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-base font-semibold text-white">Hugging Face Private Dataset Quota</h2>
+            <p class="text-xs text-slate-400" id="hf-repo-label">sahabul1064/mulberry-archives</p>
+          </div>
+          <button onclick="fetchHfStatus()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs">
+            Scan HF Tree
+          </button>
+        </div>
+
+        <div class="w-full bg-slate-900 h-4 rounded-full overflow-hidden border border-slate-800">
+          <div id="hf-quota-bar" class="bg-emerald-500 h-full transition-all duration-300" style="width: 0%"></div>
+        </div>
+        <div class="flex justify-between text-xs text-slate-400 font-mono">
+          <span id="hf-usage-text">Click 'Scan HF Tree' to calculate usage</span>
+          <span>100 GB Private Limit</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="glass rounded-2xl p-5">
+          <h3 class="text-sm font-semibold text-white mb-3">All Encrypted Files in HF Dataset</h3>
+          <div id="hf-files-list" class="space-y-1.5 max-h-96 overflow-y-auto text-xs font-mono"></div>
+        </div>
+        <div class="glass rounded-2xl p-5">
+          <h3 class="text-sm font-semibold text-amber-400 mb-3">Untracked / Orphan Files (In HF but not in catalog.json)</h3>
+          <div id="hf-orphans-list" class="space-y-1.5 max-h-96 overflow-y-auto text-xs font-mono"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== MODAL: LIVE EDIT BOOK ==================== -->
+  <div id="edit-modal" class="fixed inset-0 bg-black/75 hidden items-center justify-center z-50 p-4">
+    <div class="glass rounded-2xl max-w-lg w-full p-6 space-y-4 border border-slate-700">
+      <div class="flex justify-between items-center">
+        <h3 class="text-base font-bold text-white">Edit Book Metadata & Location</h3>
+        <button onclick="closeEditModal()" class="text-slate-400 hover:text-white">&times;</button>
+      </div>
+      <input type="hidden" id="edit-id" />
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+        <div class="md:col-span-2">
+          <label class="text-slate-400 block mb-1">Title</label>
+          <input id="edit-title" type="text" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2" />
+        </div>
+        <div>
+          <label class="text-slate-400 block mb-1">Author</label>
+          <input id="edit-author" type="text" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2" />
+        </div>
+        <div>
+          <label class="text-slate-400 block mb-1">Edition</label>
+          <input id="edit-edition" type="text" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2" />
+        </div>
+        <div>
+          <label class="text-slate-400 block mb-1">Prof (Triggers HF Move if changed)</label>
+          <select id="edit-prof" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2"></select>
+        </div>
+        <div>
+          <label class="text-slate-400 block mb-1">Asset Type (Triggers HF Move if changed)</label>
+          <select id="edit-type" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2"></select>
+        </div>
+        <div>
+          <label class="text-slate-400 block mb-1">Subject</label>
+          <select id="edit-subject" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2"></select>
+        </div>
+        <div>
+          <label class="text-slate-400 block mb-1">Uploader</label>
+          <input id="edit-uploader" type="text" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2" />
+        </div>
+        <div class="md:col-span-2">
+          <label class="text-slate-400 block mb-1">Search Tags (comma separated)</label>
+          <input id="edit-tags" type="text" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2" />
+        </div>
+      </div>
+
+      <label class="flex items-center gap-2 text-xs text-emerald-400 pt-1">
+        <input type="checkbox" id="edit-relocate" checked class="rounded" />
+        Automatically move .bin file on Hugging Face if Prof or Asset Type changed
+      </label>
+
+      <div class="flex justify-end gap-2 pt-3">
+        <button onclick="closeEditModal()" class="px-4 py-2 rounded-xl bg-slate-800 text-xs">Cancel</button>
+        <button onclick="saveBookEdit()" id="btn-save-edit" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold">
+          Save & Push to GitHub
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: DELETE CONFIRMATION ==================== -->
+  <div id="delete-modal" class="fixed inset-0 bg-black/75 hidden items-center justify-center z-50 p-4">
+    <div class="glass rounded-2xl max-w-md w-full p-6 space-y-4 border border-red-500/30">
+      <h3 class="text-base font-bold text-white">Delete Resource</h3>
+      <p class="text-xs text-slate-300" id="delete-book-label"></p>
+      <input type="hidden" id="delete-id" />
+
+      <div class="space-y-2 pt-2">
+        <button onclick="confirmDelete('soft')" class="w-full text-left p-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700">
+          <div class="text-xs font-semibold text-amber-400">Option 1: Soft Delete (Catalog Only)</div>
+          <div class="text-[11px] text-slate-400">Removes from catalog.json & deletes cover, but keeps encrypted .bin safe in Hugging Face.</div>
+        </button>
+
+        <button onclick="confirmDelete('purge')" class="w-full text-left p-3 rounded-xl bg-red-950/40 hover:bg-red-900/50 border border-red-500/40">
+          <div class="text-xs font-semibold text-red-400">Option 2: Full Purge (Catalog + Hugging Face)</div>
+          <div class="text-[11px] text-slate-400">Permanently deletes record, cover, AND removes .bin from Hugging Face to free quota.</div>
+        </button>
+      </div>
+
+      <div class="flex justify-end">
+        <button onclick="closeDeleteModal()" class="px-4 py-1.5 rounded-lg bg-slate-800 text-xs">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: ADD CUSTOM ASSET TYPE ==================== -->
+  <div id="category-modal" class="fixed inset-0 bg-black/75 hidden items-center justify-center z-50 p-4">
+    <div class="glass rounded-2xl max-w-sm w-full p-6 space-y-4">
+      <h3 class="text-sm font-bold text-white">Add New Asset Category</h3>
+      <div>
+        <label class="text-xs text-slate-400 block mb-1">Display Name (e.g. Clinical Cases)</label>
+        <input id="new-cat-name" type="text" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs" />
+      </div>
+      <div>
+        <label class="text-xs text-slate-400 block mb-1">HF Folder Slug (e.g. clinical_cases)</label>
+        <input id="new-cat-slug" type="text" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs" />
+      </div>
+      <div class="flex justify-end gap-2">
+        <button onclick="closeCategoryModal()" class="px-3 py-1.5 rounded-lg bg-slate-800 text-xs">Cancel</button>
+        <button onclick="submitNewCategory()" class="px-4 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-semibold">Add & Sync</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let catalogData = { filters: { profs: [], types: [], subjects: [] }, books: [] };
+    let scannedFiles = [];
+    let pollTimer = null;
+
+    function switchTab(tab) {
+      ['catalog', 'ingest', 'vault'].forEach(t => {
+        document.getElementById(`tab-${t}`).classList.toggle('hidden', t !== tab);
+        const btn = document.getElementById(`tab-btn-${t}`);
+        if (t === tab) {
+          btn.className = "px-4 py-1.5 rounded-lg text-sm font-medium bg-emerald-600 text-white";
+        } else {
+          btn.className = "px-4 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white";
+        }
+      });
+    }
+
+    async function fetchCatalog() {
+      const res = await fetch('/api/catalog');
+      catalogData = await res.json();
+      populateFilterDropdowns();
+      renderCatalog();
+    }
+
+    function populateFilterDropdowns() {
+      const { profs = [], types = [], subjects = [] } = catalogData.filters || {};
+      const fill = (id, items, defaultLabel) => {
+        const el = document.getElementById(id);
+        const current = el.value;
+        el.innerHTML = defaultLabel ? `<option value="">${defaultLabel}</option>` : '';
+        items.forEach(item => {
+          el.innerHTML += `<option value="${item}">${item}</option>`;
+        });
+        el.value = current;
+      };
+      fill('filter-prof', profs, 'All Profs');
+      fill('filter-type', types, 'All Asset Types');
+      fill('filter-subject', subjects, 'All Subjects');
+      fill('edit-prof', profs);
+      fill('edit-type', types);
+      fill('edit-subject', subjects);
+    }
+
+    function renderCatalog() {
+      const q = document.getElementById('search-input').value.toLowerCase();
+      const prof = document.getElementById('filter-prof').value;
+      const type = document.getElementById('filter-type').value;
+      const subject = document.getElementById('filter-subject').value;
+
+      const filtered = (catalogData.books || []).filter(b => {
+        if (prof && b.prof !== prof) return false;
+        if (type && b.type !== type) return false;
+        if (subject && b.subject !== subject) return false;
+        if (q) {
+          const hay = `${b.title} ${b.author} ${b.id} ${(b.tags || []).join(' ')}`.toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      });
+
+      document.getElementById('book-count-badge').textContent = `${filtered.length} Books`;
+      const grid = document.getElementById('books-grid');
+      grid.innerHTML = filtered.map(b => {
+        const primaryUrl = b.download?.mirrors?.[0]?.url || 'N/A';
+        return `
+          <div class="glass rounded-2xl p-4 flex gap-4 items-start border border-slate-800/80 hover:border-emerald-500/40 transition">
+            <img src="${b.coverUrl}" onerror="this.src='https://placehold.co/120x160/1e293b/10b981?text=Cover'"
+              class="w-20 h-28 object-cover rounded-xl bg-slate-900 flex-shrink-0 border border-slate-800" />
+            <div class="flex-1 min-w-0 space-y-1">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400 font-medium">${b.prof}</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300">${b.subject}</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-purple-500/15 text-purple-300">${b.type}</span>
+              </div>
+              <h3 class="text-sm font-bold text-white truncate" title="${b.title}">${b.title}</h3>
+              <p class="text-xs text-slate-400 truncate">${b.author} • ${b.edition}</p>
+              <p class="text-[11px] text-slate-500 font-mono">${b.totalPages || 0}p • ${b.sizeMb || 0} MB</p>
+              <p class="text-[10px] text-slate-500 font-mono truncate" title="${primaryUrl}">${primaryUrl}</p>
+              <div class="pt-2 flex gap-2">
+                <button onclick="openEditModal('${b.id}')" class="px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-emerald-400 font-medium">Edit / Move</button>
+                <button onclick="openDeleteModal('${b.id}')" class="px-3 py-1 rounded-lg bg-red-950/50 hover:bg-red-900/60 text-xs text-red-400">Delete</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openEditModal(bookId) {
+      const b = catalogData.books.find(x => x.id === bookId);
+      if (!b) return;
+      document.getElementById('edit-id').value = b.id;
+      document.getElementById('edit-title').value = b.title || '';
+      document.getElementById('edit-author').value = b.author || '';
+      document.getElementById('edit-edition').value = b.edition || '';
+      document.getElementById('edit-prof').value = b.prof || '';
+      document.getElementById('edit-type').value = b.type || '';
+      document.getElementById('edit-subject').value = b.subject || '';
+      document.getElementById('edit-uploader').value = b.uploader || 'Sahabul';
+      document.getElementById('edit-tags').value = (b.tags || []).join(', ');
+      document.getElementById('edit-modal').classList.replace('hidden', 'flex');
+    }
+
+    function closeEditModal() {
+      document.getElementById('edit-modal').classList.replace('flex', 'hidden');
+    }
+
+    async function saveBookEdit() {
+      const bookId = document.getElementById('edit-id').value;
+      const btn = document.getElementById('btn-save-edit');
+      btn.textContent = 'Syncing HF & Git...';
+      btn.disabled = true;
+
+      const payload = {
+        title: document.getElementById('edit-title').value,
+        author: document.getElementById('edit-author').value,
+        edition: document.getElementById('edit-edition').value,
+        prof: document.getElementById('edit-prof').value,
+        type: document.getElementById('edit-type').value,
+        subject: document.getElementById('edit-subject').value,
+        uploader: document.getElementById('edit-uploader').value,
+        tags: document.getElementById('edit-tags').value.split(',').map(s => s.trim()).filter(Boolean),
+        relocate_hf: document.getElementById('edit-relocate').checked
+      };
+
+      const res = await fetch(`/api/books/${bookId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      btn.textContent = 'Save & Push to GitHub';
+      btn.disabled = false;
+
+      if (res.ok) {
+        closeEditModal();
+        await fetchCatalog();
+      } else {
+        const err = await res.json();
+        alert('Error: ' + (err.detail || 'Update failed'));
+      }
+    }
+
+    function openDeleteModal(bookId) {
+      const b = catalogData.books.find(x => x.id === bookId);
+      if (!b) return;
+      document.getElementById('delete-id').value = b.id;
+      document.getElementById('delete-book-label').textContent = `${b.title} (${b.id}.bin)`;
+      document.getElementById('delete-modal').classList.replace('hidden', 'flex');
+    }
+
+    function closeDeleteModal() {
+      document.getElementById('delete-modal').classList.replace('flex', 'hidden');
+    }
+
+    async function confirmDelete(mode) {
+      const bookId = document.getElementById('delete-id').value;
+      const res = await fetch(`/api/books/${bookId}?mode=${mode}`, { method: 'DELETE' });
+      if (res.ok) {
+        closeDeleteModal();
+        await fetchCatalog();
+      } else {
+        const err = await res.json();
+        alert('Delete error: ' + (err.detail || 'Failed'));
+      }
+    }
+
+    function openCategoryModal() {
+      document.getElementById('category-modal').classList.replace('hidden', 'flex');
+    }
+
+    function closeCategoryModal() {
+      document.getElementById('category-modal').classList.replace('flex', 'hidden');
+    }
+
+    async function submitNewCategory() {
+      const name = document.getElementById('new-cat-name').value.trim();
+      const slug = document.getElementById('new-cat-slug').value.trim();
+      if (!name) return;
+      const res = await fetch('/api/categories/add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, slug })
+      });
+      if (res.ok) {
+        closeCategoryModal();
+        await fetchCatalog();
+      }
+    }
+
+    async function scanDrive() {
+      const btn = document.getElementById('btn-scan');
+      btn.textContent = 'Scanning Drive...';
+      const folder_url = document.getElementById('scan-folder-url').value;
+      const direct_links = document.getElementById('scan-direct-links').value;
+
+      const res = await fetch('/api/scan-folder', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ folder_url, direct_links })
+      });
+      const data = await res.json();
+      btn.textContent = 'Scan Drive Sources';
+
+      scannedFiles = data.files || [];
+      const tbody = document.getElementById('scan-results-body');
+      document.getElementById('ingest-queue-card').classList.toggle('hidden', scannedFiles.length === 0);
+
+      const profOpts = (catalogData.filters.profs || []).map(p => `<option value="${p}">${p}</option>`).join('');
+      const subjOpts = (catalogData.filters.subjects || []).map(s => `<option value="${s}">${s}</option>`).join('');
+      const typeOpts = (catalogData.filters.types || []).map(t => `<option value="${t}">${t}</option>`).join('');
+
+      tbody.innerHTML = scannedFiles.map((f, i) => `
+        <tr>
+          <td class="p-2"><input type="checkbox" id="chk-${i}" ${f.already_in_catalog ? '' : 'checked'} /></td>
+          <td class="p-2"><input id="title-${i}" value="${f.heuristics.title}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1 w-48" /></td>
+          <td class="p-2"><input id="author-${i}" value="${f.heuristics.author}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1 w-32" /></td>
+          <td class="p-2"><input id="ed-${i}" value="${f.heuristics.edition}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1 w-20" /></td>
+          <td class="p-2"><select id="prof-${i}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1">${profOpts}</select></td>
+          <td class="p-2"><select id="subj-${i}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1">${subjOpts}</select></td>
+          <td class="p-2"><select id="type-${i}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1">${typeOpts}</select></td>
+          <td class="p-2"><input id="tags-${i}" placeholder="pyq, important" class="bg-slate-900 border border-slate-700 rounded px-2 py-1 w-28" /></td>
+        </tr>
+      `).join('');
+
+      scannedFiles.forEach((f, i) => {
+        document.getElementById(`prof-${i}`).value = f.heuristics.prof;
+        document.getElementById(`subj-${i}`).value = f.heuristics.subject;
+        document.getElementById(`type-${i}`).value = f.heuristics.type;
+      });
+    }
+
+    async function startIngestionBatch() {
+      const books = [];
+      scannedFiles.forEach((f, i) => {
+        if (document.getElementById(`chk-${i}`).checked) {
+          books.push({
+            drive_id: f.drive_id,
+            title: document.getElementById(`title-${i}`).value,
+            author: document.getElementById(`author-${i}`).value,
+            edition: document.getElementById(`ed-${i}`).value,
+            prof: document.getElementById(`prof-${i}`).value,
+            subject: document.getElementById(`subj-${i}`).value,
+            type: document.getElementById(`type-${i}`).value,
+            extra_tags: document.getElementById(`tags-${i}`).value
+          });
+        }
+      });
+      if (!books.length) return alert('Select at least one book.');
+
+      await fetch('/api/start-ingestion', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ books })
+      });
+
+      if (pollTimer) clearInterval(pollTimer);
+      pollTimer = setInterval(pollLogs, 1500);
+    }
+
+    async function pollLogs() {
+      const res = await fetch('/api/logs');
+      const data = await res.json();
+      const box = document.getElementById('terminal-box');
+      box.textContent = (data.logs || []).join('\n');
+      box.scrollTop = box.scrollHeight;
+      if (!data.is_processing) {
+        clearInterval(pollTimer);
+        fetchCatalog();
+      }
+    }
+
+    async function fetchHfStatus() {
+      document.getElementById('hf-usage-text').textContent = 'Scanning Hugging Face repository...';
+      const res = await fetch('/api/hf-status');
+      const data = await res.json();
+      if (data.status !== 'success') {
+        document.getElementById('hf-usage-text').textContent = 'Error: ' + data.message;
+        return;
+      }
+      const pct = Math.min(100, (data.total_gb / data.quota_gb) * 100);
+      document.getElementById('hf-quota-bar').style.width = `${pct}%`;
+      document.getElementById('hf-usage-text').textContent = `${data.total_gb} GB used across ${data.total_files} encrypted files`;
+
+      document.getElementById('hf-files-list').innerHTML = data.files.map(f =>
+        `<div class="flex justify-between py-1 border-b border-slate-800/60"><span>${f.path}</span><span class="text-emerald-400">${f.size_mb} MB</span></div>`
+      ).join('');
+
+      document.getElementById('hf-orphans-list').innerHTML = data.orphans.length
+        ? data.orphans.map(f => `<div class="flex justify-between py-1 border-b border-slate-800/60 text-amber-300"><span>${f.path}</span><span>${f.size_mb} MB</span></div>`).join('')
+        : `<div class="text-slate-500">No orphan files detected! Every HF file matches catalog.json.</div>`;
+    }
+
+    fetchCatalog();
+  </script>
+</body>
+</html>

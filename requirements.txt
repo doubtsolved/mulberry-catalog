@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+jinja2
+requests
+pymupdf
+gdown
+beautifulsoup4
+Pillow
+python-dotenv
+cryptography
+huggingface_hub
+pydantic
