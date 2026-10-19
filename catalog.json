@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792424091212,
+  "lastUpdated": 1792424481124,
   "filters": {
     "profs": [
       "1st Prof",
@@ -40,50 +40,6 @@
     ]
   },
   "books": [
-    {
-      "id": "guyton_and_hall_textbook_of_medical_physiology",
-      "title": "Guyton And Hall Textbook Of Medical Physiology",
-      "author": "Guyton and Hall",
-      "edition": "southEdition",
-      "prof": "1st Prof",
-      "year": "1st Year",
-      "subject": "Physiology",
-      "type": "Standard Textbook",
-      "tags": [
-        "1st prof",
-        "1st year",
-        "and",
-        "guyton",
-        "hall",
-        "medical",
-        "physiology",
-        "standard textbook",
-        "textbook"
-      ],
-      "totalPages": 1112,
-      "sizeMb": 54.1,
-      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/guyton_and_hall_textbook_of_medical_physiology.webp",
-      "download": {
-        "mirrors": [
-          {
-            "provider": "mulberry-vault",
-            "repo": "sahabul1064/mulberry-archives",
-            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/guyton_and_hall_textbook_of_medical_physiology.bin",
-            "isEncrypted": true,
-            "format": "aes-256-gcm"
-          },
-          {
-            "provider": "source",
-            "url": "https://pharma.me.uk/wp-content/uploads/2025/06/Guyton-and-Hall-Textbook-of-Medical-Physiology-PDFDrive-.pdf",
-            "isEncrypted": false
-          }
-        ],
-        "telegram": {
-          "deepLink": "https://t.me/MulberryIngestionBot?start=guyton_and_hall_textbook_of_medical_physiology"
-        }
-      },
-      "uploader": "Sahabul"
-    },
     {
       "id": "inderbir_singhs_human_embryology",
       "title": "Inderbir Singh's Human Embryology",
