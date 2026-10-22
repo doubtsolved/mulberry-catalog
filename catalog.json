@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792424481721,
+  "lastUpdated": 1792688895821,
   "filters": {
     "profs": [
       "1st Prof",
@@ -40,6 +40,528 @@
     ]
   },
   "books": [
+    {
+      "id": "textbook_of_practical_physiology",
+      "title": "Textbook of Practical Physiology",
+      "author": "G. K. Pal",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Atlas / Practical",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "atlas / practical",
+        "pal",
+        "physiology",
+        "practical",
+        "textbook"
+      ],
+      "totalPages": 451,
+      "sizeMb": 100.4,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/textbook_of_practical_physiology.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/practicals/textbook_of_practical_physiology.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1QvXZliML7VWJnBO63vFOol7ZS9Br4amK",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=textbook_of_practical_physiology"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "textbook_of_medical_physiology",
+      "title": "Textbook of Medical Physiology",
+      "author": "G. K. Pal",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "medical",
+        "pal",
+        "physiology",
+        "standard textbook",
+        "textbook"
+      ],
+      "totalPages": 1395,
+      "sizeMb": 182.2,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/textbook_of_medical_physiology.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/textbook_of_medical_physiology.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1nSRGu129ID_IvDz80XkH5O_EyUia7rii",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=textbook_of_medical_physiology"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "ganong_review_of_medical_physiology",
+      "title": "Ganong Review Of Medical Physiology",
+      "author": "William Francis Ganong",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Review / High-Yield",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "francis",
+        "ganong",
+        "medical",
+        "physiology",
+        "review",
+        "review / high-yield",
+        "william"
+      ],
+      "totalPages": 753,
+      "sizeMb": 90.4,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/ganong_review_of_medical_physiology.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/review/ganong_review_of_medical_physiology.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1KlBpx3dCS5KRA7oQQN7DqP1pNICVsy3i",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=ganong_review_of_medical_physiology"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "manual_of_practical_physiology",
+      "title": "Manual of Practical Physiology",
+      "author": "Dr. Debasis Pramanik",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Atlas / Practical",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "atlas / practical",
+        "debasis",
+        "manual",
+        "physiology",
+        "practical",
+        "pramanik"
+      ],
+      "totalPages": 103,
+      "sizeMb": 21.3,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/manual_of_practical_physiology.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/practicals/manual_of_practical_physiology.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1q5NUy38eGf4ZbNVzJouUMTxiEpTYP7CC",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=manual_of_practical_physiology"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "costanzos_physiology",
+      "title": "Costanzo'S Physiology",
+      "author": "Dr. Linda S. Costanzo, PhD",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "costanzo",
+        "linda",
+        "phd",
+        "physiology",
+        "standard textbook"
+      ],
+      "totalPages": 494,
+      "sizeMb": 10.3,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/costanzos_physiology.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/costanzos_physiology.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1hwsDVrEY-7Iplkkx9WZiO19DzkRQmPst",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=costanzos_physiology"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "ghais_textbook_of_practical_physiology",
+      "title": "Ghai’s Textbook of Practical Physiology",
+      "author": "Medical Faculty",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Atlas / Practical",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "atlas / practical",
+        "ghai",
+        "physiology",
+        "practical",
+        "textbook"
+      ],
+      "totalPages": 406,
+      "sizeMb": 12.3,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/ghais_textbook_of_practical_physiology.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/practicals/ghais_textbook_of_practical_physiology.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1zjMIJ80QUUIENPvXxwhTdU-bnyG-bpNe",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=ghais_textbook_of_practical_physiology"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "cc_chatterjees_human_physiology_volume_2",
+      "title": "CC Chatterjee’s Human Physiology (Volume 2)",
+      "author": ": Dr. Chandi Charan (C.C.) Chatterjee",
+      "edition": "2th Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "chandi",
+        "charan",
+        "chatterjee",
+        "human",
+        "physiology",
+        "standard textbook",
+        "volume"
+      ],
+      "totalPages": 538,
+      "sizeMb": 49.1,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/cc_chatterjees_human_physiology_volume_2.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/cc_chatterjees_human_physiology_volume_2.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1Emt00ORVG_E0EEyQ6fikg_lMIDYCFRd5",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=cc_chatterjees_human_physiology_volume_2"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "cc_chatterjees_human_physiology_volume_1",
+      "title": "CC Chatterjee’s Human Physiology (Volume 1)",
+      "author": ": Dr. Chandi Charan (C.C.) Chatterjee",
+      "edition": "1th Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "chandi",
+        "charan",
+        "chatterjee",
+        "human",
+        "physiology",
+        "standard textbook",
+        "volume"
+      ],
+      "totalPages": 594,
+      "sizeMb": 46.0,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/cc_chatterjees_human_physiology_volume_1.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/cc_chatterjees_human_physiology_volume_1.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1EmG6bnckRqaczPFTa6nO_MMCikatTcvi",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=cc_chatterjees_human_physiology_volume_1"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "boron_boulpaep_medical_physiology",
+      "title": "Boron Boulpaep Medical Physiology",
+      "author": "Dr. Walter F. Boron, MD, PhD and Dr. Emile L. Boulpaep, MD",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "boron",
+        "boulpaep",
+        "emile",
+        "medical",
+        "phd",
+        "physiology",
+        "standard textbook",
+        "walter"
+      ],
+      "totalPages": 1351,
+      "sizeMb": 54.3,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/boron_boulpaep_medical_physiology.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/boron_boulpaep_medical_physiology.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1-xXJ1OZLsCmrWdj8h3tQMZKfLtD-W6Sr",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=boron_boulpaep_medical_physiology"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "berne_and_levy_physiology",
+      "title": "Berne And Levy Physiology",
+      "author": "• Robert M. Berne and Matthew N. Levy",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "and",
+        "berne",
+        "levy",
+        "matthew",
+        "physiology",
+        "robert",
+        "standard textbook"
+      ],
+      "totalPages": 884,
+      "sizeMb": 71.5,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/berne_and_levy_physiology.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/berne_and_levy_physiology.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1pv2Vn9vTCKtKJuwyQDNzuyqQGCCksKx6",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=berne_and_levy_physiology"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "extbook_of_physiology_for_mbbs",
+      "title": "extbook of Physiology for MBBS",
+      "author": "Dr. A. K. Jain",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "extbook",
+        "for",
+        "jain",
+        "mbbs",
+        "physiology",
+        "standard textbook"
+      ],
+      "totalPages": 1156,
+      "sizeMb": 394.6,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/extbook_of_physiology_for_mbbs.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/extbook_of_physiology_for_mbbs.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1gm04ZszbtsD-pbYccBCDz9pFGgt1MlPm",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=extbook_of_physiology_for_mbbs"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "manual_of_practical_physiology_for_mbbs",
+      "title": "Manual of Practical Physiology for MBBS",
+      "author": "Dr. A. K. Jain",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Atlas / Practical",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "atlas / practical",
+        "for",
+        "jain",
+        "manual",
+        "mbbs",
+        "physiology",
+        "practical"
+      ],
+      "totalPages": 160,
+      "sizeMb": 102.8,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/manual_of_practical_physiology_for_mbbs.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/practicals/manual_of_practical_physiology_for_mbbs.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=17Uyyx5dGE71zfxzD0bq4sA6KhQwnR7N3",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=manual_of_practical_physiology_for_mbbs"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "inderbir_singhs_human_embryology",
       "title": "Inderbir Singh's Human Embryology",
