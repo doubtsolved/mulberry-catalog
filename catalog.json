@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792688895821,
+  "lastUpdated": 1792689298324,
   "filters": {
     "profs": [
       "1st Prof",
@@ -40,6 +40,184 @@
     ]
   },
   "books": [
+    {
+      "id": "joshis_physiology_preparatory_manual_for_undergraduates",
+      "title": "Joshi's Physiology Preparatory Manual for Undergraduates",
+      "author": "Vijaya D. Joshi and Sadhana Joshi Mendhurwar",
+      "edition": "2010th Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Atlas / Practical",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "atlas / practical",
+        "for",
+        "joshi",
+        "manual",
+        "mendhurwar",
+        "physiology",
+        "preparatory",
+        "sadhana",
+        "undergraduates",
+        "vijaya"
+      ],
+      "totalPages": 691,
+      "sizeMb": 5.0,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/joshis_physiology_preparatory_manual_for_undergraduates.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/practicals/joshis_physiology_preparatory_manual_for_undergraduates.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1Jw86NE3osvgoGuiBy78SgsesQbG-SdyQ",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=joshis_physiology_preparatory_manual_for_undergraduates"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "review_of_physiology_by_soumen_manna",
+      "title": "Review Of Physiology by Soumen Manna",
+      "author": "dr. Soumen Manna",
+      "edition": "2nd",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Review / High-Yield",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "manna",
+        "physiology",
+        "review",
+        "review / high-yield",
+        "soumen"
+      ],
+      "totalPages": 594,
+      "sizeMb": 19.9,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/review_of_physiology_by_soumen_manna.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/review/review_of_physiology_by_soumen_manna.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1QD9x5ZUXN_Km3Nr8gS-bN2l-aaQ0aBJh",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=review_of_physiology_by_soumen_manna"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "guyton_and_hall_textbook_of_medical_physiology",
+      "title": "Guyton and Hall Textbook of Medical Physiology",
+      "author": "Arthur C. Guyton , John E. Hall, and Michael E. Hall",
+      "edition": "14th",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "and",
+        "arthur",
+        "guyton",
+        "hall",
+        "john",
+        "medical",
+        "michael",
+        "physiology",
+        "standard textbook",
+        "textbook"
+      ],
+      "totalPages": 1028,
+      "sizeMb": 59.6,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/guyton_and_hall_textbook_of_medical_physiology.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/guyton_and_hall_textbook_of_medical_physiology.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1FKddrgeHiCiUPLq-kmiaLL_HUTa6Gj3Y",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=guyton_and_hall_textbook_of_medical_physiology"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "principles_of_physiology",
+      "title": "Principles of Physiology",
+      "author": "Dr. Debasis Pramanik",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "debasis",
+        "physiology",
+        "pramanik",
+        "principles",
+        "standard textbook"
+      ],
+      "totalPages": 643,
+      "sizeMb": 89.7,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/principles_of_physiology.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/principles_of_physiology.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1pyFk1uswRlGqaV_V4on_CkwcTq4Z0RU-",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=principles_of_physiology"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "textbook_of_practical_physiology",
       "title": "Textbook of Practical Physiology",
