@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792748412877,
+  "lastUpdated": 1792775079376,
   "filters": {
     "profs": [
       "1st Prof",
@@ -143,7 +143,7 @@
       "prof": "1st Prof",
       "year": "1st Year",
       "subject": "Physiology",
-      "type": "Question Bank",
+      "type": "Question Bank (PYQ)",
       "tags": [
         "1st prof",
         "1st year",
@@ -153,7 +153,8 @@
         "biochemistry",
         "mbbs",
         "physiology",
-        "question bank",
+        "pyq",
+        "question bank (pyq)",
         "vij",
         "viva"
       ],
@@ -165,7 +166,7 @@
           {
             "provider": "mulberry-vault",
             "repo": "sahabul1064/mulberry-archives",
-            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/question_bank/viva_in_anatomy_physiology_and_biochemistry.bin",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/pyqs/viva_in_anatomy_physiology_and_biochemistry.bin",
             "isEncrypted": true,
             "format": "aes-256-gcm"
           },
