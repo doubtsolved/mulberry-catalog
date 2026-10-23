@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792693624514,
+  "lastUpdated": 1792748412877,
   "filters": {
     "profs": [
       "1st Prof",
@@ -41,6 +41,54 @@
     ]
   },
   "books": [
+    {
+      "id": "jambulkar_sir_3rd_ed_golden_notes_5_compressed_1",
+      "title": "Jambulkar  Sir 3rd Ed. Golden Notes (5) Compressed (1)",
+      "author": "Dr. Rajesh Jambhulkar",
+      "edition": "3th Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Handwritten Notes",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "3rd",
+        "biochemistry",
+        "compressed",
+        "golden",
+        "handwritten notes",
+        "jambhulkar",
+        "jambu notes",
+        "jambulkar",
+        "notes",
+        "rajesh",
+        "sir"
+      ],
+      "totalPages": 453,
+      "sizeMb": 74.0,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/jambulkar_sir_3rd_ed_golden_notes_5_compressed_1.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/notes/jambulkar_sir_3rd_ed_golden_notes_5_compressed_1.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1lEc3kk4GU9uBbWAUf1T7FkU_CAfEYsVC",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=jambulkar_sir_3rd_ed_golden_notes_5_compressed_1"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "guyton_hall_textbook_of_medical_physiology_south_asian",
       "title": "Guyton & Hall Textbook Of Medical Physiology South Asian",
