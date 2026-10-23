@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792689298324,
+  "lastUpdated": 1792748412877,
   "filters": {
     "profs": [
       "1st Prof",
@@ -15,7 +15,8 @@
       "Atlas / Practical",
       "Question Bank (PYQ)",
       "Aetcom",
-      "Question Bank"
+      "Question Bank",
+      "Exam/Viva"
     ],
     "subjects": [
       "Anatomy",
@@ -40,6 +41,146 @@
     ]
   },
   "books": [
+    {
+      "id": "jambulkar_sir_3rd_ed_golden_notes_5_compressed_1",
+      "title": "Jambulkar  Sir 3rd Ed. Golden Notes (5) Compressed (1)",
+      "author": "Dr. Rajesh Jambhulkar",
+      "edition": "3th Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Handwritten Notes",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "3rd",
+        "biochemistry",
+        "compressed",
+        "golden",
+        "handwritten notes",
+        "jambhulkar",
+        "jambu notes",
+        "jambulkar",
+        "notes",
+        "rajesh",
+        "sir"
+      ],
+      "totalPages": 453,
+      "sizeMb": 74.0,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/jambulkar_sir_3rd_ed_golden_notes_5_compressed_1.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/notes/jambulkar_sir_3rd_ed_golden_notes_5_compressed_1.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1lEc3kk4GU9uBbWAUf1T7FkU_CAfEYsVC",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=jambulkar_sir_3rd_ed_golden_notes_5_compressed_1"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "guyton_hall_textbook_of_medical_physiology_south_asian",
+      "title": "Guyton & Hall Textbook Of Medical Physiology South Asian",
+      "author": "Arthur C. Guyton",
+      "edition": "3th Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "arthur",
+        "asian",
+        "guyton",
+        "hall",
+        "medical",
+        "physiology",
+        "south",
+        "standard textbook",
+        "textbook"
+      ],
+      "totalPages": 3804,
+      "sizeMb": 32.4,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/guyton_hall_textbook_of_medical_physiology_south_asian.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/guyton_hall_textbook_of_medical_physiology_south_asian.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1VgYTb13AJsN4Rw74_yxrGKJ472u5VP9Z",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=guyton_hall_textbook_of_medical_physiology_south_asian"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "viva_in_anatomy_physiology_and_biochemistry",
+      "title": "Viva In Anatomy , Physiology and Biochemistry",
+      "author": "Anjula Vij MBBS",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Question Bank",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "and",
+        "anjula",
+        "biochemistry",
+        "mbbs",
+        "physiology",
+        "question bank",
+        "vij",
+        "viva"
+      ],
+      "totalPages": 346,
+      "sizeMb": 23.0,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/viva_in_anatomy_physiology_and_biochemistry.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/question_bank/viva_in_anatomy_physiology_and_biochemistry.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=19NKsq5PhaoPiFIUVDvMM90yWKp1FMJE8",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=viva_in_anatomy_physiology_and_biochemistry"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "joshis_physiology_preparatory_manual_for_undergraduates",
       "title": "Joshi's Physiology Preparatory Manual for Undergraduates",
