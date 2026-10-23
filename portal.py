@@ -17,7 +17,7 @@ from dotenv import load_dotenv
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from huggingface_hub import HfApi, CommitOperationCopy, CommitOperationDelete
 from fastapi import FastAPI, Request, BackgroundTasks, HTTPException, Query
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse, Response
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
@@ -175,7 +175,6 @@ def sync_git(commit_message: str) -> bool:
     subprocess.run(["git", "config", "user.name", "Sahabul Mondal"], cwd=BASE_DIR, check=False)
     subprocess.run(["git", "config", "user.email", "sahabul@users.noreply.github.com"], cwd=BASE_DIR, check=False)
 
-    # Remove stale git-lfs hook if present in container
     lfs_hook = BASE_DIR / ".git" / "hooks" / "pre-push"
     if lfs_hook.exists():
         try:
@@ -217,7 +216,7 @@ def build_tags(title: str, author: str, subject: str, prof: str, book_type: str,
     for word in re.findall(r'\b\w{3,}\b', title.lower()):
         tags.add(word)
     for word in re.findall(r'\b\w{3,}\b', author.lower()):
-        if word not in ["faculty", "medical", "books", "dr", "and", "prof", "students"]:
+        if word not in ["faculty", "medical", "books", "dr", "and", "prof", "students", "local", "import"]:
             tags.add(word)
     if extra_tags:
         for t in extra_tags.split(","):
@@ -237,7 +236,6 @@ def get_hf_api() -> HfApi:
 
 
 def find_existing_hf_path(book: Dict[str, Any], hf_files: List[str]) -> Optional[str]:
-    """Resolves the actual path of a book's .bin file inside Hugging Face."""
     book_id = book["id"]
     target_filename = f"{book_id}.bin"
 
@@ -260,10 +258,6 @@ def find_existing_hf_path(book: Dict[str, Any], hf_files: List[str]) -> Optional
 
 
 def relocate_hf_file_if_needed(book: Dict[str, Any], new_prof: str, new_type: str) -> str:
-    """
-    Moves the file on Hugging Face if Prof or Asset Type changed.
-    Returns the final relative HF path (e.g. 'prof1/pyqs/book.bin').
-    """
     book_id = book["id"]
     desired_path = build_hf_path(new_prof, new_type, book_id)
 
@@ -484,7 +478,7 @@ def run_batch_ingestion(books_queue: List[Dict[str, Any]]):
                     fallback_mirror_url = source_id
                 else:
                     log(f"1. Downloading from Google Drive ({source_id})...")
-                    gdown.download(id=source_id, output=str(pdf_path), quiet=False)
+                    gdown.download(id=source_id, output=str(pdf_path), quiet=False, fuzzy=True)
                     fallback_mirror_url = f"https://drive.google.com/uc?export=download&id={source_id}"
             except Exception as dl_err:
                 log(f"ERROR: Download failed for '{title}': {dl_err}. Skipping.")
@@ -697,7 +691,6 @@ def api_update_book(book_id: str, req: BookUpdateRequest):
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Hugging Face Move Failed: {str(e)}")
 
-    # Scrub stale category/prof/subject tags so books never appear in two categories at once
     all_known_types = {t.lower() for t in catalog["filters"].get("types", [])}
     all_known_profs = {p.lower() for p in catalog["filters"].get("profs", [])}
     stale_tags = {
@@ -786,6 +779,226 @@ def api_delete_book(book_id: str, mode: str = Query("soft", enum=["soft", "purge
     }
 
 
+# ==========================================
+# API ROUTES: COMMUNITY SUBMISSIONS INBOX
+# ==========================================
+@app.get("/api/submissions")
+def api_list_submissions():
+    """Scans `submissions/<slug>/` on Hugging Face for pending student contributions."""
+    try:
+        api = get_hf_api()
+        hf_files = api.list_repo_files(repo_id=HF_REPO_ID, repo_type="dataset")
+
+        submission_Files_map: Dict[str, List[str]] = {}
+        for f in hf_files:
+            if f.startswith("submissions/"):
+                parts = f.split("/")
+                if len(parts) >= 3:
+                    slug = parts[1]
+                    submission_Files_map.setdefault(slug, []).append(f)
+
+        headers = {"Authorization": f"Bearer {HF_TOKEN}"} if HF_TOKEN else {}
+        submissions = []
+
+        for slug, paths in submission_Files_map.items():
+            meta_path = f"submissions/{slug}/metadata.json"
+            bin_path = next((p for p in paths if p.endswith(".bin")), None)
+            cover_path = next((p for p in paths if p.endswith(".webp")), None)
+
+            if not bin_path:
+                continue
+
+            meta = {
+                "slug": slug,
+                "title": slug.replace("_", " ").title(),
+                "author": "Community Contributor",
+                "edition": "Standard Edition",
+                "prof": "1st Prof",
+                "subject": "Anatomy",
+                "type": "Handwritten Notes",
+                "totalPages": 1,
+                "sizeMb": 0.0,
+                "uploader": "Student",
+                "contributorTier": "STANDARD",
+                "submittedAt": int(time.time() * 1000)
+            }
+
+            if meta_path in paths:
+                try:
+                    url = f"https://huggingface.co/datasets/{HF_REPO_ID}/resolve/main/{meta_path}"
+                    r = requests.get(url, headers=headers, timeout=10)
+                    if r.status_code == 200:
+                        fetched_meta = r.json()
+                        meta.update(fetched_meta)
+                except Exception as e:
+                    print(f"Failed reading metadata for {slug}: {e}")
+
+            if not meta.get("sizeMb") and meta.get("sizeBytes"):
+                meta["sizeMb"] = round(float(meta["sizeBytes"]) / (1024 * 1024), 1)
+
+            meta["slug"] = slug
+            meta["bin_hf_path"] = bin_path
+            meta["has_cover"] = cover_path is not None
+            meta["cover_preview_url"] = f"/api/submissions/{slug}/cover" if cover_path else ""
+            submissions.append(meta)
+
+        submissions.sort(key=lambda x: x.get("submittedAt", 0), reverse=True)
+        return {"status": "success", "count": len(submissions), "submissions": submissions}
+    except Exception as e:
+        return JSONResponse({"status": "error", "message": str(e)}, status_code=500)
+
+
+@app.get("/api/submissions/{slug}/cover")
+def api_submission_cover(slug: str):
+    """Proxies the quarantined .webp cover image from private Hugging Face repo."""
+    headers = {"Authorization": f"Bearer {HF_TOKEN}"} if HF_TOKEN else {}
+    url = f"https://huggingface.co/datasets/{HF_REPO_ID}/resolve/main/submissions/{slug}/{slug}.webp"
+    r = requests.get(url, headers=headers, timeout=10)
+    if r.status_code == 200:
+        return Response(content=r.content, media_type="image/webp")
+    raise HTTPException(status_code=404, detail="Cover not found")
+
+
+class SubmissionApproveRequest(BaseModel):
+    title: str
+    author: str = "Medical Faculty"
+    edition: str = "Standard Edition"
+    prof: str
+    subject: str
+    type: str
+    uploader: str = "Student"
+    extra_tags: str = ""
+    totalPages: int = 1
+    sizeMb: float = 1.0
+
+
+@app.post("/api/submissions/{slug}/approve")
+def api_approve_submission(slug: str, req: SubmissionApproveRequest):
+    """
+    1. Relocates submissions/<slug>/<slug>.bin -> <prof>/<type>/<book_id>.bin on HF
+    2. Downloads cover.webp into assets/covers/<book_id>.webp
+    3. Deletes submissions/<slug>/ quarantine folder on HF
+    4. Adds record to catalog.json and pushes to GitHub
+    """
+    api = get_hf_api()
+    hf_files = api.list_repo_files(repo_id=HF_REPO_ID, repo_type="dataset")
+    sub_files = [f for f in hf_files if f.startswith(f"submissions/{slug}/")]
+
+    bin_src = next((f for f in sub_files if f.endswith(".bin")), None)
+    if not bin_src:
+        raise HTTPException(status_code=404, detail=f"No .bin file found in submissions/{slug}/")
+
+    book_id = slugify(req.title) or slug
+    dest_hf_path = build_hf_path(req.prof, req.type, book_id)
+
+    # 1. Download cover from HF quarantine if present
+    cover_src = next((f for f in sub_files if f.endswith(".webp")), None)
+    local_cover_path = COVERS_DIR / f"{book_id}.webp"
+    if cover_src:
+        try:
+            headers = {"Authorization": f"Bearer {HF_TOKEN}"} if HF_TOKEN else {}
+            c_url = f"https://huggingface.co/datasets/{HF_REPO_ID}/resolve/main/{cover_src}"
+            r = requests.get(c_url, headers=headers, timeout=15)
+            if r.status_code == 200 and len(r.content) > 0:
+                with open(local_cover_path, "wb") as f:
+                    f.write(r.content)
+        except Exception as e:
+            log(f"Warning: could not save submission cover for {slug}: {e}")
+
+    # 2. Server-side move on Hugging Face (Copy .bin to production + Delete quarantine folder)
+    log(f"Approving submission '{slug}': moving {bin_src} -> {dest_hf_path}...")
+    operations = [
+        CommitOperationCopy(src_path_in_repo=bin_src, path_in_repo=dest_hf_path)
+    ]
+    for old_f in sub_files:
+        operations.append(CommitOperationDelete(path_in_repo=old_f))
+
+    try:
+        api.create_commit(
+            repo_id=HF_REPO_ID,
+            repo_type="dataset",
+            operations=operations,
+            commit_message=f"feat(approve): publish community contribution {dest_hf_path} (by {req.uploader})"
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"HF Commit Failed: {str(e)}")
+
+    # 3. Update catalog.json
+    catalog = load_catalog()
+    if req.type not in catalog["filters"]["types"]:
+        catalog["filters"]["types"].append(req.type)
+
+    worker_download_url = build_worker_url(dest_hf_path)
+    cover_cdn_url = f"https://cdn.jsdelivr.net/gh/{CATALOG_REPO}@main/assets/covers/{book_id}.webp"
+    tags = build_tags(req.title, req.author, req.subject, req.prof, req.type, req.extra_tags)
+
+    record = {
+        "id": book_id,
+        "title": req.title.strip(),
+        "author": req.author.strip(),
+        "edition": req.edition.strip(),
+        "prof": req.prof.strip(),
+        "year": PROF_TO_YEAR.get(req.prof.strip(), "1st Year"),
+        "subject": req.subject.strip(),
+        "type": req.type.strip(),
+        "tags": tags,
+        "totalPages": max(1, req.totalPages),
+        "sizeMb": round(req.sizeMb, 1),
+        "coverUrl": cover_cdn_url,
+        "download": {
+            "mirrors": [
+                {
+                    "provider": "mulberry-vault",
+                    "repo": HF_REPO_ID,
+                    "url": worker_download_url,
+                    "isEncrypted": True,
+                    "format": "aes-256-gcm"
+                }
+            ],
+            "telegram": {
+                "deepLink": f"https://t.me/MulberryIngestionBot?start={book_id}"
+            }
+        },
+        "uploader": req.uploader.strip() or "Community"
+    }
+
+    catalog["books"] = [b for b in catalog["books"] if b.get("id") != book_id]
+    catalog["books"].insert(0, record)
+    save_catalog(catalog)
+
+    sync_git(f"feat(community): approve '{req.title}' contributed by {req.uploader}")
+    log(f"PUBLISHED COMMUNITY SUBMISSION: {req.title} -> {dest_hf_path}")
+
+    return {"status": "approved", "book": record, "hf_path": dest_hf_path}
+
+
+@app.delete("/api/submissions/{slug}")
+def api_reject_submission(slug: str):
+    """Deletes all files inside `submissions/<slug>/` on Hugging Face."""
+    api = get_hf_api()
+    hf_files = api.list_repo_files(repo_id=HF_REPO_ID, repo_type="dataset")
+    sub_files = [f for f in hf_files if f.startswith(f"submissions/{slug}/")]
+
+    if not sub_files:
+        raise HTTPException(status_code=404, detail="Submission folder not found on HF")
+
+    operations = [CommitOperationDelete(path_in_repo=f) for f in sub_files]
+    try:
+        api.create_commit(
+            repo_id=HF_REPO_ID,
+            repo_type="dataset",
+            operations=operations,
+            commit_message=f"chore(reject): purge rejected submission {slug}"
+        )
+        log(f"Purged rejected submission: submissions/{slug}/")
+        return {"status": "rejected", "deleted_files": sub_files}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"HF Purge Failed: {str(e)}")
+
+
+# ==========================================
+# API ROUTES: HF STORAGE & ORPHANS
+# ==========================================
 @app.get("/api/hf-status")
 def api_hf_status():
     """Fetches real-time Hugging Face file list, folder structure, and orphan status."""
@@ -806,7 +1019,10 @@ def api_hf_status():
                 })
 
         catalog_ids = {f"{b['id']}.bin" for b in catalog.get("books", [])}
-        orphans = [f for f in files_list if f["path"].split("/")[-1] not in catalog_ids]
+        orphans = [
+            f for f in files_list
+            if not f["path"].startswith("submissions/") and f["path"].split("/")[-1] not in catalog_ids
+        ]
 
         return {
             "status": "success",

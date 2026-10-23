@@ -24,12 +24,16 @@
       </div>
 
       <!-- Navigation Tabs -->
-      <div class="flex gap-2 bg-slate-900 p-1 rounded-xl border border-slate-800">
+      <div class="flex flex-wrap gap-2 bg-slate-900 p-1 rounded-xl border border-slate-800">
         <button onclick="switchTab('catalog')" id="tab-btn-catalog" class="px-4 py-1.5 rounded-lg text-sm font-medium bg-emerald-600 text-white">
           Catalog & Live Editor
         </button>
         <button onclick="switchTab('ingest')" id="tab-btn-ingest" class="px-4 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white">
           + Ingest Books
+        </button>
+        <button onclick="switchTab('submissions')" id="tab-btn-submissions" class="px-4 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white flex items-center gap-2">
+          <span>Community Submissions</span>
+          <span id="submissions-badge" class="px-2 py-0.5 text-[10px] rounded-full bg-amber-500/20 text-amber-300 font-mono hidden">0</span>
         </button>
         <button onclick="switchTab('vault')" id="tab-btn-vault" class="px-4 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white">
           HF Storage & Orphans
@@ -139,7 +143,26 @@
       </div>
     </section>
 
-    <!-- ==================== TAB 3: HF STORAGE & ORPHANS ==================== -->
+    <!-- ==================== TAB 3: COMMUNITY SUBMISSIONS ==================== -->
+    <section id="tab-submissions" class="hidden space-y-6">
+      <div class="glass rounded-2xl p-6 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h2 class="text-base font-semibold text-white">Quarantined Student Contributions</h2>
+          <p class="text-xs text-slate-400">Files uploaded from the Mulberry Android App into <code class="text-emerald-400">submissions/&lt;slug&gt;/</code> awaiting admin review.</p>
+        </div>
+        <button onclick="fetchSubmissions()" id="btn-refresh-subs" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-medium text-emerald-400 border border-slate-700">
+          Scan Quarantine Inbox
+        </button>
+      </div>
+
+      <div id="submissions-empty" class="glass rounded-2xl p-12 text-center text-slate-400 text-sm hidden">
+        No pending student submissions in <code class="text-slate-300">submissions/</code> right now.
+      </div>
+
+      <div id="submissions-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-5"></div>
+    </section>
+
+    <!-- ==================== TAB 4: HF STORAGE & ORPHANS ==================== -->
     <section id="tab-vault" class="hidden space-y-6">
       <div class="glass rounded-2xl p-6 space-y-4">
         <div class="flex items-center justify-between">
@@ -279,18 +302,22 @@
   <script>
     let catalogData = { filters: { profs: [], types: [], subjects: [] }, books: [] };
     let scannedFiles = [];
+    let pendingSubmissions = [];
     let pollTimer = null;
 
     function switchTab(tab) {
-      ['catalog', 'ingest', 'vault'].forEach(t => {
+      ['catalog', 'ingest', 'submissions', 'vault'].forEach(t => {
         document.getElementById(`tab-${t}`).classList.toggle('hidden', t !== tab);
         const btn = document.getElementById(`tab-btn-${t}`);
         if (t === tab) {
-          btn.className = "px-4 py-1.5 rounded-lg text-sm font-medium bg-emerald-600 text-white";
+          btn.className = "px-4 py-1.5 rounded-lg text-sm font-medium bg-emerald-600 text-white flex items-center gap-2";
         } else {
-          btn.className = "px-4 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white";
+          btn.className = "px-4 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white flex items-center gap-2";
         }
       });
+      if (tab === 'submissions') {
+        fetchSubmissions();
+      }
     }
 
     async function fetchCatalog() {
@@ -354,7 +381,7 @@
               </div>
               <h3 class="text-sm font-bold text-white truncate" title="${b.title}">${b.title}</h3>
               <p class="text-xs text-slate-400 truncate">${b.author} • ${b.edition}</p>
-              <p class="text-[11px] text-slate-500 font-mono">${b.totalPages || 0}p • ${b.sizeMb || 0} MB</p>
+              <p class="text-[11px] text-slate-500 font-mono">${b.totalPages || 0}p • ${b.sizeMb || 0} MB • By ${b.uploader || 'Sahabul'}</p>
               <p class="text-[10px] text-slate-500 font-mono truncate" title="${primaryUrl}">${primaryUrl}</p>
               <div class="pt-2 flex gap-2">
                 <button onclick="openEditModal('${b.id}')" class="px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-emerald-400 font-medium">Edit / Move</button>
@@ -366,6 +393,162 @@
       }).join('');
     }
 
+    // ==================== COMMUNITY SUBMISSIONS LOGIC ====================
+    async function fetchSubmissions() {
+      const btn = document.getElementById('btn-refresh-subs');
+      btn.textContent = 'Scanning HF...';
+      try {
+        const res = await fetch('/api/submissions?t=' + Date.now());
+        const data = await res.json();
+        pendingSubmissions = data.submissions || [];
+        const badge = document.getElementById('submissions-badge');
+        badge.textContent = pendingSubmissions.length;
+        badge.classList.toggle('hidden', pendingSubmissions.length === 0);
+        renderSubmissions();
+      } catch (e) {
+        console.error(e);
+      } finally {
+        btn.textContent = 'Scan Quarantine Inbox';
+      }
+    }
+
+    function renderSubmissions() {
+      const emptyEl = document.getElementById('submissions-empty');
+      const grid = document.getElementById('submissions-grid');
+      emptyEl.classList.toggle('hidden', pendingSubmissions.length > 0);
+
+      const profOpts = (catalogData.filters.profs || []).map(p => `<option value="${p}">${p}</option>`).join('');
+      const subjOpts = (catalogData.filters.subjects || []).map(s => `<option value="${s}">${s}</option>`).join('');
+      const typeOpts = (catalogData.filters.types || []).map(t => `<option value="${t}">${t}</option>`).join('');
+
+      grid.innerHTML = pendingSubmissions.map((s, idx) => {
+        const tierBadge = s.contributorTier === 'CORE_VIP'
+          ? '<span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[10px] font-bold">★ CORE VIP</span>'
+          : s.contributorTier === 'AMBASSADOR'
+            ? '<span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-bold">✓ AMBASSADOR</span>'
+            : '<span class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 text-[10px]">SCHOLAR</span>';
+
+        const coverSrc = s.has_cover ? s.cover_preview_url : 'https://placehold.co/120x160/1e293b/10b981?text=No+Cover';
+
+        return `
+          <div class="glass rounded-2xl p-5 space-y-4 border border-slate-800" id="sub-card-${s.slug}">
+            <div class="flex gap-4">
+              <img src="${coverSrc}" onerror="this.src='https://placehold.co/120x160/1e293b/10b981?text=Cover'"
+                class="w-24 h-32 object-cover rounded-xl bg-slate-900 border border-slate-700 flex-shrink-0" />
+              <div class="flex-1 min-w-0 space-y-2">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-xs text-slate-400">Submitted by <strong class="text-white">${s.uploader || 'Student'}</strong></span>
+                  ${tierBadge}
+                </div>
+                <div class="text-[11px] font-mono text-slate-400">
+                  Slug: <span class="text-emerald-400">${s.slug}</span> • ${s.totalPages || 1} pages • ${s.sizeMb || 0} MB
+                </div>
+                <div>
+                  <label class="text-[11px] text-slate-400 block">Book Title</label>
+                  <input id="sub-title-${idx}" value="${s.title || ''}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white" />
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="text-[11px] text-slate-400 block">Author</label>
+                    <input id="sub-author-${idx}" value="${s.author || 'Medical Faculty'}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1 text-xs" />
+                  </div>
+                  <div>
+                    <label class="text-[11px] text-slate-400 block">Edition</label>
+                    <input id="sub-edition-${idx}" value="${s.edition || 'Standard Edition'}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1 text-xs" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2 text-xs">
+              <div>
+                <label class="text-[11px] text-slate-400 block mb-1">Target Prof</label>
+                <select id="sub-prof-${idx}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5">${profOpts}</select>
+              </div>
+              <div>
+                <label class="text-[11px] text-slate-400 block mb-1">Subject</label>
+                <select id="sub-subj-${idx}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5">${subjOpts}</select>
+              </div>
+              <div>
+                <label class="text-[11px] text-slate-400 block mb-1">Asset Type</label>
+                <select id="sub-type-${idx}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5">${typeOpts}</select>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between gap-3 pt-2 border-t border-slate-800/80">
+              <input id="sub-tags-${idx}" placeholder="Extra tags (comma separated)" class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs flex-1" />
+              <button onclick="rejectSubmission('${s.slug}')" id="btn-reject-${s.slug}" class="px-3.5 py-1.5 rounded-xl bg-red-950/60 hover:bg-red-900/70 text-red-300 text-xs font-medium border border-red-500/30">
+                ✕ Reject & Purge
+              </button>
+              <button onclick="approveSubmission('${s.slug}', ${idx})" id="btn-approve-${s.slug}" class="px-4 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold">
+                ✓ Approve & Publish
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      pendingSubmissions.forEach((s, idx) => {
+        if (s.prof) document.getElementById(`sub-prof-${idx}`).value = s.prof;
+        if (s.subject) document.getElementById(`sub-subj-${idx}`).value = s.subject;
+        if (s.type) document.getElementById(`sub-type-${idx}`).value = s.type;
+      });
+    }
+
+    async function approveSubmission(slug, idx) {
+      const s = pendingSubmissions[idx];
+      const btn = document.getElementById(`btn-approve-${slug}`);
+      btn.textContent = 'Publishing to HF & Git...';
+      btn.disabled = true;
+
+      const payload = {
+        title: document.getElementById(`sub-title-${idx}`).value,
+        author: document.getElementById(`sub-author-${idx}`).value,
+        edition: document.getElementById(`sub-edition-${idx}`).value,
+        prof: document.getElementById(`sub-prof-${idx}`).value,
+        subject: document.getElementById(`sub-subj-${idx}`).value,
+        type: document.getElementById(`sub-type-${idx}`).value,
+        uploader: s.uploader || 'Student',
+        extra_tags: document.getElementById(`sub-tags-${idx}`).value,
+        totalPages: s.totalPages || 1,
+        sizeMb: s.sizeMb || 1.0
+      };
+
+      const res = await fetch(`/api/submissions/${slug}/approve`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (res.ok) {
+        await fetchSubmissions();
+        await fetchCatalog();
+      } else {
+        const err = await res.json();
+        alert('Approve failed: ' + (err.detail || 'Unknown error'));
+        btn.textContent = '✓ Approve & Publish';
+        btn.disabled = false;
+      }
+    }
+
+    async function rejectSubmission(slug) {
+      if (!confirm(`Reject and permanently delete submissions/${slug}/ from Hugging Face?`)) return;
+      const btn = document.getElementById(`btn-reject-${slug}`);
+      btn.textContent = 'Purging...';
+      btn.disabled = true;
+
+      const res = await fetch(`/api/submissions/${slug}`, { method: 'DELETE' });
+      if (res.ok) {
+        await fetchSubmissions();
+      } else {
+        const err = await res.json();
+        alert('Reject failed: ' + (err.detail || 'Error'));
+        btn.textContent = '✕ Reject & Purge';
+        btn.disabled = false;
+      }
+    }
+
+    // ==================== CATALOG MODALS & ACTIONS ====================
     function openEditModal(bookId) {
       const b = catalogData.books.find(x => x.id === bookId);
       if (!b) return;
@@ -468,6 +651,7 @@
       }
     }
 
+    // ==================== INGESTION SCANNER ====================
     async function scanSources() {
       const btn = document.getElementById('btn-scan');
       btn.textContent = 'Scanning Sources...';
@@ -585,10 +769,11 @@
 
       document.getElementById('hf-orphans-list').innerHTML = data.orphans.length
         ? data.orphans.map(f => `<div class="flex justify-between py-1 border-b border-slate-800/60 text-amber-300"><span>${f.path}</span><span>${f.size_mb} MB</span></div>`).join('')
-        : `<div class="text-slate-500">No orphan files detected! Every HF file matches catalog.json.</div>`;
+        : `<div class="text-slate-500">No orphan files detected! Every production HF file matches catalog.json.</div>`;
     }
 
     fetchCatalog();
+    fetchSubmissions();
   </script>
 </body>
 </html>
