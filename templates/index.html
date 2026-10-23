@@ -42,7 +42,6 @@
 
     <!-- ==================== TAB 1: CATALOG MANAGER ==================== -->
     <section id="tab-catalog" class="space-y-6">
-      <!-- Stats & Action Bar -->
       <div class="glass rounded-2xl p-5 flex flex-wrap items-center justify-between gap-4">
         <div class="flex flex-wrap items-center gap-4 flex-1">
           <input id="search-input" oninput="renderCatalog()" type="text" placeholder="Search title, author, ID, or tag..."
@@ -79,22 +78,30 @@
     <!-- ==================== TAB 2: INGESTION PIPELINE ==================== -->
     <section id="tab-ingest" class="hidden space-y-6">
       <div class="glass rounded-2xl p-6 space-y-4">
-        <h2 class="text-base font-semibold text-white">1. Scan Google Drive Sources</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <h2 class="text-base font-semibold text-white">1. Scan Sources (Google Drive or Direct PDF URLs)</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <label class="text-xs text-slate-400 block mb-1">Public Google Drive Folder URL</label>
             <input id="scan-folder-url" type="text" placeholder="https://drive.google.com/drive/folders/..."
-              class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm" />
+              class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-emerald-500" />
           </div>
           <div>
-            <label class="text-xs text-slate-400 block mb-1">Or Direct Drive File Links (One per line)</label>
+            <label class="text-xs text-slate-400 block mb-1">Direct Drive File Links (One per line)</label>
             <textarea id="scan-direct-links" rows="2" placeholder="https://drive.google.com/file/d/..."
-              class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm"></textarea>
+              class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-emerald-500"></textarea>
+          </div>
+          <div>
+            <label class="text-xs text-emerald-400 font-medium block mb-1">Direct Web PDF Links (One per line)</label>
+            <textarea id="scan-direct-pdf-links" rows="2" placeholder="https://example.com/books/guyton_15e.pdf"
+              class="w-full bg-slate-900 border border-emerald-500/40 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-emerald-400"></textarea>
           </div>
         </div>
-        <button onclick="scanDrive()" id="btn-scan" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium">
-          Scan Drive Sources
-        </button>
+        <div class="flex items-center gap-3">
+          <button onclick="scanSources()" id="btn-scan" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium">
+            Scan All Provided Sources
+          </button>
+          <span class="text-xs text-slate-400">Supports Drive folders, individual Drive links, and direct HTTP/HTTPS .pdf URLs.</span>
+        </div>
       </div>
 
       <!-- Scanned Queue Table -->
@@ -110,6 +117,7 @@
             <thead>
               <tr class="border-b border-slate-800 text-slate-400">
                 <th class="p-2">Select</th>
+                <th class="p-2">Source</th>
                 <th class="p-2">Title</th>
                 <th class="p-2">Author</th>
                 <th class="p-2">Ed.</th>
@@ -205,7 +213,7 @@
           <input id="edit-uploader" type="text" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2" />
         </div>
         <div class="md:col-span-2">
-          <label class="text-slate-400 block mb-1">Search Tags (comma separated)</label>
+          <label class="text-slate-400 block mb-1">Search Tags (Stale type/prof tags are scrubbed automatically)</label>
           <input id="edit-tags" type="text" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2" />
         </div>
       </div>
@@ -286,7 +294,7 @@
     }
 
     async function fetchCatalog() {
-      const res = await fetch('/api/catalog');
+      const res = await fetch('/api/catalog?t=' + Date.now());
       catalogData = await res.json();
       populateFilterDropdowns();
       renderCatalog();
@@ -301,7 +309,9 @@
         items.forEach(item => {
           el.innerHTML += `<option value="${item}">${item}</option>`;
         });
-        el.value = current;
+        if (items.includes(current) || current === '') {
+          el.value = current;
+        }
       };
       fill('filter-prof', profs, 'All Profs');
       fill('filter-type', types, 'All Asset Types');
@@ -458,21 +468,31 @@
       }
     }
 
-    async function scanDrive() {
+    async function scanSources() {
       const btn = document.getElementById('btn-scan');
-      btn.textContent = 'Scanning Drive...';
+      btn.textContent = 'Scanning Sources...';
+      btn.disabled = true;
+
       const folder_url = document.getElementById('scan-folder-url').value;
       const direct_links = document.getElementById('scan-direct-links').value;
+      const direct_pdf_links = document.getElementById('scan-direct-pdf-links').value;
 
-      const res = await fetch('/api/scan-folder', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ folder_url, direct_links })
-      });
-      const data = await res.json();
-      btn.textContent = 'Scan Drive Sources';
+      try {
+        const res = await fetch('/api/scan-folder', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ folder_url, direct_links, direct_pdf_links })
+        });
+        const data = await res.json();
+        scannedFiles = data.files || [];
+      } catch (e) {
+        alert('Scan error: ' + e.message);
+        scannedFiles = [];
+      } finally {
+        btn.textContent = 'Scan All Provided Sources';
+        btn.disabled = false;
+      }
 
-      scannedFiles = data.files || [];
       const tbody = document.getElementById('scan-results-body');
       document.getElementById('ingest-queue-card').classList.toggle('hidden', scannedFiles.length === 0);
 
@@ -480,18 +500,24 @@
       const subjOpts = (catalogData.filters.subjects || []).map(s => `<option value="${s}">${s}</option>`).join('');
       const typeOpts = (catalogData.filters.types || []).map(t => `<option value="${t}">${t}</option>`).join('');
 
-      tbody.innerHTML = scannedFiles.map((f, i) => `
-        <tr>
-          <td class="p-2"><input type="checkbox" id="chk-${i}" ${f.already_in_catalog ? '' : 'checked'} /></td>
-          <td class="p-2"><input id="title-${i}" value="${f.heuristics.title}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1 w-48" /></td>
-          <td class="p-2"><input id="author-${i}" value="${f.heuristics.author}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1 w-32" /></td>
-          <td class="p-2"><input id="ed-${i}" value="${f.heuristics.edition}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1 w-20" /></td>
-          <td class="p-2"><select id="prof-${i}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1">${profOpts}</select></td>
-          <td class="p-2"><select id="subj-${i}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1">${subjOpts}</select></td>
-          <td class="p-2"><select id="type-${i}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1">${typeOpts}</select></td>
-          <td class="p-2"><input id="tags-${i}" placeholder="pyq, important" class="bg-slate-900 border border-slate-700 rounded px-2 py-1 w-28" /></td>
-        </tr>
-      `).join('');
+      tbody.innerHTML = scannedFiles.map((f, i) => {
+        const srcBadge = f.source_type === 'direct_url'
+          ? '<span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono text-[10px]">Direct PDF</span>'
+          : '<span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px]">G-Drive</span>';
+        return `
+          <tr>
+            <td class="p-2"><input type="checkbox" id="chk-${i}" ${f.already_in_catalog ? '' : 'checked'} /></td>
+            <td class="p-2">${srcBadge}</td>
+            <td class="p-2"><input id="title-${i}" value="${f.heuristics.title}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1 w-48" /></td>
+            <td class="p-2"><input id="author-${i}" value="${f.heuristics.author}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1 w-32" /></td>
+            <td class="p-2"><input id="ed-${i}" value="${f.heuristics.edition}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1 w-24" /></td>
+            <td class="p-2"><select id="prof-${i}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1">${profOpts}</select></td>
+            <td class="p-2"><select id="subj-${i}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1">${subjOpts}</select></td>
+            <td class="p-2"><select id="type-${i}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1">${typeOpts}</select></td>
+            <td class="p-2"><input id="tags-${i}" placeholder="pyq, important" class="bg-slate-900 border border-slate-700 rounded px-2 py-1 w-28" /></td>
+          </tr>
+        `;
+      }).join('');
 
       scannedFiles.forEach((f, i) => {
         document.getElementById(`prof-${i}`).value = f.heuristics.prof;
@@ -505,7 +531,8 @@
       scannedFiles.forEach((f, i) => {
         if (document.getElementById(`chk-${i}`).checked) {
           books.push({
-            drive_id: f.drive_id,
+            source_id: f.source_id,
+            source_type: f.source_type,
             title: document.getElementById(`title-${i}`).value,
             author: document.getElementById(`author-${i}`).value,
             edition: document.getElementById(`ed-${i}`).value,

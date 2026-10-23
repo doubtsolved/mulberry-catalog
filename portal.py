@@ -6,6 +6,7 @@ import json
 import subprocess
 from pathlib import Path
 from typing import List, Dict, Any, Optional
+from urllib.parse import urlparse, unquote
 
 import requests
 import pymupdf
@@ -38,7 +39,7 @@ GH_TOKEN = os.getenv("GH_TOKEN", "").strip()
 HF_TOKEN = os.getenv("HF_TOKEN", "").strip()
 HF_REPO_ID = os.getenv("HF_REPO_ID", "sahabul1064/mulberry-archives").strip()
 CATALOG_REPO = os.getenv("CATALOG_REPO", "doubtsolved/mulberry-catalog").strip()
-CF_WORKER_URL = os.getenv("CF_WORKER_URL", "https://mulberry-vault.workers.dev").strip().rstrip("/")
+ENV_CF_WORKER_URL = os.getenv("CF_WORKER_URL", "").strip().rstrip("/")
 
 PROF_TO_YEAR = {
     "1st Prof": "1st Year",
@@ -118,10 +119,6 @@ def build_hf_path(prof: str, asset_type: str, book_id: str) -> str:
     return f"{p_slug}/{t_slug}/{book_id}.bin"
 
 
-def build_worker_url(hf_path: str) -> str:
-    return f"{CF_WORKER_URL}/{hf_path}"
-
-
 def load_catalog() -> Dict[str, Any]:
     if CATALOG_PATH.exists():
         with open(CATALOG_PATH, "r", encoding="utf-8") as f:
@@ -137,7 +134,6 @@ def load_catalog() -> Dict[str, Any]:
             },
             "books": []
         }
-    # Ensure filters structure exists
     data.setdefault("filters", {})
     data["filters"].setdefault("profs", list(PROF_TO_YEAR.keys()))
     data["filters"].setdefault("types", list(DEFAULT_TYPE_SLUG_MAP.keys()))
@@ -152,32 +148,61 @@ def save_catalog(catalog: Dict[str, Any]):
         json.dump(catalog, f, indent=2, ensure_ascii=False)
 
 
+def get_worker_base_url() -> str:
+    """Resolves CF Worker base URL from env, existing catalog records, or default."""
+    if ENV_CF_WORKER_URL:
+        return ENV_CF_WORKER_URL
+    try:
+        catalog = load_catalog()
+        for b in catalog.get("books", []):
+            for m in b.get("download", {}).get("mirrors", []):
+                url = m.get("url", "")
+                if ".workers.dev/" in url:
+                    return url.split(".workers.dev/")[0] + ".workers.dev"
+    except Exception:
+        pass
+    return "https://mulberry-vault.sahabulmondal2023.workers.dev"
+
+
+def build_worker_url(hf_path: str) -> str:
+    base = get_worker_base_url()
+    return f"{base}/{hf_path}"
+
+
 def sync_git(commit_message: str) -> bool:
     """Stages catalog.json and covers, commits, and pushes to GitHub."""
     log(f"Git Sync: '{commit_message}'...")
     subprocess.run(["git", "config", "user.name", "Sahabul Mondal"], cwd=BASE_DIR, check=False)
     subprocess.run(["git", "config", "user.email", "sahabul@users.noreply.github.com"], cwd=BASE_DIR, check=False)
 
+    # Remove stale git-lfs hook if present in container
+    lfs_hook = BASE_DIR / ".git" / "hooks" / "pre-push"
+    if lfs_hook.exists():
+        try:
+            lfs_hook.unlink()
+        except Exception:
+            pass
+
     remote_target = f"https://x-access-token:{GH_TOKEN}@github.com/{CATALOG_REPO}.git" if GH_TOKEN else "origin"
 
     subprocess.run(["git", "pull", remote_target, "main", "--rebase"], cwd=BASE_DIR, check=False, capture_output=True)
     subprocess.run(["git", "add", "assets/covers/", "catalog.json"], cwd=BASE_DIR, check=False)
 
-    commit = subprocess.run(
+    subprocess.run(
         ["git", "commit", "-m", commit_message],
-        cwd=BASE_DIR, capture_output=True, text=True
+        cwd=BASE_DIR, capture_output=True, text=True, check=False
     )
 
     push = subprocess.run(
         ["git", "push", remote_target, "HEAD:main"],
-        cwd=BASE_DIR, capture_output=True, text=True
+        cwd=BASE_DIR, capture_output=True, text=True, check=False
     )
 
     if push.returncode == 0:
         log("Git Sync Successful!")
         return True
     else:
-        log(f"Git Push Warning/Error: {push.stderr.strip()}")
+        log(f"Git Push Note: {push.stderr.strip()}")
         return False
 
 
@@ -187,10 +212,12 @@ def build_tags(title: str, author: str, subject: str, prof: str, book_type: str,
     tags.add(PROF_TO_YEAR.get(prof, "").lower())
     tags.add(subject.lower())
     tags.add(book_type.lower())
+    if "pyq" in book_type.lower():
+        tags.add("pyq")
     for word in re.findall(r'\b\w{3,}\b', title.lower()):
         tags.add(word)
     for word in re.findall(r'\b\w{3,}\b', author.lower()):
-        if word not in ["faculty", "medical", "books", "dr", "and", "prof"]:
+        if word not in ["faculty", "medical", "books", "dr", "and", "prof", "students"]:
             tags.add(word)
     if extra_tags:
         for t in extra_tags.split(","):
@@ -214,7 +241,6 @@ def find_existing_hf_path(book: Dict[str, Any], hf_files: List[str]) -> Optional
     book_id = book["id"]
     target_filename = f"{book_id}.bin"
 
-    # 1. Check URLs in mirrors first
     for m in book.get("download", {}).get("mirrors", []):
         url = m.get("url", "")
         if "resolve/main/" in url:
@@ -226,7 +252,6 @@ def find_existing_hf_path(book: Dict[str, Any], hf_files: List[str]) -> Optional
             if candidate in hf_files:
                 return candidate
 
-    # 2. Search anywhere in repository for matching filename
     for f in hf_files:
         if f == target_filename or f.endswith(f"/{target_filename}"):
             return f
@@ -237,7 +262,7 @@ def find_existing_hf_path(book: Dict[str, Any], hf_files: List[str]) -> Optional
 def relocate_hf_file_if_needed(book: Dict[str, Any], new_prof: str, new_type: str) -> str:
     """
     Moves the file on Hugging Face if Prof or Asset Type changed.
-    Returns the final relative HF path (e.g. 'prof2/textbooks/robbins.bin').
+    Returns the final relative HF path (e.g. 'prof1/pyqs/book.bin').
     """
     book_id = book["id"]
     desired_path = build_hf_path(new_prof, new_type, book_id)
@@ -247,7 +272,7 @@ def relocate_hf_file_if_needed(book: Dict[str, Any], new_prof: str, new_type: st
     current_path = find_existing_hf_path(book, hf_files)
 
     if not current_path:
-        log(f"Notice: {book_id}.bin not found on HF to relocate; updating URL path to {desired_path}")
+        log(f"Notice: {book_id}.bin not found at old HF path; setting path to {desired_path}")
         return desired_path
 
     if current_path == desired_path:
@@ -269,7 +294,7 @@ def relocate_hf_file_if_needed(book: Dict[str, Any], new_prof: str, new_type: st
 
 
 # ==========================================
-# GOOGLE DRIVE DISCOVERY
+# SOURCE DISCOVERY (DRIVE & DIRECT PDF URLS)
 # ==========================================
 def extract_drive_id(url: str) -> str:
     patterns = [
@@ -295,20 +320,22 @@ def parse_filename_heuristics(filename: str) -> Dict[str, Any]:
         elif subj == "Biochemistry" and re.search(r"\bbiochem\b", raw_name, re.IGNORECASE):
             detected_subject = "Biochemistry"
             break
-        elif subj == "Physiology" and re.search(r"\bphysio\b", raw_name, re.IGNORECASE):
+        elif subj == "Physiology" and re.search(r"\b(physio|phisiology|guyton|ganong)\b", raw_name, re.IGNORECASE):
             detected_subject = "Physiology"
             break
 
     detected_type = "Standard Textbook"
-    if re.search(r"\b(pyq|pyqs|question|solved|auxilia)\b", raw_name, re.IGNORECASE):
+    if re.search(r"\b(pyq|pyqs|question|solved|auxilia|auxilla)\b", raw_name, re.IGNORECASE):
         detected_type = "Question Bank (PYQ)"
     elif re.search(r"\b(notes|marrow|prepladder|handwritten)\b", raw_name, re.IGNORECASE):
         detected_type = "Handwritten Notes"
     elif re.search(r"\b(atlas|practical|manual|dissection)\b", raw_name, re.IGNORECASE):
         detected_type = "Atlas / Practical"
+    elif re.search(r"\b(review|first aid|rapid)\b", raw_name, re.IGNORECASE):
+        detected_type = "Review / High-Yield"
 
-    edition_match = re.search(r'(\d+)(?:st|nd|rd|th)?\s*(?:ed|edition)', raw_name, re.IGNORECASE)
-    edition = f"{edition_match.group(1)}th" if edition_match else "Standard Edition"
+    edition_match = re.search(r'(\d+)(?:st|nd|rd|th|e)?\s*(?:ed|edition)?', raw_name, re.IGNORECASE)
+    edition = f"{edition_match.group(1)}th Edition" if edition_match else "Standard Edition"
     detected_prof = SUBJECT_TO_PROF.get(detected_subject, "1st Prof")
 
     return {
@@ -349,7 +376,7 @@ def fetch_public_drive_folder(folder_url_or_id: str) -> List[Dict[str, str]]:
                             fid = fid or m.group(1)
                 if fid and fname and fid not in seen_ids and fname.lower().endswith(".pdf"):
                     seen_ids.add(fid)
-                    files.append({"id": fid, "name": fname})
+                    files.append({"id": fid, "name": fname, "source_type": "drive"})
     except Exception as e:
         print(f"Drive folder error: {e}")
     return files
@@ -370,9 +397,46 @@ def resolve_direct_drive_links(raw_text: str) -> List[Dict[str, str]]:
                 if not clean_name.lower().endswith(".pdf"):
                     clean_name += ".pdf"
                 seen_ids.add(fid)
-                files.append({"id": fid, "name": clean_name})
+                files.append({"id": fid, "name": clean_name, "source_type": "drive"})
             except Exception as e:
-                print(f"Error resolving link {fid}: {e}")
+                print(f"Error resolving Drive link {fid}: {e}")
+    return files
+
+
+def resolve_direct_pdf_links(raw_text: str) -> List[Dict[str, str]]:
+    files = []
+    seen_urls = set()
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
+
+    for line in [l.strip() for l in raw_text.splitlines() if l.strip()]:
+        if not line.startswith("http://") and not line.startswith("https://"):
+            continue
+        if line in seen_urls:
+            continue
+        seen_urls.add(line)
+
+        parsed = urlparse(line)
+        path_name = Path(unquote(parsed.path)).name
+        filename = path_name if path_name else "direct_document.pdf"
+
+        try:
+            head = requests.head(line, headers=headers, allow_redirects=True, timeout=8)
+            cd = head.headers.get("content-disposition", "")
+            if "filename=" in cd:
+                match = re.search(r'filename\*?=["\']?(?:UTF-8\'\')?([^"\';]+)["\']?', cd, flags=re.IGNORECASE)
+                if match:
+                    filename = unquote(match.group(1).strip())
+        except Exception:
+            pass
+
+        if not filename.lower().endswith(".pdf"):
+            filename += ".pdf"
+
+        files.append({
+            "id": line,
+            "name": filename,
+            "source_type": "direct_url"
+        })
     return files
 
 
@@ -389,7 +453,8 @@ def run_batch_ingestion(books_queue: List[Dict[str, Any]]):
 
         for book in books_queue:
             title = book["title"].strip()
-            drive_id = book["drive_id"].strip()
+            source_id = (book.get("source_id") or book.get("drive_id") or "").strip()
+            source_type = book.get("source_type", "drive")
             author = book.get("author", "Medical Faculty").strip()
             edition = book.get("edition", "Standard Edition").strip()
             subject = book.get("subject", "Anatomy").strip()
@@ -404,18 +469,54 @@ def run_batch_ingestion(books_queue: List[Dict[str, Any]]):
             cover_path = COVERS_DIR / f"{book_id}.webp"
 
             log(f"=== Ingesting: {title} ===")
-            log(f"1. Downloading from Google Drive ({drive_id})...")
-            direct_drive_url = f"https://drive.google.com/uc?export=download&id={drive_id}"
-            gdown.download(id=drive_id, output=str(pdf_path), quiet=False)
+
+            # --- 1. DOWNLOAD ---
+            try:
+                if source_type == "direct_url":
+                    log(f"1. Downloading Direct PDF URL ({source_id})...")
+                    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
+                    with requests.get(source_id, stream=True, headers=headers, allow_redirects=True, timeout=120) as r:
+                        r.raise_for_status()
+                        with open(pdf_path, "wb") as f:
+                            for chunk in r.iter_content(chunk_size=1024 * 1024):
+                                if chunk:
+                                    f.write(chunk)
+                    fallback_mirror_url = source_id
+                else:
+                    log(f"1. Downloading from Google Drive ({source_id})...")
+                    gdown.download(id=source_id, output=str(pdf_path), quiet=False)
+                    fallback_mirror_url = f"https://drive.google.com/uc?export=download&id={source_id}"
+            except Exception as dl_err:
+                log(f"ERROR: Download failed for '{title}': {dl_err}. Skipping.")
+                if pdf_path.exists():
+                    pdf_path.unlink()
+                continue
 
             if not pdf_path.exists() or pdf_path.stat().st_size == 0:
-                log(f"ERROR: Download failed for {title}. Skipping.")
+                log(f"ERROR: Downloaded file is empty for '{title}'. Skipping.")
+                continue
+
+            # --- 2. VERIFY %PDF SIGNATURE ---
+            with open(pdf_path, "rb") as f:
+                header_bytes = f.read(1024)
+
+            if b"%PDF" not in header_bytes:
+                preview_text = header_bytes.decode("utf-8", errors="ignore")[:160].replace("\n", " ")
+                log(f"ERROR: Source returned HTML/invalid data instead of a PDF (Google Drive quota or auth wall): '{preview_text}...'")
+                pdf_path.unlink()
                 continue
 
             file_size_mb = round(pdf_path.stat().st_size / (1024 * 1024), 1)
 
-            log("2. Rendering 150 DPI WebP cover...")
+            # --- 3. RENDER 150 DPI WEBP COVER ---
+            log(f"2. Rendering 150 DPI WebP cover ({file_size_mb} MB PDF)...")
             doc = pymupdf.open(str(pdf_path))
+            if len(doc) == 0:
+                log(f"ERROR: '{title}' has 0 pages. Skipping.")
+                doc.close()
+                pdf_path.unlink()
+                continue
+
             total_pages = len(doc)
             page_1 = doc.load_page(0)
             pix = page_1.get_pixmap(dpi=150)
@@ -425,7 +526,10 @@ def run_batch_ingestion(books_queue: List[Dict[str, Any]]):
             img.save(str(cover_path), format="WEBP", quality=80)
             doc.close()
 
+            # --- 4. AES-256-GCM ENCRYPTION ---
             log("3. Encrypting payload with AES-256-GCM...")
+            if not VAULT_KEY:
+                raise ValueError("VAULT_ENCRYPTION_KEY is missing in environment!")
             key = bytes.fromhex(VAULT_KEY)
             aesgcm = AESGCM(key)
             nonce = os.urandom(12)
@@ -435,6 +539,7 @@ def run_batch_ingestion(books_queue: List[Dict[str, Any]]):
             with open(bin_path, "wb") as f:
                 f.write(nonce + ciphertext)
 
+            # --- 5. UPLOAD TO HUGGING FACE ---
             hf_dest_path = build_hf_path(prof, book_type, book_id)
             log(f"4. Uploading to Hugging Face ({HF_REPO_ID} -> {hf_dest_path})...")
             api.upload_file(
@@ -445,11 +550,11 @@ def run_batch_ingestion(books_queue: List[Dict[str, Any]]):
                 commit_message=f"feat(ingest): add {hf_dest_path}"
             )
 
+            # --- 6. UPDATE CATALOG.JSON ---
             worker_download_url = build_worker_url(hf_dest_path)
             cover_cdn_url = f"https://cdn.jsdelivr.net/gh/{CATALOG_REPO}@main/assets/covers/{book_id}.webp"
             tags = build_tags(title, author, subject, prof, book_type, extra_tags)
 
-            # Register custom asset type if not already in filters
             if book_type not in catalog["filters"]["types"]:
                 catalog["filters"]["types"].append(book_type)
 
@@ -476,8 +581,8 @@ def run_batch_ingestion(books_queue: List[Dict[str, Any]]):
                             "format": "aes-256-gcm"
                         },
                         {
-                            "provider": "drive",
-                            "url": direct_drive_url,
+                            "provider": "source" if source_type == "direct_url" else "drive",
+                            "url": fallback_mirror_url,
                             "isEncrypted": False
                         }
                     ],
@@ -497,10 +602,10 @@ def run_batch_ingestion(books_queue: List[Dict[str, Any]]):
             if bin_path.exists():
                 bin_path.unlink()
 
-            log(f"Cataloged: {title} -> {hf_dest_path}")
+            log(f"SUCCESS: Cataloged '{title}' -> {hf_dest_path}")
 
         sync_git("feat(vault): batch ingest books to HF & update catalog")
-        log("BATCH INGESTION COMPLETE!")
+        log("=== BATCH INGESTION COMPLETE! ===")
 
     except Exception as e:
         log(f"CRITICAL ERROR: {str(e)}")
@@ -561,10 +666,10 @@ def api_update_book(book_id: str, req: BookUpdateRequest):
     if not target_book:
         raise HTTPException(status_code=404, detail="Book not found in catalog.json")
 
-    old_prof = target_book.get("prof")
-    old_type = target_book.get("type")
+    old_prof = target_book.get("prof", "")
+    old_type = target_book.get("type", "")
+    old_subject = target_book.get("subject", "")
 
-    # Check if physical relocation on Hugging Face is required
     needs_move = req.relocate_hf and (old_prof != req.prof or old_type != req.type)
     relocated_path = None
 
@@ -572,7 +677,6 @@ def api_update_book(book_id: str, req: BookUpdateRequest):
         try:
             relocated_path = relocate_hf_file_if_needed(target_book, req.prof, req.type)
             new_worker_url = build_worker_url(relocated_path)
-            # Update primary encrypted mirror URL
             mirrors = target_book.get("download", {}).get("mirrors", [])
             updated_mirror = False
             for m in mirrors:
@@ -593,7 +697,32 @@ def api_update_book(book_id: str, req: BookUpdateRequest):
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Hugging Face Move Failed: {str(e)}")
 
-    # Update metadata fields
+    # Scrub stale category/prof/subject tags so books never appear in two categories at once
+    all_known_types = {t.lower() for t in catalog["filters"].get("types", [])}
+    all_known_profs = {p.lower() for p in catalog["filters"].get("profs", [])}
+    stale_tags = {
+        old_type.lower(),
+        old_prof.lower(),
+        PROF_TO_YEAR.get(old_prof, "").lower(),
+        old_subject.lower()
+    } | (all_known_types - {req.type.strip().lower()}) | (all_known_profs - {req.prof.strip().lower()})
+
+    cleaned_tags = [
+        t.strip().lower() for t in req.tags
+        if t.strip() and t.strip().lower() not in stale_tags
+    ]
+    for mandatory_tag in [
+        req.prof.strip().lower(),
+        PROF_TO_YEAR.get(req.prof.strip(), "").lower(),
+        req.subject.strip().lower(),
+        req.type.strip().lower()
+    ]:
+        if mandatory_tag and mandatory_tag not in cleaned_tags:
+            cleaned_tags.append(mandatory_tag)
+
+    if "pyq" in req.type.lower() and "pyq" not in cleaned_tags:
+        cleaned_tags.append("pyq")
+
     target_book["title"] = req.title.strip()
     target_book["author"] = req.author.strip()
     target_book["edition"] = req.edition.strip()
@@ -602,7 +731,7 @@ def api_update_book(book_id: str, req: BookUpdateRequest):
     target_book["subject"] = req.subject.strip()
     target_book["type"] = req.type.strip()
     target_book["uploader"] = req.uploader.strip()
-    target_book["tags"] = [t.strip().lower() for t in req.tags if t.strip()]
+    target_book["tags"] = sorted(list(set(cleaned_tags)))
 
     if req.type not in catalog["filters"]["types"]:
         catalog["filters"]["types"].append(req.type)
@@ -642,12 +771,10 @@ def api_delete_book(book_id: str, mode: str = Query("soft", enum=["soft", "purge
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Failed to purge from HF: {str(e)}")
 
-    # Remove cover image if present
     cover_file = COVERS_DIR / f"{book_id}.webp"
     if cover_file.exists():
         cover_file.unlink()
 
-    # Remove from catalog.json
     catalog["books"] = [b for b in catalog["books"] if b.get("id") != book_id]
     save_catalog(catalog)
     sync_git(f"chore(catalog): {mode} delete {book_id}")
@@ -700,6 +827,7 @@ def api_hf_status():
 class ScanFolderRequest(BaseModel):
     folder_url: Optional[str] = ""
     direct_links: Optional[str] = ""
+    direct_pdf_links: Optional[str] = ""
 
 
 @app.post("/api/scan-folder")
@@ -709,6 +837,8 @@ def scan_folder(req: ScanFolderRequest):
         files.extend(fetch_public_drive_folder(req.folder_url.strip()))
     if req.direct_links and req.direct_links.strip():
         files.extend(resolve_direct_drive_links(req.direct_links.strip()))
+    if req.direct_pdf_links and req.direct_pdf_links.strip():
+        files.extend(resolve_direct_pdf_links(req.direct_pdf_links.strip()))
 
     if not files:
         return {"status": "empty", "files": []}
@@ -721,7 +851,8 @@ def scan_folder(req: ScanFolderRequest):
         heuristics = parse_filename_heuristics(f["name"])
         candidate_id = slugify(heuristics["title"])
         results.append({
-            "drive_id": f["id"],
+            "source_id": f["id"],
+            "source_type": f.get("source_type", "drive"),
             "filename": f["name"],
             "already_in_catalog": candidate_id in existing_ids,
             "heuristics": heuristics
