@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792775079376,
+  "lastUpdated": 1792839425861,
   "filters": {
     "profs": [
       "1st Prof",
@@ -41,6 +41,50 @@
     ]
   },
   "books": [
+    {
+      "id": "grays_anatomy_descriptive_and_applied",
+      "title": "Gray's Anatomy: Descriptive and Applied",
+      "author": "Edited by D. V. Davies",
+      "edition": "33",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "and",
+        "applied",
+        "davies",
+        "descriptive",
+        "edited",
+        "father",
+        "godfather",
+        "gold",
+        "gray",
+        "grays",
+        "standard textbook"
+      ],
+      "totalPages": 1674,
+      "sizeMb": 61.9,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/grays_anatomy_descriptive_and_applied.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/grays_anatomy_descriptive_and_applied.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=grays_anatomy_descriptive_and_applied"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "jambulkar_sir_3rd_ed_golden_notes_5_compressed_1",
       "title": "Jambulkar  Sir 3rd Ed. Golden Notes (5) Compressed (1)",
