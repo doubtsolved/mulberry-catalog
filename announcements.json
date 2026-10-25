@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "updatedAt": 1729850000000,
   "banners": [
     {
@@ -18,21 +18,7 @@
       "bgColor": "#0014a8",
       "textColor": "#ffffff",
       "updatedAt": 1792919724949
-    },
-    {
-      "id": "banner_category_pyq",
-      "title": "University PYQ Solutions Added",
-      "subtitle": "Check the latest 10-year solved question papers",
-      "badge": "EXAM PREP",
-      "imageUrl": "",
-      "action": {
-        "type": "FILTER_CATEGORY",
-        "target": "Question Bank (PYQ)"
-      },
-      "active": true,
-      "priority": 3,
-      "targetProf": "All"
     }
   ],
-  "lastUpdated": 1792919739531
+  "lastUpdated": 1792919745259
 }
