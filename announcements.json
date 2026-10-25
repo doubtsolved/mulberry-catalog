@@ -1,23 +1,7 @@
 {
-  "version": 2,
+  "version": 3,
   "updatedAt": 1729850000000,
   "banners": [
-    {
-      "id": "banner_telegram_community",
-      "title": "Join 1st Prof Study Circle",
-      "subtitle": "Daily clinical MCQs & handwritten notes discussion",
-      "badge": "COMMUNITY",
-      "imageUrl": "https://raw.githubusercontent.com/sahabul-mondal/mulberry-catalog/main/assets/banners/telegram_banner.webp",
-      "bgColor": "#1e1b4b",
-      "textColor": "#ffffff",
-      "action": {
-        "type": "OPEN_URL",
-        "target": "https://t.me/MulberryMedicalVault"
-      },
-      "active": true,
-      "priority": 1,
-      "targetProf": "All"
-    },
     {
       "id": "banner_spotlight_jambulkar",
       "title": "Lippincott Illustrated Reviews 8th Ed",
@@ -50,5 +34,5 @@
       "targetProf": "All"
     }
   ],
-  "lastUpdated": 1792919724949
+  "lastUpdated": 1792919739531
 }
