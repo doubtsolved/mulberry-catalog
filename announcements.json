@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "updatedAt": 1729850000000,
   "banners": [
     {
@@ -18,7 +18,24 @@
       "bgColor": "#0014a8",
       "textColor": "#ffffff",
       "updatedAt": 1792919724949
+    },
+    {
+      "id": "grays_anatomy_father_available",
+      "title": "Gray's Anatomy (Father) Available",
+      "subtitle": "",
+      "badge": "NEW DROP",
+      "imageUrl": "",
+      "bgColor": "#0059b8",
+      "textColor": "#ffffff",
+      "targetProf": "1st Prof",
+      "priority": 2,
+      "active": true,
+      "action": {
+        "type": "OPEN_BOOK",
+        "target": "grays_anatomy_descriptive_and_applied"
+      },
+      "updatedAt": 1792921098018
     }
   ],
-  "lastUpdated": 1792919745259
+  "lastUpdated": 1792921098018
 }
