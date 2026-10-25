@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "updatedAt": 1729850000000,
+  "banners": [
+    {
+      "id": "banner_telegram_community",
+      "title": "Join 1st Prof Study Circle",
+      "subtitle": "Daily clinical MCQs & handwritten notes discussion",
+      "badge": "COMMUNITY",
+      "imageUrl": "https://raw.githubusercontent.com/sahabul-mondal/mulberry-catalog/main/assets/banners/telegram_banner.webp",
+      "bgColor": "#1e1b4b",
+      "textColor": "#ffffff",
+      "action": {
+        "type": "OPEN_URL",
+        "target": "https://t.me/MulberryMedicalVault"
+      },
+      "active": true,
+      "priority": 1,
+      "targetProf": "All"
+    },
+    {
+      "id": "banner_spotlight_jambulkar",
+      "title": "Lippincott Illustrated Reviews 8th Ed",
+      "subtitle": "High-yield rapid revision biochemistry charts",
+      "badge": "NEW DROP",
+      "imageUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/banners/banner_spotlight_jambulkar.webp",
+      "action": {
+        "type": "OPEN_BOOK",
+        "target": "medicalstudyzonecom_lippincott_illustrated_reviews_biochemistry_8th_edition"
+      },
+      "active": true,
+      "priority": 2,
+      "targetProf": "1st Prof",
+      "bgColor": "#0014a8",
+      "textColor": "#ffffff",
+      "updatedAt": 1792919724949
+    },
+    {
+      "id": "banner_category_pyq",
+      "title": "University PYQ Solutions Added",
+      "subtitle": "Check the latest 10-year solved question papers",
+      "badge": "EXAM PREP",
+      "imageUrl": "",
+      "action": {
+        "type": "FILTER_CATEGORY",
+        "target": "Question Bank (PYQ)"
+      },
+      "active": true,
+      "priority": 3,
+      "targetProf": "All"
+    }
+  ],
+  "lastUpdated": 1792919724949
+}
