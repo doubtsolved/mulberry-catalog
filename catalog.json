@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792839425861,
+  "lastUpdated": 1792917889397,
   "filters": {
     "profs": [
       "1st Prof",
@@ -41,6 +41,60 @@
     ]
   },
   "books": [
+    {
+      "id": "medicalstudyzonecom_lippincott_illustrated_reviews_biochemistry_8th_edition",
+      "title": "[Medicalstudyzone.Com] Lippincott® Illustrated Reviews Biochemistry 8Th Edition",
+      "author": "Emine Ercikan Abali, Susan D. Cline, David S. Franklin, and Susan M. Viselli.",
+      "edition": "8th Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Review / High-Yield",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "8th",
+        "abali",
+        "biochemistry",
+        "cline",
+        "com",
+        "david",
+        "edition",
+        "emine",
+        "ercikan",
+        "franklin",
+        "illustrated",
+        "lippincott",
+        "medicalstudyzone",
+        "review / high-yield",
+        "reviews",
+        "susan",
+        "viselli"
+      ],
+      "totalPages": 1588,
+      "sizeMb": 143.9,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/medicalstudyzonecom_lippincott_illustrated_reviews_biochemistry_8th_edition.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/review/medicalstudyzonecom_lippincott_illustrated_reviews_biochemistry_8th_edition.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1CruInUE7UXTz7ITGf1DIYP8UsHwbvYqA",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=medicalstudyzonecom_lippincott_illustrated_reviews_biochemistry_8th_edition"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "grays_anatomy_descriptive_and_applied",
       "title": "Gray's Anatomy: Descriptive and Applied",
