@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792917889397,
+  "lastUpdated": 1792918020053,
   "filters": {
     "profs": [
       "1st Prof",
@@ -43,7 +43,7 @@
   "books": [
     {
       "id": "medicalstudyzonecom_lippincott_illustrated_reviews_biochemistry_8th_edition",
-      "title": "[Medicalstudyzone.Com] Lippincott® Illustrated Reviews Biochemistry 8Th Edition",
+      "title": "Lippincott® Illustrated Reviews Biochemistry 8Th Edition",
       "author": "Emine Ercikan Abali, Susan D. Cline, David S. Franklin, and Susan M. Viselli.",
       "edition": "8th Edition",
       "prof": "1st Prof",
