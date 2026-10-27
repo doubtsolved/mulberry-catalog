@@ -1,5 +1,5 @@
 {
-  "version": 9,
+  "version": 10,
   "updatedAt": 1729850000000,
   "banners": [
     {
@@ -28,13 +28,13 @@
       "bgColor": "#4a2511",
       "textColor": "#ffffff",
       "targetProf": "1st Prof",
-      "priority": 1,
+      "priority": 2,
       "active": true,
       "action": {
         "type": "FILTER_SUBJECT",
         "target": "Anatomy"
       },
-      "updatedAt": 1793119116024
+      "updatedAt": 1793119149576
     },
     {
       "id": "banner_spotlight_jambulkar",
@@ -54,5 +54,5 @@
       "updatedAt": 1792919724949
     }
   ],
-  "lastUpdated": 1793119116024
+  "lastUpdated": 1793119149576
 }
