@@ -1,5 +1,5 @@
 {
-  "version": 8,
+  "version": 9,
   "updatedAt": 1729850000000,
   "banners": [
     {
@@ -20,6 +20,23 @@
       "updatedAt": 1793075260941
     },
     {
+      "id": "histology_books_are_now_available_on_mulberry",
+      "title": "Histology Books Are Now Available on Mulberry! 🧬",
+      "subtitle": "Explore trusted histology textbooks, now available on the Mulberry Shelf for your medical studies.",
+      "badge": "NEW DROP",
+      "imageUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/banners/histology_books_are_now_available_on_mulberry.webp",
+      "bgColor": "#4a2511",
+      "textColor": "#ffffff",
+      "targetProf": "1st Prof",
+      "priority": 1,
+      "active": true,
+      "action": {
+        "type": "FILTER_SUBJECT",
+        "target": "Anatomy"
+      },
+      "updatedAt": 1793119116024
+    },
+    {
       "id": "banner_spotlight_jambulkar",
       "title": "Lippincott Illustrated Reviews 8th Ed",
       "subtitle": "High-yield rapid revision biochemistry charts",
@@ -37,5 +54,5 @@
       "updatedAt": 1792919724949
     }
   ],
-  "lastUpdated": 1793118983473
+  "lastUpdated": 1793119116024
 }
