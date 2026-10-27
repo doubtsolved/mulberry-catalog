@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1792918020053,
+  "lastUpdated": 1793074727577,
   "filters": {
     "profs": [
       "1st Prof",
@@ -41,6 +41,61 @@
     ]
   },
   "books": [
+    {
+      "id": "physiconthe_reliable_icon_in_physiology_exam_preparatory_manual_for_undergraduates",
+      "title": "PHYSICON—The Reliable Icon in Physiology (Exam Preparatory Manual for Undergraduates)",
+      "author": "Sanoop KS, Mridul GS, and Nishanth PS",
+      "edition": "1st Ed",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Physiology",
+      "type": "Review / High-Yield",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "exam",
+        "for",
+        "human physiology",
+        "icon",
+        "jaypee brothers",
+        "manual",
+        "mbbs",
+        "medical exam revision",
+        "medical textbook",
+        "mridul",
+        "nishanth",
+        "physicon",
+        "physiology",
+        "preparatory",
+        "preparatory manual",
+        "reliable",
+        "review / high-yield",
+        "sanoop",
+        "sanoop ks",
+        "the",
+        "undergraduate medical book",
+        "undergraduates",
+        "viva preparation"
+      ],
+      "totalPages": 400,
+      "sizeMb": 29.6,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/physiconthe_reliable_icon_in_physiology_exam_preparatory_manual_for_undergraduates.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/review/physiconthe_reliable_icon_in_physiology_exam_preparatory_manual_for_undergraduates.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=physiconthe_reliable_icon_in_physiology_exam_preparatory_manual_for_undergraduates"
+        }
+      },
+      "uploader": "Sahabul Mondal"
+    },
     {
       "id": "medicalstudyzonecom_lippincott_illustrated_reviews_biochemistry_8th_edition",
       "title": "Lippincott® Illustrated Reviews Biochemistry 8Th Edition",
