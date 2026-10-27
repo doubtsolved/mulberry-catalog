@@ -1,5 +1,5 @@
 {
-  "version": 10,
+  "version": 11,
   "updatedAt": 1729850000000,
   "banners": [
     {
@@ -47,12 +47,12 @@
         "target": "medicalstudyzonecom_lippincott_illustrated_reviews_biochemistry_8th_edition"
       },
       "active": true,
-      "priority": 2,
+      "priority": 3,
       "targetProf": "1st Prof",
       "bgColor": "#0014a8",
       "textColor": "#ffffff",
-      "updatedAt": 1792919724949
+      "updatedAt": 1793119158743
     }
   ],
-  "lastUpdated": 1793119149576
+  "lastUpdated": 1793119158743
 }
