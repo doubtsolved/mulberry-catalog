@@ -1,7 +1,24 @@
 {
-  "version": 5,
+  "version": 6,
   "updatedAt": 1729850000000,
   "banners": [
+    {
+      "id": "physiconthe_reliable_icon_in_physiology_exam_preparatory_manual_for_undergraduates",
+      "title": "PHYSICON—The Reliable Icon in Physiology (Exam Preparatory Manual for Undergraduates)",
+      "subtitle": "A concise, exam-focused book featuring theory, practicals, clinical insights, diagrams, MCQs, and question banks for undergraduate medical students.  bookwindow.in+1",
+      "badge": "NEW DROP",
+      "imageUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/banners/physiconthe_reliable_icon_in_physiology_exam_preparatory_manual_for_undergraduates.webp",
+      "bgColor": "#5f0066",
+      "textColor": "#ffffff",
+      "targetProf": "1st Prof",
+      "priority": 1,
+      "active": true,
+      "action": {
+        "type": "OPEN_BOOK",
+        "target": "physiconthe_reliable_icon_in_physiology_exam_preparatory_manual_for_undergraduates"
+      },
+      "updatedAt": 1793075260941
+    },
     {
       "id": "banner_spotlight_jambulkar",
       "title": "Lippincott Illustrated Reviews 8th Ed",
@@ -37,5 +54,5 @@
       "updatedAt": 1792921098018
     }
   ],
-  "lastUpdated": 1792921098018
+  "lastUpdated": 1793075260941
 }
