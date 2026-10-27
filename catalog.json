@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1793074727577,
+  "lastUpdated": 1793117792175,
   "filters": {
     "profs": [
       "1st Prof",
@@ -41,6 +41,271 @@
     ]
   },
   "books": [
+    {
+      "id": "lippincotts_pocket_histology_lisa_m_j_lee",
+      "title": "Lippincott's Pocket Histology, Lisa M. J. Lee",
+      "author": "Medical Faculty",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Review / High-Yield",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "histology",
+        "lee",
+        "lippincott",
+        "lisa",
+        "pocket",
+        "review / high-yield"
+      ],
+      "totalPages": 290,
+      "sizeMb": 12.0,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/lippincotts_pocket_histology_lisa_m_j_lee.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/review/lippincotts_pocket_histology_lisa_m_j_lee.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1LRz0VTOeufSTPt-gae7ySn_UA43sMtan",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=lippincotts_pocket_histology_lisa_m_j_lee"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "netters_essential_histology",
+      "title": "Netter'S Essential Histology",
+      "author": "Netter'S Essential Histology",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "essential",
+        "histology",
+        "netter",
+        "standard textbook"
+      ],
+      "totalPages": 536,
+      "sizeMb": 444.8,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/netters_essential_histology.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/netters_essential_histology.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1QnUHrX3nAa6-eHLvvmW2SX3s11h7muxq",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=netters_essential_histology"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "inderbir_singhs_textbook_of_human_histology_inderbir_singh",
+      "title": "Inderbir Singh's Textbook of Human Histology, Inderbir Singh",
+      "author": "Inderbir Singh",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "histology",
+        "human",
+        "inderbir",
+        "singh",
+        "standard textbook",
+        "textbook"
+      ],
+      "totalPages": 502,
+      "sizeMb": 69.2,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/inderbir_singhs_textbook_of_human_histology_inderbir_singh.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/inderbir_singhs_textbook_of_human_histology_inderbir_singh.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1JWJM6RH6ZJxajEx5atHcm9Q54KGNrnCp",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=inderbir_singhs_textbook_of_human_histology_inderbir_singh"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "textbook_of_human_histology_yogesh_sontakke",
+      "title": "Textbook of Human Histology, Yogesh Sontakke",
+      "author": "Yogesh Sontakke",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "histology",
+        "human",
+        "sontakke",
+        "standard textbook",
+        "textbook",
+        "yogesh"
+      ],
+      "totalPages": 358,
+      "sizeMb": 149.0,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/textbook_of_human_histology_yogesh_sontakke.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/textbook_of_human_histology_yogesh_sontakke.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1aMs8K7M4j2i0xPxHTZx4jK7KDgCUNZBD",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=textbook_of_human_histology_yogesh_sontakke"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "histology_one_stop_solution_by_syncytium",
+      "title": "Histology  One Stop Solution By Syncytium",
+      "author": "Syncytium",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Handwritten Notes",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "handwritten notes",
+        "histology",
+        "one",
+        "solution",
+        "stop",
+        "syncytium"
+      ],
+      "totalPages": 150,
+      "sizeMb": 56.4,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/histology_one_stop_solution_by_syncytium.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/notes/histology_one_stop_solution_by_syncytium.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1DiFBkXq7p_lLi_WpuA0GHftY4qbvON4b",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=histology_one_stop_solution_by_syncytium"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "difiores_atlas_of_histology_with_functional_correlations",
+      "title": "diFiore's Atlas of Histology with Functional Correlations",
+      "author": "Victor P. Eroschenko",
+      "edition": "13th Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Atlas / Practical",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "atlas",
+        "atlas / practical",
+        "correlations",
+        "difiore",
+        "eroschenko",
+        "functional",
+        "histology",
+        "victor",
+        "with"
+      ],
+      "totalPages": 1100,
+      "sizeMb": 42.8,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/difiores_atlas_of_histology_with_functional_correlations.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/practicals/difiores_atlas_of_histology_with_functional_correlations.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1BFFzgunLWhdkk8fVD6L79RbAIMeh2y6P",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=difiores_atlas_of_histology_with_functional_correlations"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "physiconthe_reliable_icon_in_physiology_exam_preparatory_manual_for_undergraduates",
       "title": "PHYSICON—The Reliable Icon in Physiology (Exam Preparatory Manual for Undergraduates)",
