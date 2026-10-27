@@ -3,663 +3,522 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mulberry CMS & Vault Console</title>
+  <title>Mulberry Operations & CMS Portal</title>
+
+  <!-- Google Fonts: Poppins & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Poppins', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
   <style>
-    body { background-color: #0b1116; color: #e2e8f0; font-family: system-ui, -apple-system, sans-serif; }
-    .glass { background: rgba(18, 28, 36, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(45, 212, 191, 0.15); }
+    body { font-family: 'Inter', sans-serif; background-color: #0b0f19; color: #f1f5f9; }
+    h1, h2, h3, h4, .font-display { font-family: 'Poppins', sans-serif; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    .aspect-16-6 { aspect-ratio: 16 / 6; }
   </style>
 </head>
-<body class="min-h-screen pb-16">
+<body class="min-h-screen flex flex-col selection:bg-pink-500 selection:text-white">
 
   <!-- Top Header -->
-  <header class="border-b border-slate-800 bg-slate-950/80 sticky top-0 z-30 backdrop-blur">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+  <header class="sticky top-0 z-30 border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-bold">M</div>
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-purple-700 flex items-center justify-center shadow-lg shadow-pink-500/20">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+        </div>
         <div>
-          <h1 class="text-lg font-bold tracking-tight text-white">Mulberry Operations Desk</h1>
-          <p class="text-xs text-slate-400">Hugging Face Vault + GitHub Catalog CMS</p>
+          <h1 class="font-display font-bold text-lg text-white leading-none">Mulberry Operations & CMS</h1>
+          <p class="text-xs text-slate-400 mt-0.5">AES-256-GCM Ingestion • Quarantine Review • 16:6 Carousel • HF Vault</p>
         </div>
       </div>
 
-      <!-- Navigation Tabs -->
-      <div class="flex flex-wrap gap-2 bg-slate-900 p-1 rounded-xl border border-slate-800">
-        <button onclick="switchTab('catalog')" id="tab-btn-catalog" class="px-4 py-1.5 rounded-lg text-sm font-medium bg-emerald-600 text-white">
-          Catalog & Live Editor
-        </button>
-        <button onclick="switchTab('ingest')" id="tab-btn-ingest" class="px-4 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white">
-          + Ingest Books
-        </button>
-        <button onclick="switchTab('submissions')" id="tab-btn-submissions" class="px-4 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white flex items-center gap-2">
-          <span>Community Submissions</span>
-          <span id="submissions-badge" class="px-2 py-0.5 text-[10px] rounded-full bg-amber-500/20 text-amber-300 font-mono hidden">0</span>
-        </button>
-        <button onclick="switchTab('vault')" id="tab-btn-vault" class="px-4 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white">
-          HF Storage & Orphans
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span id="hfQuotaBadge">HF Storage: Loading...</span>
+        </div>
+        <button onclick="refreshAll()" class="px-3.5 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs font-display font-medium text-slate-200 transition">
+          ↻ Refresh All
         </button>
       </div>
     </div>
   </header>
 
-  <main class="max-w-7xl mx-auto px-6 mt-6">
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
 
-    <!-- ==================== TAB 1: CATALOG MANAGER ==================== -->
-    <section id="tab-catalog" class="space-y-6">
-      <div class="glass rounded-2xl p-5 flex flex-wrap items-center justify-between gap-4">
-        <div class="flex flex-wrap items-center gap-4 flex-1">
-          <input id="search-input" oninput="renderCatalog()" type="text" placeholder="Search title, author, ID, or tag..."
-            class="bg-slate-900/90 border border-slate-700 rounded-xl px-4 py-2 text-sm w-full md:w-72 focus:outline-none focus:border-emerald-500" />
+    <!-- Toast Banner -->
+    <div id="toastBanner" class="hidden rounded-xl border px-4 py-3 text-sm flex items-center justify-between">
+      <span id="toastMessage"></span>
+      <button onclick="hideToast()" class="text-xs opacity-75 hover:opacity-100 ml-4">✕</button>
+    </div>
 
-          <select id="filter-prof" onchange="renderCatalog()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm">
-            <option value="">All Profs</option>
-          </select>
+    <!-- Navigation Tabs -->
+    <div class="flex flex-wrap items-center gap-2 border-b border-slate-800">
+      <button onclick="switchTab('ingest')" id="tabBtnIngest" class="font-display font-semibold text-sm px-5 py-3 border-b-2 border-pink-500 text-white flex items-center gap-2 transition">
+        <span>⚡ Batch Ingestion</span>
+      </button>
 
-          <select id="filter-type" onchange="renderCatalog()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm">
-            <option value="">All Asset Types</option>
-          </select>
+      <button onclick="switchTab('submissions')" id="tabBtnSubmissions" class="font-display font-medium text-sm px-5 py-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition">
+        <span>📥 Community Submissions</span>
+        <span id="tabBadgeSubmissions" class="px-2 py-0.5 text-xs rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">0</span>
+      </button>
 
-          <select id="filter-subject" onchange="renderCatalog()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm">
-            <option value="">All Subjects</option>
-          </select>
+      <button onclick="switchTab('catalog')" id="tabBtnCatalog" class="font-display font-medium text-sm px-5 py-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition">
+        <span>📚 Catalog CMS</span>
+        <span id="tabBadgeCatalog" class="px-2 py-0.5 text-xs rounded-full bg-slate-800 text-slate-300">0</span>
+      </button>
+
+      <button onclick="switchTab('announcements')" id="tabBtnAnnouncements" class="font-display font-medium text-sm px-5 py-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition">
+        <span>📢 Announcements (16:6)</span>
+        <span id="tabBadgeAnnouncements" class="px-2 py-0.5 text-xs rounded-full bg-pink-500/20 text-pink-300 border border-pink-500/30">0</span>
+      </button>
+
+      <button onclick="switchTab('storage')" id="tabBtnStorage" class="font-display font-medium text-sm px-5 py-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition">
+        <span>☁️ HF Storage & Orphans</span>
+      </button>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- TAB 1: BATCH INGESTION (DRIVE FOLDER / DRIVE LINKS / DIRECT PDF)    -->
+    <!-- =================================================================== -->
+    <section id="sectionIngest" class="space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-3">
+          <h3 class="font-display font-semibold text-sm text-white">1. Google Drive Folder URL</h3>
+          <p class="text-xs text-slate-400">Scans public Drive folder for all PDFs inside.</p>
+          <input
+            type="text"
+            id="inputFolderUrl"
+            placeholder="https://drive.google.com/drive/folders/..."
+            class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-pink-500"
+          />
         </div>
 
-        <div class="flex items-center gap-3">
-          <span id="book-count-badge" class="text-xs px-3 py-1.5 rounded-lg bg-slate-800 text-emerald-400 font-mono">0 Books</span>
-          <button onclick="openCategoryModal()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-medium text-emerald-400">
-            + Add Asset Type
-          </button>
-          <button onclick="fetchCatalog()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs">
-            Refresh
-          </button>
+        <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-3">
+          <h3 class="font-display font-semibold text-sm text-white">2. Google Drive File URL(s)</h3>
+          <p class="text-xs text-slate-400">One Drive file link per line.</p>
+          <textarea
+            id="inputDriveLinks"
+            rows="2"
+            placeholder="https://drive.google.com/file/d/..."
+            class="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-pink-500"
+          ></textarea>
         </div>
-      </div>
 
-      <!-- Books Grid -->
-      <div id="books-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-    </section>
-
-    <!-- ==================== TAB 2: INGESTION PIPELINE ==================== -->
-    <section id="tab-ingest" class="hidden space-y-6">
-      <div class="glass rounded-2xl p-6 space-y-4">
-        <h2 class="text-base font-semibold text-white">1. Scan Sources (Google Drive or Direct PDF URLs)</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
-            <label class="text-xs text-slate-400 block mb-1">Public Google Drive Folder URL</label>
-            <input id="scan-folder-url" type="text" placeholder="https://drive.google.com/drive/folders/..."
-              class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-emerald-500" />
-          </div>
-          <div>
-            <label class="text-xs text-slate-400 block mb-1">Direct Drive File Links (One per line)</label>
-            <textarea id="scan-direct-links" rows="2" placeholder="https://drive.google.com/file/d/..."
-              class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-emerald-500"></textarea>
-          </div>
-          <div>
-            <label class="text-xs text-emerald-400 font-medium block mb-1">Direct Web PDF Links (One per line)</label>
-            <textarea id="scan-direct-pdf-links" rows="2" placeholder="https://example.com/books/guyton_15e.pdf"
-              class="w-full bg-slate-900 border border-emerald-500/40 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-emerald-400"></textarea>
-          </div>
-        </div>
-        <div class="flex items-center gap-3">
-          <button onclick="scanSources()" id="btn-scan" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium">
-            Scan All Provided Sources
-          </button>
-          <span class="text-xs text-slate-400">Supports Drive folders, individual Drive links, and direct HTTP/HTTPS .pdf URLs.</span>
-        </div>
-      </div>
-
-      <!-- Scanned Queue Table -->
-      <div id="ingest-queue-card" class="glass rounded-2xl p-6 hidden space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-base font-semibold text-white">2. Configure Metadata & Target HF Path</h2>
-          <button onclick="startIngestionBatch()" id="btn-start-ingest" class="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm">
-            Encrypt & Upload Selected to HF
-          </button>
-        </div>
-        <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs border-collapse">
-            <thead>
-              <tr class="border-b border-slate-800 text-slate-400">
-                <th class="p-2">Select</th>
-                <th class="p-2">Source</th>
-                <th class="p-2">Title</th>
-                <th class="p-2">Author</th>
-                <th class="p-2">Ed.</th>
-                <th class="p-2">Prof</th>
-                <th class="p-2">Subject</th>
-                <th class="p-2">Asset Type</th>
-                <th class="p-2">Extra Tags</th>
-              </tr>
-            </thead>
-            <tbody id="scan-results-body" class="divide-y divide-slate-800/60"></tbody>
-          </table>
+        <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-3">
+          <h3 class="font-display font-semibold text-sm text-white">3. Direct PDF Link(s)</h3>
+          <p class="text-xs text-slate-400">One direct `.pdf` HTTP/HTTPS URL per line.</p>
+          <textarea
+            id="inputDirectPdfLinks"
+            rows="2"
+            placeholder="https://example.com/anatomy_notes.pdf"
+            class="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-pink-500"
+          ></textarea>
         </div>
       </div>
 
-      <!-- Live Terminal Logs -->
-      <div class="glass rounded-2xl p-5">
-        <h3 class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">Live Cloud Worker Terminal</h3>
-        <pre id="terminal-box" class="bg-black/80 text-emerald-400 font-mono text-xs p-4 rounded-xl h-64 overflow-y-auto border border-slate-800">Ready.</pre>
-      </div>
-    </section>
-
-    <!-- ==================== TAB 3: COMMUNITY SUBMISSIONS ==================== -->
-    <section id="tab-submissions" class="hidden space-y-6">
-      <div class="glass rounded-2xl p-6 flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h2 class="text-base font-semibold text-white">Quarantined Student Contributions</h2>
-          <p class="text-xs text-slate-400">Files uploaded from the Mulberry Android App into <code class="text-emerald-400">submissions/&lt;slug&gt;/</code> awaiting admin review.</p>
-        </div>
-        <button onclick="fetchSubmissions()" id="btn-refresh-subs" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-medium text-emerald-400 border border-slate-700">
-          Scan Quarantine Inbox
+      <div class="flex items-center justify-end gap-3">
+        <button onclick="clearScanInputs()" class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs font-medium text-slate-300">
+          Clear Inputs
+        </button>
+        <button onclick="scanSources()" id="btnScanSources" class="font-display font-semibold text-xs px-6 py-2.5 rounded-xl bg-pink-600 hover:bg-pink-500 text-white shadow-lg shadow-pink-600/20 transition">
+          🔍 Scan & Auto-Detect Metadata
         </button>
       </div>
 
-      <div id="submissions-empty" class="glass rounded-2xl p-12 text-center text-slate-400 text-sm hidden">
-        No pending student submissions in <code class="text-slate-300">submissions/</code> right now.
-      </div>
-
-      <div id="submissions-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-5"></div>
-    </section>
-
-    <!-- ==================== TAB 4: HF STORAGE & ORPHANS ==================== -->
-    <section id="tab-vault" class="hidden space-y-6">
-      <div class="glass rounded-2xl p-6 space-y-4">
+      <!-- Scanned Staging Queue -->
+      <div id="stagingCard" class="hidden p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-4">
         <div class="flex items-center justify-between">
           <div>
-            <h2 class="text-base font-semibold text-white">Hugging Face Private Dataset Quota</h2>
-            <p class="text-xs text-slate-400" id="hf-repo-label">sahabul1064/mulberry-archives</p>
+            <h3 class="font-display font-bold text-sm text-white">Staged Books Queue (<span id="stagedCount">0</span>)</h3>
+            <p class="text-xs text-slate-400">Verify heuristics before encrypting with AES-256-GCM and uploading to Hugging Face.</p>
           </div>
-          <button onclick="fetchHfStatus()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs">
-            Scan HF Tree
+          <button onclick="startBatchIngestion()" id="btnStartIngest" class="font-display font-semibold text-xs px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/20 transition">
+            🚀 Start Batch Ingestion
           </button>
         </div>
 
-        <div class="w-full bg-slate-900 h-4 rounded-full overflow-hidden border border-slate-800">
-          <div id="hf-quota-bar" class="bg-emerald-500 h-full transition-all duration-300" style="width: 0%"></div>
-        </div>
-        <div class="flex justify-between text-xs text-slate-400 font-mono">
-          <span id="hf-usage-text">Click 'Scan HF Tree' to calculate usage</span>
-          <span>100 GB Private Limit</span>
-        </div>
+        <div id="stagedList" class="space-y-3 max-h-[420px] overflow-y-auto pr-1"></div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="glass rounded-2xl p-5">
-          <h3 class="text-sm font-semibold text-white mb-3">All Encrypted Files in HF Dataset</h3>
-          <div id="hf-files-list" class="space-y-1.5 max-h-96 overflow-y-auto text-xs font-mono"></div>
+      <!-- Live Logs Console -->
+      <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span id="jobDot" class="w-2.5 h-2.5 rounded-full bg-slate-600"></span>
+            <h3 class="font-display font-semibold text-xs uppercase tracking-wider text-slate-300">Live Operations Log</h3>
+          </div>
+          <span id="jobStatusLabel" class="font-mono text-xs text-slate-400">Idle</span>
         </div>
-        <div class="glass rounded-2xl p-5">
-          <h3 class="text-sm font-semibold text-amber-400 mb-3">Untracked / Orphan Files (In HF but not in catalog.json)</h3>
-          <div id="hf-orphans-list" class="space-y-1.5 max-h-96 overflow-y-auto text-xs font-mono"></div>
+        <pre id="jobLogsConsole" class="font-mono text-xs text-slate-300 bg-black/50 p-4 rounded-xl border border-slate-900 h-60 overflow-y-auto leading-relaxed">Ready. Scan a Google Drive folder, Drive link, or Direct PDF URL above.</pre>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 2: COMMUNITY SUBMISSIONS INBOX                                  -->
+    <!-- =================================================================== -->
+    <section id="sectionSubmissions" class="hidden space-y-4">
+      <div id="submissionsEmpty" class="hidden py-16 rounded-2xl bg-slate-900/40 border border-slate-800 text-center space-y-1">
+        <p class="font-display font-semibold text-base text-slate-300">No Pending Community Submissions</p>
+        <p class="text-xs text-slate-500">Quarantine folder `submissions/` on Hugging Face is empty.</p>
+      </div>
+
+      <div id="submissionsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 3: CATALOG CMS                                                  -->
+    <!-- =================================================================== -->
+    <section id="sectionCatalog" class="hidden space-y-4">
+      <div class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between bg-slate-900/60 p-3 rounded-xl border border-slate-800">
+        <input
+          type="text"
+          id="catalogSearch"
+          oninput="renderCatalog()"
+          placeholder="Search by title, author, subject, tag, or ID..."
+          class="flex-1 px-4 py-2 rounded-lg bg-slate-950 border border-slate-800 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-pink-500"
+        />
+        <select id="catalogProfFilter" onchange="renderCatalog()" class="px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-200">
+          <option value="">All Profs</option>
+        </select>
+        <select id="catalogTypeFilter" onchange="renderCatalog()" class="px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-200">
+          <option value="">All Asset Types</option>
+        </select>
+        <button onclick="promptAddCategory()" class="font-display font-medium text-xs px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 whitespace-nowrap">
+          + New Type
+        </button>
+      </div>
+
+      <div id="catalogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 4: ANNOUNCEMENTS CAROUSEL CMS (16:6)                            -->
+    <!-- =================================================================== -->
+    <section id="sectionAnnouncements" class="hidden space-y-6">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-slate-900/70 p-4 rounded-2xl border border-slate-800">
+        <div>
+          <h3 class="font-display font-bold text-base text-white">Mulberry Shelf 16:6 Carousel Manager</h3>
+          <p class="text-xs text-slate-400">Create interactive announcement banners that open webpages, specific textbooks, subjects, or categories directly inside the app.</p>
         </div>
+        <button onclick="openBannerModal()" class="font-display font-semibold text-xs px-5 py-2.5 rounded-xl bg-pink-600 hover:bg-pink-500 text-white shadow-lg shadow-pink-600/20 whitespace-nowrap transition">
+          + New 16:6 Banner
+        </button>
+      </div>
+
+      <div id="announcementsEmpty" class="hidden py-16 rounded-2xl bg-slate-900/40 border border-slate-800 text-center space-y-1">
+        <p class="font-display font-semibold text-base text-slate-300">No Carousel Announcements Yet</p>
+        <p class="text-xs text-slate-500">Click "+ New 16:6 Banner" above to publish your first shelf announcement.</p>
+      </div>
+
+      <div id="announcementsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 5: HF STORAGE & ORPHANS                                         -->
+    <!-- =================================================================== -->
+    <section id="sectionStorage" class="hidden space-y-4">
+      <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="font-display font-bold text-base text-white">Hugging Face Dataset Vault</h3>
+            <p class="text-xs text-slate-400" id="hfRepoLabel"></p>
+          </div>
+          <button onclick="loadHfStatus()" class="text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200">Refresh Tree</button>
+        </div>
+        <div id="hfOrphansBox" class="hidden p-4 rounded-xl bg-amber-950/40 border border-amber-800/60 space-y-2">
+          <p class="font-display font-semibold text-xs text-amber-300">Orphaned `.bin` Files (In HF but not in `catalog.json`)</p>
+          <div id="hfOrphansList" class="text-xs font-mono text-amber-200/90 space-y-1"></div>
+        </div>
+        <div id="hfFilesList" class="space-y-1.5 max-h-96 overflow-y-auto font-mono text-xs text-slate-300"></div>
       </div>
     </section>
 
   </main>
 
-  <!-- ==================== MODAL: LIVE EDIT BOOK ==================== -->
-  <div id="edit-modal" class="fixed inset-0 bg-black/75 hidden items-center justify-center z-50 p-4">
-    <div class="glass rounded-2xl max-w-lg w-full p-6 space-y-4 border border-slate-700">
-      <div class="flex justify-between items-center">
-        <h3 class="text-base font-bold text-white">Edit Book Metadata & Location</h3>
-        <button onclick="closeEditModal()" class="text-slate-400 hover:text-white">&times;</button>
+  <!-- ===================================================================== -->
+  <!-- MODAL 1: EDIT CATALOG BOOK OR APPROVE COMMUNITY SUBMISSION            -->
+  <!-- ===================================================================== -->
+  <div id="actionModal" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl">
+      <div class="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
+        <h3 id="modalTitleHeader" class="font-display font-bold text-base text-white">Review</h3>
+        <button onclick="closeModal()" class="text-slate-400 hover:text-white">✕</button>
       </div>
-      <input type="hidden" id="edit-id" />
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-        <div class="md:col-span-2">
-          <label class="text-slate-400 block mb-1">Title</label>
-          <input id="edit-title" type="text" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2" />
+
+      <div class="p-6 space-y-4 max-h-[75vh] overflow-y-auto">
+        <input type="hidden" id="modalMode" value="" />
+        <input type="hidden" id="modalTargetId" value="" />
+
+        <div class="flex gap-4 items-start">
+          <img id="modalCoverImg" src="" class="w-20 h-28 object-cover rounded-lg border border-slate-700 bg-slate-800 flex-shrink-0" />
+          <div class="flex-1 space-y-2">
+            <div>
+              <label class="block text-xs font-medium text-slate-400 mb-1">Book Title</label>
+              <input type="text" id="modalBookTitle" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-sm text-white" />
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-xs font-medium text-slate-400 mb-1">Author</label>
+                <input type="text" id="modalBookAuthor" class="w-full px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-xs text-white" />
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-400 mb-1">Edition</label>
+                <input type="text" id="modalBookEdition" class="w-full px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-xs text-white" />
+              </div>
+            </div>
+          </div>
         </div>
+
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Prof</label>
+            <select id="modalBookProf" class="w-full px-2.5 py-2 rounded-lg bg-slate-950 border border-slate-800 text-xs text-white"></select>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Subject</label>
+            <select id="modalBookSubject" class="w-full px-2.5 py-2 rounded-lg bg-slate-950 border border-slate-800 text-xs text-white"></select>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Asset Type</label>
+            <select id="modalBookType" class="w-full px-2.5 py-2 rounded-lg bg-slate-950 border border-slate-800 text-xs text-white"></select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Uploader</label>
+            <input type="text" id="modalBookUploader" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-xs text-white" />
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Pages</label>
+            <input type="number" id="modalBookPages" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-xs text-white" />
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Size (MB)</label>
+            <input type="number" step="0.1" id="modalBookSize" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-xs text-white" />
+          </div>
+        </div>
+
         <div>
-          <label class="text-slate-400 block mb-1">Author</label>
-          <input id="edit-author" type="text" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2" />
+          <label class="block text-xs font-medium text-slate-400 mb-1">Tags (comma-separated)</label>
+          <input type="text" id="modalBookTags" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-xs text-white" />
         </div>
-        <div>
-          <label class="text-slate-400 block mb-1">Edition</label>
-          <input id="edit-edition" type="text" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2" />
-        </div>
-        <div>
-          <label class="text-slate-400 block mb-1">Prof (Triggers HF Move if changed)</label>
-          <select id="edit-prof" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2"></select>
-        </div>
-        <div>
-          <label class="text-slate-400 block mb-1">Asset Type (Triggers HF Move if changed)</label>
-          <select id="edit-type" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2"></select>
-        </div>
-        <div>
-          <label class="text-slate-400 block mb-1">Subject</label>
-          <select id="edit-subject" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2"></select>
-        </div>
-        <div>
-          <label class="text-slate-400 block mb-1">Uploader</label>
-          <input id="edit-uploader" type="text" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2" />
-        </div>
-        <div class="md:col-span-2">
-          <label class="text-slate-400 block mb-1">Search Tags (Stale type/prof tags are scrubbed automatically)</label>
-          <input id="edit-tags" type="text" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2" />
+
+        <div id="modalRelocateWrap" class="flex items-center gap-2 pt-1">
+          <input type="checkbox" id="modalRelocateHf" checked class="rounded bg-slate-950 border-slate-700 text-pink-500" />
+          <label for="modalRelocateHf" class="text-xs text-slate-300">Relocate `.bin` on Hugging Face if Prof or Type changed</label>
         </div>
       </div>
 
-      <label class="flex items-center gap-2 text-xs text-emerald-400 pt-1">
-        <input type="checkbox" id="edit-relocate" checked class="rounded" />
-        Automatically move .bin file on Hugging Face if Prof or Asset Type changed
-      </label>
-
-      <div class="flex justify-end gap-2 pt-3">
-        <button onclick="closeEditModal()" class="px-4 py-2 rounded-xl bg-slate-800 text-xs">Cancel</button>
-        <button onclick="saveBookEdit()" id="btn-save-edit" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold">
-          Save & Push to GitHub
+      <div class="px-6 py-4 bg-slate-950/60 border-t border-slate-800 flex items-center justify-end gap-3">
+        <button onclick="closeModal()" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-300">Cancel</button>
+        <button onclick="submitModalAction()" id="modalConfirmBtn" class="font-display font-semibold px-5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-xs text-white">
+          Confirm
         </button>
       </div>
     </div>
   </div>
 
-  <!-- ==================== MODAL: DELETE CONFIRMATION ==================== -->
-  <div id="delete-modal" class="fixed inset-0 bg-black/75 hidden items-center justify-center z-50 p-4">
-    <div class="glass rounded-2xl max-w-md w-full p-6 space-y-4 border border-red-500/30">
-      <h3 class="text-base font-bold text-white">Delete Resource</h3>
-      <p class="text-xs text-slate-300" id="delete-book-label"></p>
-      <input type="hidden" id="delete-id" />
+  <!-- ===================================================================== -->
+  <!-- MODAL 2: CREATE / EDIT 16:6 ANNOUNCEMENT BANNER                       -->
+  <!-- ===================================================================== -->
+  <div id="bannerModal" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-xl w-full overflow-hidden shadow-2xl">
+      <div class="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
+        <h3 id="bannerModalHeader" class="font-display font-bold text-base text-white">Create 16:6 Carousel Banner</h3>
+        <button onclick="closeBannerModal()" class="text-slate-400 hover:text-white">✕</button>
+      </div>
 
-      <div class="space-y-2 pt-2">
-        <button onclick="confirmDelete('soft')" class="w-full text-left p-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700">
-          <div class="text-xs font-semibold text-amber-400">Option 1: Soft Delete (Catalog Only)</div>
-          <div class="text-[11px] text-slate-400">Removes from catalog.json & deletes cover, but keeps encrypted .bin safe in Hugging Face.</div>
+      <div class="p-6 space-y-4 max-h-[80vh] overflow-y-auto">
+        <input type="hidden" id="bannerEditId" value="" />
+
+        <!-- Live 16:6 Interactive Preview Card -->
+        <div>
+          <label class="block text-[11px] font-medium text-slate-400 uppercase tracking-wider mb-1.5">Live 16:6 Shelf Preview</label>
+          <div id="bannerLivePreview" class="w-full aspect-16-6 rounded-2xl overflow-hidden relative border border-slate-700 shadow-lg flex flex-col justify-end p-5 transition-all" style="background-color: #4a2511; color: #ffffff;">
+            <img id="bannerPreviewImg" src="" class="hidden absolute inset-0 w-full h-full object-cover z-0" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10"></div>
+            <div class="relative z-20 space-y-1">
+              <span id="previewBadge" class="inline-block px-2.5 py-0.5 text-[10px] font-display font-bold uppercase tracking-wider rounded-full bg-white/20 backdrop-blur-sm">NEW DROP</span>
+              <h4 id="previewTitle" class="font-display font-bold text-lg leading-tight truncate">Banner Headline</h4>
+              <p id="previewSubtitle" class="text-xs opacity-90 truncate">Subtitle description goes here</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="sm:col-span-2">
+            <label class="block text-xs font-medium text-slate-400 mb-1">Headline Title *</label>
+            <input type="text" id="bannerTitle" oninput="updateBannerPreview()" placeholder="e.g., BD Chaurasia 9th Ed Live!" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-sm text-white" />
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Badge Pill</label>
+            <input type="text" id="bannerBadge" oninput="updateBannerPreview()" placeholder="e.g., NEW DROP" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-sm text-white" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-400 mb-1">Subtitle / Description</label>
+          <input type="text" id="bannerSubtitle" oninput="updateBannerPreview()" placeholder="e.g., Tap to open directly in your Mulberry Shelf" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-xs text-white" />
+        </div>
+
+        <!-- Image Upload or External Image URL -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1">Upload 16:6 Image (Auto-converts to WebP)</label>
+            <input type="file" id="bannerFileInput" accept="image/*" onchange="handleBannerFileSelect(event)" class="text-xs text-slate-400 file:mr-2 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-xs file:bg-pink-600 file:text-white hover:file:bg-pink-500" />
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Or Direct Image URL (Optional)</label>
+            <input type="text" id="bannerImageUrl" oninput="updateBannerPreview()" placeholder="https://..." class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-white" />
+          </div>
+        </div>
+
+        <!-- Tap Action Routing -->
+        <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-medium text-pink-400 mb-1">On Banner Tap Action</label>
+              <select id="bannerActionType" onchange="handleActionTypeChange()" class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white">
+                <option value="OPEN_BOOK">📖 Open Specific Book</option>
+                <option value="FILTER_CATEGORY">🗂️ Open Library Section / Type</option>
+                <option value="FILTER_SUBJECT">🧬 Filter Shelf by Subject</option>
+                <option value="OPEN_URL">🌐 Open External Webpage / Link</option>
+                <option value="OPEN_CONTRIBUTE">📤 Open Community Upload Sheet</option>
+                <option value="NONE">🚫 No Action (Visual Only)</option>
+              </select>
+            </div>
+
+            <div id="bannerTargetContainer">
+              <label id="bannerTargetLabel" class="block text-xs font-medium text-slate-400 mb-1">Select Target</label>
+              <select id="bannerTargetSelect" class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white"></select>
+              <input type="text" id="bannerTargetInput" placeholder="https://t.me/..." class="hidden w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Styling, Audience & Priority -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Target Prof</label>
+            <select id="bannerTargetProf" class="w-full px-2.5 py-2 rounded-lg bg-slate-950 border border-slate-800 text-xs text-white">
+              <option value="All">All Profs</option>
+              <option value="1st Prof">1st Prof</option>
+              <option value="2nd Prof">2nd Prof</option>
+              <option value="3rd Prof Part 1">3rd Prof Part 1</option>
+              <option value="Final Prof">Final Prof</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Order Priority</label>
+            <input type="number" id="bannerPriority" value="1" min="1" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-xs text-white" />
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Fallback Card Color</label>
+            <input type="color" id="bannerBgColor" value="#4a2511" oninput="updateBannerPreview()" class="w-full h-9 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer p-1" />
+          </div>
+          <div class="flex items-center pt-5">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" id="bannerActive" checked class="w-4 h-4 rounded bg-slate-950 border-slate-700 text-pink-500" />
+              <span class="text-xs font-medium text-slate-200">Active on Shelf</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="px-6 py-4 bg-slate-950/60 border-t border-slate-800 flex items-center justify-end gap-3">
+        <button onclick="closeBannerModal()" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-300">Cancel</button>
+        <button onclick="saveBanner()" id="btnSaveBanner" class="font-display font-semibold px-5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-xs text-white shadow">
+          Publish Banner & Push to GitHub
         </button>
-
-        <button onclick="confirmDelete('purge')" class="w-full text-left p-3 rounded-xl bg-red-950/40 hover:bg-red-900/50 border border-red-500/40">
-          <div class="text-xs font-semibold text-red-400">Option 2: Full Purge (Catalog + Hugging Face)</div>
-          <div class="text-[11px] text-slate-400">Permanently deletes record, cover, AND removes .bin from Hugging Face to free quota.</div>
-        </button>
-      </div>
-
-      <div class="flex justify-end">
-        <button onclick="closeDeleteModal()" class="px-4 py-1.5 rounded-lg bg-slate-800 text-xs">Cancel</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== MODAL: ADD CUSTOM ASSET TYPE ==================== -->
-  <div id="category-modal" class="fixed inset-0 bg-black/75 hidden items-center justify-center z-50 p-4">
-    <div class="glass rounded-2xl max-w-sm w-full p-6 space-y-4">
-      <h3 class="text-sm font-bold text-white">Add New Asset Category</h3>
-      <div>
-        <label class="text-xs text-slate-400 block mb-1">Display Name (e.g. Clinical Cases)</label>
-        <input id="new-cat-name" type="text" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs" />
-      </div>
-      <div>
-        <label class="text-xs text-slate-400 block mb-1">HF Folder Slug (e.g. clinical_cases)</label>
-        <input id="new-cat-slug" type="text" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs" />
-      </div>
-      <div class="flex justify-end gap-2">
-        <button onclick="closeCategoryModal()" class="px-3 py-1.5 rounded-lg bg-slate-800 text-xs">Cancel</button>
-        <button onclick="submitNewCategory()" class="px-4 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-semibold">Add & Sync</button>
       </div>
     </div>
   </div>
 
   <script>
     let catalogData = { filters: { profs: [], types: [], subjects: [] }, books: [] };
-    let scannedFiles = [];
-    let pendingSubmissions = [];
-    let pollTimer = null;
+    let submissionsList = [];
+    let announcementsList = [];
+    let stagedFiles = [];
+    let logPollInterval = null;
+    let uploadedBannerBase64 = null;
+
+    const FALLBACK_COVER = 'https://placehold.co/120x168/1e293b/94a3b8?text=No+Cover';
+
+    function escapeHtml(s) {
+      return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function showToast(msg, type = 'success') {
+      const b = document.getElementById('toastBanner');
+      b.className = 'rounded-xl border px-4 py-3 text-sm flex items-center justify-between ' +
+        (type === 'error' ? 'bg-red-950/70 border-red-800 text-red-200' : 'bg-emerald-950/70 border-emerald-800 text-emerald-200');
+      document.getElementById('toastMessage').textContent = msg;
+      b.classList.remove('hidden');
+      setTimeout(hideToast, 6000);
+    }
+
+    function hideToast() {
+      document.getElementById('toastBanner').classList.add('hidden');
+    }
 
     function switchTab(tab) {
-      ['catalog', 'ingest', 'submissions', 'vault'].forEach(t => {
-        document.getElementById(`tab-${t}`).classList.toggle('hidden', t !== tab);
-        const btn = document.getElementById(`tab-btn-${t}`);
+      ['ingest', 'submissions', 'catalog', 'announcements', 'storage'].forEach(t => {
+        const sec = document.getElementById('section' + t.charAt(0).toUpperCase() + t.slice(1));
+        const btn = document.getElementById('tabBtn' + t.charAt(0).toUpperCase() + t.slice(1));
         if (t === tab) {
-          btn.className = "px-4 py-1.5 rounded-lg text-sm font-medium bg-emerald-600 text-white flex items-center gap-2";
+          sec.classList.remove('hidden');
+          btn.className = 'font-display font-semibold text-sm px-5 py-3 border-b-2 border-pink-500 text-white flex items-center gap-2 transition';
         } else {
-          btn.className = "px-4 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white flex items-center gap-2";
+          sec.classList.add('hidden');
+          btn.className = 'font-display font-medium text-sm px-5 py-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition';
         }
       });
-      if (tab === 'submissions') {
-        fetchSubmissions();
-      }
     }
 
-    async function fetchCatalog() {
-      const res = await fetch('/api/catalog?t=' + Date.now());
-      catalogData = await res.json();
-      populateFilterDropdowns();
-      renderCatalog();
+    // =========================================================================
+    // 1. SCAN & INGESTION
+    // =========================================================================
+    function clearScanInputs() {
+      document.getElementById('inputFolderUrl').value = '';
+      document.getElementById('inputDriveLinks').value = '';
+      document.getElementById('inputDirectPdfLinks').value = '';
+      stagedFiles = [];
+      renderStagedQueue();
     }
 
-    function populateFilterDropdowns() {
-      const { profs = [], types = [], subjects = [] } = catalogData.filters || {};
-      const fill = (id, items, defaultLabel) => {
-        const el = document.getElementById(id);
-        const current = el.value;
-        el.innerHTML = defaultLabel ? `<option value="">${defaultLabel}</option>` : '';
-        items.forEach(item => {
-          el.innerHTML += `<option value="${item}">${item}</option>`;
-        });
-        if (items.includes(current) || current === '') {
-          el.value = current;
-        }
-      };
-      fill('filter-prof', profs, 'All Profs');
-      fill('filter-type', types, 'All Asset Types');
-      fill('filter-subject', subjects, 'All Subjects');
-      fill('edit-prof', profs);
-      fill('edit-type', types);
-      fill('edit-subject', subjects);
-    }
-
-    function renderCatalog() {
-      const q = document.getElementById('search-input').value.toLowerCase();
-      const prof = document.getElementById('filter-prof').value;
-      const type = document.getElementById('filter-type').value;
-      const subject = document.getElementById('filter-subject').value;
-
-      const filtered = (catalogData.books || []).filter(b => {
-        if (prof && b.prof !== prof) return false;
-        if (type && b.type !== type) return false;
-        if (subject && b.subject !== subject) return false;
-        if (q) {
-          const hay = `${b.title} ${b.author} ${b.id} ${(b.tags || []).join(' ')}`.toLowerCase();
-          if (!hay.includes(q)) return false;
-        }
-        return true;
-      });
-
-      document.getElementById('book-count-badge').textContent = `${filtered.length} Books`;
-      const grid = document.getElementById('books-grid');
-      grid.innerHTML = filtered.map(b => {
-        const primaryUrl = b.download?.mirrors?.[0]?.url || 'N/A';
-        return `
-          <div class="glass rounded-2xl p-4 flex gap-4 items-start border border-slate-800/80 hover:border-emerald-500/40 transition">
-            <img src="${b.coverUrl}" onerror="this.src='https://placehold.co/120x160/1e293b/10b981?text=Cover'"
-              class="w-20 h-28 object-cover rounded-xl bg-slate-900 flex-shrink-0 border border-slate-800" />
-            <div class="flex-1 min-w-0 space-y-1">
-              <div class="flex items-center gap-1.5 flex-wrap">
-                <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400 font-medium">${b.prof}</span>
-                <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300">${b.subject}</span>
-                <span class="text-[10px] px-2 py-0.5 rounded bg-purple-500/15 text-purple-300">${b.type}</span>
-              </div>
-              <h3 class="text-sm font-bold text-white truncate" title="${b.title}">${b.title}</h3>
-              <p class="text-xs text-slate-400 truncate">${b.author} • ${b.edition}</p>
-              <p class="text-[11px] text-slate-500 font-mono">${b.totalPages || 0}p • ${b.sizeMb || 0} MB • By ${b.uploader || 'Sahabul'}</p>
-              <p class="text-[10px] text-slate-500 font-mono truncate" title="${primaryUrl}">${primaryUrl}</p>
-              <div class="pt-2 flex gap-2">
-                <button onclick="openEditModal('${b.id}')" class="px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-emerald-400 font-medium">Edit / Move</button>
-                <button onclick="openDeleteModal('${b.id}')" class="px-3 py-1 rounded-lg bg-red-950/50 hover:bg-red-900/60 text-xs text-red-400">Delete</button>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    // ==================== COMMUNITY SUBMISSIONS LOGIC ====================
-    async function fetchSubmissions() {
-      const btn = document.getElementById('btn-refresh-subs');
-      btn.textContent = 'Scanning HF...';
-      try {
-        const res = await fetch('/api/submissions?t=' + Date.now());
-        const data = await res.json();
-        pendingSubmissions = data.submissions || [];
-        const badge = document.getElementById('submissions-badge');
-        badge.textContent = pendingSubmissions.length;
-        badge.classList.toggle('hidden', pendingSubmissions.length === 0);
-        renderSubmissions();
-      } catch (e) {
-        console.error(e);
-      } finally {
-        btn.textContent = 'Scan Quarantine Inbox';
-      }
-    }
-
-    function renderSubmissions() {
-      const emptyEl = document.getElementById('submissions-empty');
-      const grid = document.getElementById('submissions-grid');
-      emptyEl.classList.toggle('hidden', pendingSubmissions.length > 0);
-
-      const profOpts = (catalogData.filters.profs || []).map(p => `<option value="${p}">${p}</option>`).join('');
-      const subjOpts = (catalogData.filters.subjects || []).map(s => `<option value="${s}">${s}</option>`).join('');
-      const typeOpts = (catalogData.filters.types || []).map(t => `<option value="${t}">${t}</option>`).join('');
-
-      grid.innerHTML = pendingSubmissions.map((s, idx) => {
-        const tierBadge = s.contributorTier === 'CORE_VIP'
-          ? '<span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[10px] font-bold">★ CORE VIP</span>'
-          : s.contributorTier === 'AMBASSADOR'
-            ? '<span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-bold">✓ AMBASSADOR</span>'
-            : '<span class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 text-[10px]">SCHOLAR</span>';
-
-        const coverSrc = s.has_cover ? s.cover_preview_url : 'https://placehold.co/120x160/1e293b/10b981?text=No+Cover';
-
-        return `
-          <div class="glass rounded-2xl p-5 space-y-4 border border-slate-800" id="sub-card-${s.slug}">
-            <div class="flex gap-4">
-              <img src="${coverSrc}" onerror="this.src='https://placehold.co/120x160/1e293b/10b981?text=Cover'"
-                class="w-24 h-32 object-cover rounded-xl bg-slate-900 border border-slate-700 flex-shrink-0" />
-              <div class="flex-1 min-w-0 space-y-2">
-                <div class="flex items-center justify-between gap-2">
-                  <span class="text-xs text-slate-400">Submitted by <strong class="text-white">${s.uploader || 'Student'}</strong></span>
-                  ${tierBadge}
-                </div>
-                <div class="text-[11px] font-mono text-slate-400">
-                  Slug: <span class="text-emerald-400">${s.slug}</span> • ${s.totalPages || 1} pages • ${s.sizeMb || 0} MB
-                </div>
-                <div>
-                  <label class="text-[11px] text-slate-400 block">Book Title</label>
-                  <input id="sub-title-${idx}" value="${s.title || ''}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white" />
-                </div>
-                <div class="grid grid-cols-2 gap-2">
-                  <div>
-                    <label class="text-[11px] text-slate-400 block">Author</label>
-                    <input id="sub-author-${idx}" value="${s.author || 'Medical Faculty'}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1 text-xs" />
-                  </div>
-                  <div>
-                    <label class="text-[11px] text-slate-400 block">Edition</label>
-                    <input id="sub-edition-${idx}" value="${s.edition || 'Standard Edition'}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1 text-xs" />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-3 gap-2 text-xs">
-              <div>
-                <label class="text-[11px] text-slate-400 block mb-1">Target Prof</label>
-                <select id="sub-prof-${idx}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5">${profOpts}</select>
-              </div>
-              <div>
-                <label class="text-[11px] text-slate-400 block mb-1">Subject</label>
-                <select id="sub-subj-${idx}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5">${subjOpts}</select>
-              </div>
-              <div>
-                <label class="text-[11px] text-slate-400 block mb-1">Asset Type</label>
-                <select id="sub-type-${idx}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5">${typeOpts}</select>
-              </div>
-            </div>
-
-            <div class="flex items-center justify-between gap-3 pt-2 border-t border-slate-800/80">
-              <input id="sub-tags-${idx}" placeholder="Extra tags (comma separated)" class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs flex-1" />
-              <button onclick="rejectSubmission('${s.slug}')" id="btn-reject-${s.slug}" class="px-3.5 py-1.5 rounded-xl bg-red-950/60 hover:bg-red-900/70 text-red-300 text-xs font-medium border border-red-500/30">
-                ✕ Reject & Purge
-              </button>
-              <button onclick="approveSubmission('${s.slug}', ${idx})" id="btn-approve-${s.slug}" class="px-4 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold">
-                ✓ Approve & Publish
-              </button>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      pendingSubmissions.forEach((s, idx) => {
-        if (s.prof) document.getElementById(`sub-prof-${idx}`).value = s.prof;
-        if (s.subject) document.getElementById(`sub-subj-${idx}`).value = s.subject;
-        if (s.type) document.getElementById(`sub-type-${idx}`).value = s.type;
-      });
-    }
-
-    async function approveSubmission(slug, idx) {
-      const s = pendingSubmissions[idx];
-      const btn = document.getElementById(`btn-approve-${slug}`);
-      btn.textContent = 'Publishing to HF & Git...';
-      btn.disabled = true;
-
-      const payload = {
-        title: document.getElementById(`sub-title-${idx}`).value,
-        author: document.getElementById(`sub-author-${idx}`).value,
-        edition: document.getElementById(`sub-edition-${idx}`).value,
-        prof: document.getElementById(`sub-prof-${idx}`).value,
-        subject: document.getElementById(`sub-subj-${idx}`).value,
-        type: document.getElementById(`sub-type-${idx}`).value,
-        uploader: s.uploader || 'Student',
-        extra_tags: document.getElementById(`sub-tags-${idx}`).value,
-        totalPages: s.totalPages || 1,
-        sizeMb: s.sizeMb || 1.0
-      };
-
-      const res = await fetch(`/api/submissions/${slug}/approve`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      if (res.ok) {
-        await fetchSubmissions();
-        await fetchCatalog();
-      } else {
-        const err = await res.json();
-        alert('Approve failed: ' + (err.detail || 'Unknown error'));
-        btn.textContent = '✓ Approve & Publish';
-        btn.disabled = false;
-      }
-    }
-
-    async function rejectSubmission(slug) {
-      if (!confirm(`Reject and permanently delete submissions/${slug}/ from Hugging Face?`)) return;
-      const btn = document.getElementById(`btn-reject-${slug}`);
-      btn.textContent = 'Purging...';
-      btn.disabled = true;
-
-      const res = await fetch(`/api/submissions/${slug}`, { method: 'DELETE' });
-      if (res.ok) {
-        await fetchSubmissions();
-      } else {
-        const err = await res.json();
-        alert('Reject failed: ' + (err.detail || 'Error'));
-        btn.textContent = '✕ Reject & Purge';
-        btn.disabled = false;
-      }
-    }
-
-    // ==================== CATALOG MODALS & ACTIONS ====================
-    function openEditModal(bookId) {
-      const b = catalogData.books.find(x => x.id === bookId);
-      if (!b) return;
-      document.getElementById('edit-id').value = b.id;
-      document.getElementById('edit-title').value = b.title || '';
-      document.getElementById('edit-author').value = b.author || '';
-      document.getElementById('edit-edition').value = b.edition || '';
-      document.getElementById('edit-prof').value = b.prof || '';
-      document.getElementById('edit-type').value = b.type || '';
-      document.getElementById('edit-subject').value = b.subject || '';
-      document.getElementById('edit-uploader').value = b.uploader || 'Sahabul';
-      document.getElementById('edit-tags').value = (b.tags || []).join(', ');
-      document.getElementById('edit-modal').classList.replace('hidden', 'flex');
-    }
-
-    function closeEditModal() {
-      document.getElementById('edit-modal').classList.replace('flex', 'hidden');
-    }
-
-    async function saveBookEdit() {
-      const bookId = document.getElementById('edit-id').value;
-      const btn = document.getElementById('btn-save-edit');
-      btn.textContent = 'Syncing HF & Git...';
-      btn.disabled = true;
-
-      const payload = {
-        title: document.getElementById('edit-title').value,
-        author: document.getElementById('edit-author').value,
-        edition: document.getElementById('edit-edition').value,
-        prof: document.getElementById('edit-prof').value,
-        type: document.getElementById('edit-type').value,
-        subject: document.getElementById('edit-subject').value,
-        uploader: document.getElementById('edit-uploader').value,
-        tags: document.getElementById('edit-tags').value.split(',').map(s => s.trim()).filter(Boolean),
-        relocate_hf: document.getElementById('edit-relocate').checked
-      };
-
-      const res = await fetch(`/api/books/${bookId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      btn.textContent = 'Save & Push to GitHub';
-      btn.disabled = false;
-
-      if (res.ok) {
-        closeEditModal();
-        await fetchCatalog();
-      } else {
-        const err = await res.json();
-        alert('Error: ' + (err.detail || 'Update failed'));
-      }
-    }
-
-    function openDeleteModal(bookId) {
-      const b = catalogData.books.find(x => x.id === bookId);
-      if (!b) return;
-      document.getElementById('delete-id').value = b.id;
-      document.getElementById('delete-book-label').textContent = `${b.title} (${b.id}.bin)`;
-      document.getElementById('delete-modal').classList.replace('hidden', 'flex');
-    }
-
-    function closeDeleteModal() {
-      document.getElementById('delete-modal').classList.replace('flex', 'hidden');
-    }
-
-    async function confirmDelete(mode) {
-      const bookId = document.getElementById('delete-id').value;
-      const res = await fetch(`/api/books/${bookId}?mode=${mode}`, { method: 'DELETE' });
-      if (res.ok) {
-        closeDeleteModal();
-        await fetchCatalog();
-      } else {
-        const err = await res.json();
-        alert('Delete error: ' + (err.detail || 'Failed'));
-      }
-    }
-
-    function openCategoryModal() {
-      document.getElementById('category-modal').classList.replace('hidden', 'flex');
-    }
-
-    function closeCategoryModal() {
-      document.getElementById('category-modal').classList.replace('flex', 'hidden');
-    }
-
-    async function submitNewCategory() {
-      const name = document.getElementById('new-cat-name').value.trim();
-      const slug = document.getElementById('new-cat-slug').value.trim();
-      if (!name) return;
-      const res = await fetch('/api/categories/add', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, slug })
-      });
-      if (res.ok) {
-        closeCategoryModal();
-        await fetchCatalog();
-      }
-    }
-
-    // ==================== INGESTION SCANNER ====================
     async function scanSources() {
-      const btn = document.getElementById('btn-scan');
-      btn.textContent = 'Scanning Sources...';
-      btn.disabled = true;
+      const folder_url = document.getElementById('inputFolderUrl').value.trim();
+      const direct_links = document.getElementById('inputDriveLinks').value.trim();
+      const direct_pdf_links = document.getElementById('inputDirectPdfLinks').value.trim();
 
-      const folder_url = document.getElementById('scan-folder-url').value;
-      const direct_links = document.getElementById('scan-direct-links').value;
-      const direct_pdf_links = document.getElementById('scan-direct-pdf-links').value;
+      if (!folder_url && !direct_links && !direct_pdf_links) {
+        return showToast('Enter a Drive Folder URL, Drive File Link, or Direct PDF URL.', 'error');
+      }
+
+      const btn = document.getElementById('btnScanSources');
+      btn.disabled = true;
+      btn.textContent = 'Scanning...';
 
       try {
         const res = await fetch('/api/scan-folder', {
@@ -668,112 +527,710 @@
           body: JSON.stringify({ folder_url, direct_links, direct_pdf_links })
         });
         const data = await res.json();
-        scannedFiles = data.files || [];
-      } catch (e) {
-        alert('Scan error: ' + e.message);
-        scannedFiles = [];
-      } finally {
-        btn.textContent = 'Scan All Provided Sources';
-        btn.disabled = false;
-      }
-
-      const tbody = document.getElementById('scan-results-body');
-      document.getElementById('ingest-queue-card').classList.toggle('hidden', scannedFiles.length === 0);
-
-      const profOpts = (catalogData.filters.profs || []).map(p => `<option value="${p}">${p}</option>`).join('');
-      const subjOpts = (catalogData.filters.subjects || []).map(s => `<option value="${s}">${s}</option>`).join('');
-      const typeOpts = (catalogData.filters.types || []).map(t => `<option value="${t}">${t}</option>`).join('');
-
-      tbody.innerHTML = scannedFiles.map((f, i) => {
-        const srcBadge = f.source_type === 'direct_url'
-          ? '<span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono text-[10px]">Direct PDF</span>'
-          : '<span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px]">G-Drive</span>';
-        return `
-          <tr>
-            <td class="p-2"><input type="checkbox" id="chk-${i}" ${f.already_in_catalog ? '' : 'checked'} /></td>
-            <td class="p-2">${srcBadge}</td>
-            <td class="p-2"><input id="title-${i}" value="${f.heuristics.title}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1 w-48" /></td>
-            <td class="p-2"><input id="author-${i}" value="${f.heuristics.author}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1 w-32" /></td>
-            <td class="p-2"><input id="ed-${i}" value="${f.heuristics.edition}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1 w-24" /></td>
-            <td class="p-2"><select id="prof-${i}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1">${profOpts}</select></td>
-            <td class="p-2"><select id="subj-${i}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1">${subjOpts}</select></td>
-            <td class="p-2"><select id="type-${i}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1">${typeOpts}</select></td>
-            <td class="p-2"><input id="tags-${i}" placeholder="pyq, important" class="bg-slate-900 border border-slate-700 rounded px-2 py-1 w-28" /></td>
-          </tr>
-        `;
-      }).join('');
-
-      scannedFiles.forEach((f, i) => {
-        document.getElementById(`prof-${i}`).value = f.heuristics.prof;
-        document.getElementById(`subj-${i}`).value = f.heuristics.subject;
-        document.getElementById(`type-${i}`).value = f.heuristics.type;
-      });
-    }
-
-    async function startIngestionBatch() {
-      const books = [];
-      scannedFiles.forEach((f, i) => {
-        if (document.getElementById(`chk-${i}`).checked) {
-          books.push({
-            source_id: f.source_id,
-            source_type: f.source_type,
-            title: document.getElementById(`title-${i}`).value,
-            author: document.getElementById(`author-${i}`).value,
-            edition: document.getElementById(`ed-${i}`).value,
-            prof: document.getElementById(`prof-${i}`).value,
-            subject: document.getElementById(`subj-${i}`).value,
-            type: document.getElementById(`type-${i}`).value,
-            extra_tags: document.getElementById(`tags-${i}`).value
-          });
+        if (!data.files || data.files.length === 0) {
+          showToast('No PDF files discovered from the provided link(s).', 'error');
+          return;
         }
-      });
-      if (!books.length) return alert('Select at least one book.');
 
-      await fetch('/api/start-ingestion', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ books })
-      });
+        stagedFiles = data.files.map(f => ({
+          source_id: f.source_id,
+          source_type: f.source_type || 'drive',
+          filename: f.filename,
+          already_in_catalog: f.already_in_catalog,
+          title: f.heuristics.title,
+          author: f.heuristics.author,
+          edition: f.heuristics.edition,
+          subject: f.heuristics.subject,
+          prof: f.heuristics.prof,
+          type: f.heuristics.type,
+          uploader: f.heuristics.uploader || 'Sahabul',
+          extra_tags: ''
+        }));
 
-      if (pollTimer) clearInterval(pollTimer);
-      pollTimer = setInterval(pollLogs, 1500);
-    }
-
-    async function pollLogs() {
-      const res = await fetch('/api/logs');
-      const data = await res.json();
-      const box = document.getElementById('terminal-box');
-      box.textContent = (data.logs || []).join('\n');
-      box.scrollTop = box.scrollHeight;
-      if (!data.is_processing) {
-        clearInterval(pollTimer);
-        fetchCatalog();
+        renderStagedQueue();
+        showToast(`Discovered ${stagedFiles.length} PDF file(s)!`);
+      } catch (err) {
+        showToast('Scan error: ' + err.message, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '🔍 Scan & Auto-Detect Metadata';
       }
     }
 
-    async function fetchHfStatus() {
-      document.getElementById('hf-usage-text').textContent = 'Scanning Hugging Face repository...';
-      const res = await fetch('/api/hf-status');
-      const data = await res.json();
-      if (data.status !== 'success') {
-        document.getElementById('hf-usage-text').textContent = 'Error: ' + data.message;
+    function renderStagedQueue() {
+      const card = document.getElementById('stagingCard');
+      const list = document.getElementById('stagedList');
+      document.getElementById('stagedCount').textContent = stagedFiles.length;
+
+      if (stagedFiles.length === 0) {
+        card.classList.add('hidden');
         return;
       }
-      const pct = Math.min(100, (data.total_gb / data.quota_gb) * 100);
-      document.getElementById('hf-quota-bar').style.width = `${pct}%`;
-      document.getElementById('hf-usage-text').textContent = `${data.total_gb} GB used across ${data.total_files} encrypted files`;
+      card.classList.remove('hidden');
 
-      document.getElementById('hf-files-list').innerHTML = data.files.map(f =>
-        `<div class="flex justify-between py-1 border-b border-slate-800/60"><span>${f.path}</span><span class="text-emerald-400">${f.size_mb} MB</span></div>`
-      ).join('');
+      const profOpts = (catalogData.filters.profs || ['1st Prof', '2nd Prof', '3rd Prof Part 1', 'Final Prof']);
+      const subjOpts = (catalogData.filters.subjects || ['Anatomy', 'Physiology', 'Biochemistry']);
+      const typeOpts = (catalogData.filters.types || ['Standard Textbook', 'Handwritten Notes', 'Question Bank (PYQ)']);
 
-      document.getElementById('hf-orphans-list').innerHTML = data.orphans.length
-        ? data.orphans.map(f => `<div class="flex justify-between py-1 border-b border-slate-800/60 text-amber-300"><span>${f.path}</span><span>${f.size_mb} MB</span></div>`).join('')
-        : `<div class="text-slate-500">No orphan files detected! Every production HF file matches catalog.json.</div>`;
+      list.innerHTML = stagedFiles.map((item, idx) => `
+        <div class="p-3.5 rounded-xl bg-slate-950 border ${item.already_in_catalog ? 'border-amber-700/60' : 'border-slate-800'} space-y-2">
+          <div class="flex items-center justify-between text-[11px] text-slate-400">
+            <span class="font-mono truncate">${escapeHtml(item.filename)} (${escapeHtml(item.source_type)})</span>
+            <div class="flex items-center gap-2">
+              ${item.already_in_catalog ? '<span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">Already in Catalog (Will Overwrite)</span>' : ''}
+              <button onclick="stagedFiles.splice(${idx}, 1); renderStagedQueue();" class="text-red-400 hover:text-red-300 font-bold">✕ Remove</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-2">
+            <input type="text" value="${escapeHtml(item.title)}" onchange="stagedFiles[${idx}].title = this.value" placeholder="Title" class="md:col-span-2 px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white" />
+            <input type="text" value="${escapeHtml(item.author)}" onchange="stagedFiles[${idx}].author = this.value" placeholder="Author" class="px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white" />
+            <select onchange="stagedFiles[${idx}].prof = this.value" class="px-2 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white">
+              ${profOpts.map(p => `<option value="${escapeHtml(p)}" ${item.prof === p ? 'selected' : ''}>${escapeHtml(p)}</option>`).join('')}
+            </select>
+            <select onchange="stagedFiles[${idx}].subject = this.value" class="px-2 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white">
+              ${subjOpts.map(s => `<option value="${escapeHtml(s)}" ${item.subject === s ? 'selected' : ''}>${escapeHtml(s)}</option>`).join('')}
+            </select>
+            <select onchange="stagedFiles[${idx}].type = this.value" class="px-2 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white">
+              ${typeOpts.map(t => `<option value="${escapeHtml(t)}" ${item.type === t ? 'selected' : ''}>${escapeHtml(t)}</option>`).join('')}
+            </select>
+          </div>
+        </div>
+      `).join('');
     }
 
-    fetchCatalog();
-    fetchSubmissions();
+    async function startBatchIngestion() {
+      if (stagedFiles.length === 0) return;
+      const btn = document.getElementById('btnStartIngest');
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('/api/start-ingestion', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ books: stagedFiles })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message || 'Could not start ingestion');
+
+        showToast(`Started batch ingestion for ${stagedFiles.length} book(s)!`);
+        stagedFiles = [];
+        renderStagedQueue();
+        startLogPolling();
+      } catch (err) {
+        showToast(err.message, 'error');
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    function startLogPolling() {
+      if (logPollInterval) clearInterval(logPollInterval);
+      logPollInterval = setInterval(async () => {
+        try {
+          const res = await fetch('/api/logs');
+          const data = await res.json();
+          const consoleEl = document.getElementById('jobLogsConsole');
+          const dot = document.getElementById('jobDot');
+          const label = document.getElementById('jobStatusLabel');
+
+          if (data.logs && data.logs.length > 0) {
+            consoleEl.textContent = data.logs.join('\n');
+            consoleEl.scrollTop = consoleEl.scrollHeight;
+          }
+
+          if (data.is_processing) {
+            dot.className = 'w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping';
+            label.textContent = 'Processing Batch...';
+          } else {
+            dot.className = 'w-2.5 h-2.5 rounded-full bg-slate-600';
+            label.textContent = 'Idle';
+            clearInterval(logPollInterval);
+            logPollInterval = null;
+            await loadCatalog();
+            await loadHfStatus();
+          }
+        } catch (e) {}
+      }, 1500);
+    }
+
+    // =========================================================================
+    // 2. COMMUNITY SUBMISSIONS
+    // =========================================================================
+    async function loadSubmissions() {
+      try {
+        const res = await fetch('/api/submissions');
+        const data = await res.json();
+        submissionsList = data.submissions || [];
+        document.getElementById('tabBadgeSubmissions').textContent = submissionsList.length;
+
+        const empty = document.getElementById('submissionsEmpty');
+        const grid = document.getElementById('submissionsGrid');
+
+        if (submissionsList.length === 0) {
+          empty.classList.remove('hidden');
+          grid.innerHTML = '';
+          return;
+        }
+        empty.classList.add('hidden');
+
+        grid.innerHTML = submissionsList.map((sub, idx) => {
+          const coverSrc = sub.cover_preview_url || (sub.coverBase64 ? `data:image/webp;base64,${sub.coverBase64}` : FALLBACK_COVER);
+          return `
+            <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 flex gap-4">
+              <img src="${coverSrc}" onerror="this.src='${FALLBACK_COVER}'" class="w-20 h-28 object-cover rounded-xl border border-slate-700 bg-slate-800 flex-shrink-0" />
+              <div class="flex-1 min-w-0 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-medium text-pink-400">${escapeHtml(sub.prof)} • ${escapeHtml(sub.subject)}</span>
+                    <span class="px-2 py-0.5 text-[10px] font-display rounded bg-purple-500/20 text-purple-300">${escapeHtml(sub.contributorTier || 'STUDENT')}</span>
+                  </div>
+                  <h3 class="font-display font-bold text-base text-white truncate mt-0.5">${escapeHtml(sub.title)}</h3>
+                  <p class="text-xs text-slate-400 truncate">${escapeHtml(sub.author)} (${escapeHtml(sub.edition)})</p>
+                  <p class="text-[11px] text-slate-400 mt-1">📄 ${sub.totalPages || 1} pages • 📦 ${sub.sizeMb || 0} MB • 👤 ${escapeHtml(sub.uploader)}</p>
+                </div>
+                <div class="flex items-center gap-2 mt-3 pt-2 border-t border-slate-800">
+                  <button onclick="openApproveModal(${idx})" class="flex-1 font-display font-semibold text-xs py-1.5 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white">
+                    ✓ Review & Approve
+                  </button>
+                  <button onclick="rejectSubmission('${escapeHtml(sub.slug)}')" class="font-display font-medium text-xs py-1.5 px-3 rounded-lg bg-red-950/70 hover:bg-red-900 text-red-300 border border-red-800/60">
+                    Reject
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // =========================================================================
+    // 3. CATALOG CMS
+    // =========================================================================
+    async function loadCatalog() {
+      const res = await fetch('/api/catalog');
+      catalogData = await res.json();
+      const books = catalogData.books || [];
+      document.getElementById('tabBadgeCatalog').textContent = books.length;
+
+      const profSelect = document.getElementById('catalogProfFilter');
+      const typeSelect = document.getElementById('catalogTypeFilter');
+      const curProf = profSelect.value;
+      const curType = typeSelect.value;
+
+      profSelect.innerHTML = '<option value="">All Profs</option>' +
+        (catalogData.filters.profs || []).map(p => `<option value="${escapeHtml(p)}">${escapeHtml(p)}</option>`).join('');
+      typeSelect.innerHTML = '<option value="">All Asset Types</option>' +
+        (catalogData.filters.types || []).map(t => `<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('');
+
+      profSelect.value = curProf;
+      typeSelect.value = curType;
+
+      document.getElementById('modalBookProf').innerHTML = (catalogData.filters.profs || []).map(p => `<option value="${escapeHtml(p)}">${escapeHtml(p)}</option>`).join('');
+      document.getElementById('modalBookSubject').innerHTML = (catalogData.filters.subjects || []).map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
+      document.getElementById('modalBookType').innerHTML = (catalogData.filters.types || []).map(t => `<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('');
+
+      renderCatalog();
+    }
+
+    function renderCatalog() {
+      const q = (document.getElementById('catalogSearch').value || '').toLowerCase().trim();
+      const prof = document.getElementById('catalogProfFilter').value;
+      const type = document.getElementById('catalogTypeFilter').value;
+      const grid = document.getElementById('catalogGrid');
+
+      const filtered = (catalogData.books || []).filter(b => {
+        if (prof && b.prof !== prof) return false;
+        if (type && b.type !== type) return false;
+        if (!q) return true;
+        return `${b.title} ${b.author} ${b.subject} ${b.id} ${(b.tags || []).join(' ')}`.toLowerCase().includes(q);
+      });
+
+      grid.innerHTML = filtered.map(b => {
+        const idx = catalogData.books.indexOf(b);
+        const localCover = `/assets/covers/${b.id}.webp`;
+        return `
+          <div class="p-4 rounded-2xl bg-slate-900/75 border border-slate-800 flex gap-3.5">
+            <img src="${localCover}" onerror="this.src='${b.coverUrl || FALLBACK_COVER}'" class="w-16 h-24 object-cover rounded-lg border border-slate-700 bg-slate-800 flex-shrink-0" />
+            <div class="flex-1 min-w-0 flex flex-col justify-between">
+              <div>
+                <span class="text-[11px] font-medium text-pink-400">${escapeHtml(b.prof)} • ${escapeHtml(b.subject)}</span>
+                <h4 class="font-display font-semibold text-sm text-white truncate mt-0.5" title="${escapeHtml(b.title)}">${escapeHtml(b.title)}</h4>
+                <p class="text-xs text-slate-400 truncate">${escapeHtml(b.author)} • ${escapeHtml(b.type)}</p>
+                <p class="text-[11px] text-slate-500 mt-1">${b.totalPages || '?'} pages • ${b.sizeMb || 0} MB</p>
+              </div>
+              <div class="flex items-center gap-2 mt-2 pt-2 border-t border-slate-800">
+                <button onclick="openEditBookModal(${idx})" class="text-xs text-slate-200 px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700">Edit</button>
+                <button onclick="deleteBook('${escapeHtml(b.id)}', 'soft')" class="text-xs text-amber-300 px-2.5 py-1 rounded bg-amber-950/50 border border-amber-800/40">Soft Delete</button>
+                <button onclick="deleteBook('${escapeHtml(b.id)}', 'purge')" class="text-xs text-red-300 px-2.5 py-1 rounded bg-red-950/50 border border-red-800/40">Purge HF</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function promptAddCategory() {
+      const name = prompt('Enter new Asset Category name (e.g. "Clinical Cases"):');
+      if (!name) return;
+      const res = await fetch('/api/categories/add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name })
+      });
+      if (res.ok) {
+        showToast(`Category "${name}" added!`);
+        await loadCatalog();
+      }
+    }
+
+    // =========================================================================
+    // 4. ANNOUNCEMENTS CAROUSEL CMS (16:6)
+    // =========================================================================
+    async function loadAnnouncements() {
+      try {
+        const res = await fetch('/api/announcements');
+        const data = await res.json();
+        announcementsList = data.banners || [];
+        document.getElementById('tabBadgeAnnouncements').textContent = announcementsList.filter(b => b.active).length;
+
+        const empty = document.getElementById('announcementsEmpty');
+        const grid = document.getElementById('announcementsGrid');
+
+        if (announcementsList.length === 0) {
+          empty.classList.remove('hidden');
+          grid.innerHTML = '';
+          return;
+        }
+        empty.classList.add('hidden');
+
+        grid.innerHTML = announcementsList.map((b, idx) => {
+          const imgUrl = b.localPreviewUrl || b.imageUrl || '';
+          const actType = b.action?.type || 'NONE';
+          const actTarget = b.action?.target || '';
+
+          return `
+            <div class="p-4 rounded-2xl bg-slate-900/85 border ${b.active ? 'border-slate-800' : 'border-slate-800/40 opacity-60'} space-y-3">
+              <!-- 16:6 Card Visual -->
+              <div class="w-full aspect-16-6 rounded-xl overflow-hidden relative border border-slate-700/80 flex flex-col justify-end p-4" style="background-color: ${escapeHtml(b.bgColor || '#4a2511')}; color: ${escapeHtml(b.textColor || '#ffffff')};">
+                ${imgUrl ? `<img src="${escapeHtml(imgUrl)}" onerror="this.style.display='none'" class="absolute inset-0 w-full h-full object-cover z-0" />` : ''}
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent z-10"></div>
+                <div class="relative z-20 space-y-0.5">
+                  ${b.badge ? `<span class="inline-block px-2 py-0.5 text-[10px] font-display font-bold uppercase rounded-full bg-white/20 backdrop-blur-sm">${escapeHtml(b.badge)}</span>` : ''}
+                  <h4 class="font-display font-bold text-base leading-tight truncate">${escapeHtml(b.title)}</h4>
+                  <p class="text-xs opacity-90 truncate">${escapeHtml(b.subtitle || '')}</p>
+                </div>
+              </div>
+
+              <!-- Action & Status Metadata -->
+              <div class="flex items-center justify-between text-xs text-slate-400 pt-1">
+                <div class="truncate">
+                  <span class="font-semibold text-pink-400">${escapeHtml(actType)}</span>
+                  ${actTarget ? `<span class="text-slate-500"> → ${escapeHtml(actTarget)}</span>` : ''}
+                </div>
+                <div class="flex items-center gap-2 flex-shrink-0">
+                  <span class="px-2 py-0.5 rounded bg-slate-800 text-[11px]">${escapeHtml(b.targetProf || 'All')}</span>
+                  <span class="px-2 py-0.5 rounded bg-slate-800 text-[11px]">#${b.priority || 1}</span>
+                </div>
+              </div>
+
+              <!-- Controls -->
+              <div class="flex items-center gap-2 pt-2 border-t border-slate-800">
+                <button onclick="openBannerModal(${idx})" class="flex-1 font-display font-medium text-xs py-1.5 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition">
+                  Edit Banner
+                </button>
+                <button onclick="toggleBannerActive(${idx})" class="text-xs py-1.5 px-3 rounded-lg ${b.active ? 'bg-amber-950/60 text-amber-300 border border-amber-800/50' : 'bg-emerald-950/60 text-emerald-300 border border-emerald-800/50'}">
+                  ${b.active ? 'Pause' : 'Activate'}
+                </button>
+                <button onclick="deleteBanner('${escapeHtml(b.id)}')" class="text-xs py-1.5 px-3 rounded-lg bg-red-950/60 hover:bg-red-900 text-red-300 border border-red-800/50">
+                  Delete
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      } catch (err) {
+        console.error('Failed loading announcements:', err);
+      }
+    }
+
+    function handleActionTypeChange(presetTarget = '') {
+      const type = document.getElementById('bannerActionType').value;
+      const container = document.getElementById('bannerTargetContainer');
+      const label = document.getElementById('bannerTargetLabel');
+      const selectEl = document.getElementById('bannerTargetSelect');
+      const inputEl = document.getElementById('bannerTargetInput');
+
+      if (type === 'NONE' || type === 'OPEN_CONTRIBUTE') {
+        container.classList.add('hidden');
+        return;
+      }
+      container.classList.remove('hidden');
+
+      if (type === 'OPEN_URL') {
+        label.textContent = 'Target URL (Webpage / Telegram)';
+        selectEl.classList.add('hidden');
+        inputEl.classList.remove('hidden');
+        inputEl.placeholder = 'https://t.me/...';
+        inputEl.value = presetTarget || '';
+      } else if (type === 'OPEN_BOOK') {
+        label.textContent = 'Select Book from Catalog';
+        inputEl.classList.add('hidden');
+        selectEl.classList.remove('hidden');
+        const books = catalogData.books || [];
+        selectEl.innerHTML = books.map(b => `<option value="${escapeHtml(b.id)}">${escapeHtml(b.title)} (${escapeHtml(b.subject)})</option>`).join('');
+        if (presetTarget) selectEl.value = presetTarget;
+      } else if (type === 'FILTER_CATEGORY') {
+        label.textContent = 'Select Library Section / Type';
+        inputEl.classList.add('hidden');
+        selectEl.classList.remove('hidden');
+        const types = catalogData.filters?.types || ['Standard Textbook', 'Handwritten Notes', 'Question Bank (PYQ)'];
+        selectEl.innerHTML = types.map(t => `<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('');
+        if (presetTarget) selectEl.value = presetTarget;
+      } else if (type === 'FILTER_SUBJECT') {
+        label.textContent = 'Select Medical Subject';
+        inputEl.classList.add('hidden');
+        selectEl.classList.remove('hidden');
+        const subjects = catalogData.filters?.subjects || ['Anatomy', 'Physiology', 'Biochemistry'];
+        selectEl.innerHTML = subjects.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
+        if (presetTarget) selectEl.value = presetTarget;
+      }
+    }
+
+    function openBannerModal(idx = null) {
+      uploadedBannerBase64 = null;
+      document.getElementById('bannerFileInput').value = '';
+
+      if (idx !== null && announcementsList[idx]) {
+        const b = announcementsList[idx];
+        document.getElementById('bannerModalHeader').textContent = `Edit Banner: ${b.id}`;
+        document.getElementById('bannerEditId').value = b.id;
+        document.getElementById('bannerTitle').value = b.title || '';
+        document.getElementById('bannerSubtitle').value = b.subtitle || '';
+        document.getElementById('bannerBadge').value = b.badge || '';
+        document.getElementById('bannerImageUrl').value = b.imageUrl || '';
+        document.getElementById('bannerBgColor').value = b.bgColor || '#4a2511';
+        document.getElementById('bannerTargetProf').value = b.targetProf || 'All';
+        document.getElementById('bannerPriority').value = b.priority || 1;
+        document.getElementById('bannerActive').checked = b.active !== false;
+        document.getElementById('bannerActionType').value = b.action?.type || 'OPEN_BOOK';
+        handleActionTypeChange(b.action?.target || '');
+      } else {
+        document.getElementById('bannerModalHeader').textContent = 'Create 16:6 Carousel Banner';
+        document.getElementById('bannerEditId').value = '';
+        document.getElementById('bannerTitle').value = '';
+        document.getElementById('bannerSubtitle').value = '';
+        document.getElementById('bannerBadge').value = 'NEW DROP';
+        document.getElementById('bannerImageUrl').value = '';
+        document.getElementById('bannerBgColor').value = '#4a2511';
+        document.getElementById('bannerTargetProf').value = 'All';
+        document.getElementById('bannerPriority').value = announcementsList.length + 1;
+        document.getElementById('bannerActive').checked = true;
+        document.getElementById('bannerActionType').value = 'OPEN_BOOK';
+        handleActionTypeChange('');
+      }
+
+      updateBannerPreview();
+      document.getElementById('bannerModal').classList.remove('hidden');
+    }
+
+    function closeBannerModal() {
+      document.getElementById('bannerModal').classList.add('hidden');
+    }
+
+    function handleBannerFileSelect(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        uploadedBannerBase64 = reader.result;
+        updateBannerPreview();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function updateBannerPreview() {
+      const title = document.getElementById('bannerTitle').value.trim() || 'Banner Headline';
+      const subtitle = document.getElementById('bannerSubtitle').value.trim() || 'Subtitle description goes here';
+      const badge = document.getElementById('bannerBadge').value.trim();
+      const bg = document.getElementById('bannerBgColor').value || '#4a2511';
+      const extUrl = document.getElementById('bannerImageUrl').value.trim();
+
+      document.getElementById('previewTitle').textContent = title;
+      document.getElementById('previewSubtitle').textContent = subtitle;
+
+      const badgeEl = document.getElementById('previewBadge');
+      if (badge) {
+        badgeEl.textContent = badge;
+        badgeEl.classList.remove('hidden');
+      } else {
+        badgeEl.classList.add('hidden');
+      }
+
+      const card = document.getElementById('bannerLivePreview');
+      card.style.backgroundColor = bg;
+
+      const imgEl = document.getElementById('bannerPreviewImg');
+      const srcToUse = uploadedBannerBase64 || extUrl;
+      if (srcToUse) {
+        imgEl.src = srcToUse;
+        imgEl.classList.remove('hidden');
+      } else {
+        imgEl.classList.add('hidden');
+      }
+    }
+
+    async function saveBanner() {
+      const editId = document.getElementById('bannerEditId').value.trim();
+      const title = document.getElementById('bannerTitle').value.trim();
+      if (!title) return showToast('Banner Headline Title is required.', 'error');
+
+      const actionType = document.getElementById('bannerActionType').value;
+      let actionTarget = '';
+      if (actionType === 'OPEN_URL') {
+        actionTarget = document.getElementById('bannerTargetInput').value.trim();
+      } else if (actionType !== 'NONE' && actionType !== 'OPEN_CONTRIBUTE') {
+        actionTarget = document.getElementById('bannerTargetSelect').value;
+      }
+
+      const payload = {
+        title,
+        subtitle: document.getElementById('bannerSubtitle').value.trim(),
+        badge: document.getElementById('bannerBadge').value.trim(),
+        imageUrl: document.getElementById('bannerImageUrl').value.trim(),
+        imageBase64: uploadedBannerBase64,
+        bgColor: document.getElementById('bannerBgColor').value,
+        textColor: '#ffffff',
+        targetProf: document.getElementById('bannerTargetProf').value,
+        priority: parseInt(document.getElementById('bannerPriority').value || '1', 10),
+        active: document.getElementById('bannerActive').checked,
+        action: {
+          type: actionType,
+          target: actionTarget
+        }
+      };
+
+      const btn = document.getElementById('btnSaveBanner');
+      btn.disabled = true;
+      btn.textContent = 'Saving & Syncing...';
+
+      try {
+        const url = editId ? `/api/announcements/${encodeURIComponent(editId)}` : '/api/announcements';
+        const method = editId ? 'PUT' : 'POST';
+        const res = await fetch(url, {
+          method,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || 'Failed to save banner');
+
+        closeBannerModal();
+        showToast(editId ? `Updated banner "${title}"!` : `Published new 16:6 banner "${title}"!`);
+        await loadAnnouncements();
+      } catch (err) {
+        showToast(err.message, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Publish Banner & Push to GitHub';
+      }
+    }
+
+    async function toggleBannerActive(idx) {
+      const b = announcementsList[idx];
+      if (!b) return;
+      const payload = {
+        ...b,
+        active: !b.active,
+        action: b.action || { type: 'NONE', target: '' }
+      };
+      const res = await fetch(`/api/announcements/${encodeURIComponent(b.id)}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (res.ok) {
+        showToast(`Banner "${b.title}" ${payload.active ? 'activated' : 'paused'}.`);
+        await loadAnnouncements();
+      }
+    }
+
+    async function deleteBanner(bannerId) {
+      if (!confirm(`Delete banner "${bannerId}" from announcements.json?`)) return;
+      const res = await fetch(`/api/announcements/${encodeURIComponent(bannerId)}`, { method: 'DELETE' });
+      if (res.ok) {
+        showToast(`Deleted banner "${bannerId}".`);
+        await loadAnnouncements();
+      }
+    }
+
+    // =========================================================================
+    // 5. MODAL ACTIONS (APPROVE SUBMISSION / EDIT BOOK)
+    // =========================================================================
+    function openApproveModal(idx) {
+      const sub = submissionsList[idx];
+      if (!sub) return;
+
+      document.getElementById('modalMode').value = 'approve';
+      document.getElementById('modalTargetId').value = sub.slug;
+      document.getElementById('modalTitleHeader').textContent = 'Approve Community Submission';
+      document.getElementById('modalConfirmBtn').textContent = 'Approve & Publish';
+      document.getElementById('modalRelocateWrap').classList.add('hidden');
+
+      document.getElementById('modalCoverImg').src = sub.cover_preview_url || FALLBACK_COVER;
+      document.getElementById('modalBookTitle').value = sub.title || '';
+      document.getElementById('modalBookAuthor').value = sub.author || 'Medical Faculty';
+      document.getElementById('modalBookEdition').value = sub.edition || 'Standard Edition';
+      document.getElementById('modalBookProf').value = sub.prof || '1st Prof';
+      document.getElementById('modalBookSubject').value = sub.subject || 'Anatomy';
+      document.getElementById('modalBookType').value = sub.type || 'Handwritten Notes';
+      document.getElementById('modalBookUploader').value = sub.uploader || 'Student';
+      document.getElementById('modalBookPages').value = sub.totalPages || 1;
+      document.getElementById('modalBookSize').value = sub.sizeMb || 1.0;
+      document.getElementById('modalBookTags').value = '';
+
+      document.getElementById('actionModal').classList.remove('hidden');
+    }
+
+    function openEditBookModal(idx) {
+      const b = catalogData.books[idx];
+      if (!b) return;
+
+      document.getElementById('modalMode').value = 'edit';
+      document.getElementById('modalTargetId').value = b.id;
+      document.getElementById('modalTitleHeader').textContent = `Edit Book: ${b.id}`;
+      document.getElementById('modalConfirmBtn').textContent = 'Save Changes';
+      document.getElementById('modalRelocateWrap').classList.remove('hidden');
+
+      document.getElementById('modalCoverImg').src = `/assets/covers/${b.id}.webp`;
+      document.getElementById('modalBookTitle').value = b.title || '';
+      document.getElementById('modalBookAuthor').value = b.author || '';
+      document.getElementById('modalBookEdition').value = b.edition || '';
+      document.getElementById('modalBookProf').value = b.prof || '1st Prof';
+      document.getElementById('modalBookSubject').value = b.subject || 'Anatomy';
+      document.getElementById('modalBookType').value = b.type || 'Standard Textbook';
+      document.getElementById('modalBookUploader').value = b.uploader || 'Sahabul';
+      document.getElementById('modalBookPages').value = b.totalPages || 1;
+      document.getElementById('modalBookSize').value = b.sizeMb || 1.0;
+      document.getElementById('modalBookTags').value = (b.tags || []).join(', ');
+
+      document.getElementById('actionModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('actionModal').classList.add('hidden');
+    }
+
+    async function submitModalAction() {
+      const mode = document.getElementById('modalMode').value;
+      const targetId = document.getElementById('modalTargetId').value;
+      const btn = document.getElementById('modalConfirmBtn');
+      btn.disabled = true;
+
+      try {
+        if (mode === 'approve') {
+          const payload = {
+            title: document.getElementById('modalBookTitle').value.trim(),
+            author: document.getElementById('modalBookAuthor').value.trim(),
+            edition: document.getElementById('modalBookEdition').value.trim(),
+            prof: document.getElementById('modalBookProf').value,
+            subject: document.getElementById('modalBookSubject').value,
+            type: document.getElementById('modalBookType').value,
+            uploader: document.getElementById('modalBookUploader').value.trim(),
+            extra_tags: document.getElementById('modalBookTags').value.trim(),
+            totalPages: parseInt(document.getElementById('modalBookPages').value || '1', 10),
+            sizeMb: parseFloat(document.getElementById('modalBookSize').value || '1.0')
+          };
+          const res = await fetch(`/api/submissions/${encodeURIComponent(targetId)}/approve`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.detail || 'Approval failed');
+          showToast(`Approved & published "${payload.title}"!`);
+        } else {
+          const tagsArr = document.getElementById('modalBookTags').value.split(',').map(s => s.trim()).filter(Boolean);
+          const payload = {
+            title: document.getElementById('modalBookTitle').value.trim(),
+            author: document.getElementById('modalBookAuthor').value.trim(),
+            edition: document.getElementById('modalBookEdition').value.trim(),
+            prof: document.getElementById('modalBookProf').value,
+            subject: document.getElementById('modalBookSubject').value,
+            type: document.getElementById('modalBookType').value,
+            uploader: document.getElementById('modalBookUploader').value.trim(),
+            tags: tagsArr,
+            relocate_hf: document.getElementById('modalRelocateHf').checked
+          };
+          const res = await fetch(`/api/books/${encodeURIComponent(targetId)}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.detail || 'Update failed');
+          showToast(`Updated "${payload.title}"!`);
+        }
+        closeModal();
+        await refreshAll();
+      } catch (err) {
+        showToast(err.message, 'error');
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    async function rejectSubmission(slug) {
+      if (!confirm(`Reject and purge submission "${slug}" from Hugging Face?`)) return;
+      const res = await fetch(`/api/submissions/${encodeURIComponent(slug)}`, { method: 'DELETE' });
+      if (res.ok) {
+        showToast(`Rejected "${slug}".`);
+        await loadSubmissions();
+      }
+    }
+
+    async function deleteBook(bookId, mode) {
+      if (!confirm(`Delete "${bookId}" with mode="${mode}"?`)) return;
+      const res = await fetch(`/api/books/${encodeURIComponent(bookId)}?mode=${mode}`, { method: 'DELETE' });
+      if (res.ok) {
+        showToast(`Deleted "${bookId}" (${mode}).`);
+        await refreshAll();
+      }
+    }
+
+    // =========================================================================
+    // 6. HF STORAGE & ORPHANS
+    // =========================================================================
+    async function loadHfStatus() {
+      try {
+        const res = await fetch('/api/hf-status');
+        const data = await res.json();
+        if (data.status !== 'success') return;
+
+        document.getElementById('hfQuotaBadge').textContent = `HF Vault: ${data.total_gb} GB / ${data.quota_gb} GB (${data.total_files} files)`;
+        document.getElementById('hfRepoLabel').textContent = `Repo: ${data.repo_id} • ${data.total_files} encrypted .bin files (${data.total_gb} GB)`;
+
+        const orphansBox = document.getElementById('hfOrphansBox');
+        if (data.orphans && data.orphans.length > 0) {
+          orphansBox.classList.remove('hidden');
+          document.getElementById('hfOrphansList').innerHTML = data.orphans.map(o => `<div>⚠️ ${escapeHtml(o.path)} (${o.size_mb} MB)</div>`).join('');
+        } else {
+          orphansBox.classList.add('hidden');
+        }
+
+        document.getElementById('hfFilesList').innerHTML = (data.files || []).map(f =>
+          `<div class="flex justify-between py-1 border-b border-slate-900"><span>${escapeHtml(f.path)}</span><span class="text-slate-500">${f.size_mb} MB</span></div>`
+        ).join('');
+      } catch (e) {}
+    }
+
+    async function refreshAll() {
+      await Promise.all([loadCatalog(), loadSubmissions(), loadAnnouncements(), loadHfStatus()]);
+    }
+
+    window.addEventListener('DOMContentLoaded', refreshAll);
   </script>
 </body>
 </html>

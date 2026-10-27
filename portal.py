@@ -3,6 +3,7 @@ import re
 import io
 import time
 import json
+import base64
 import subprocess
 from pathlib import Path
 from typing import List, Dict, Any, Optional
@@ -18,6 +19,7 @@ from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from huggingface_hub import HfApi, CommitOperationCopy, CommitOperationDelete
 from fastapi import FastAPI, Request, BackgroundTasks, HTTPException, Query
 from fastapi.responses import HTMLResponse, JSONResponse, Response
+from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
@@ -25,10 +27,14 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent
 CATALOG_PATH = BASE_DIR / "catalog.json"
+ANNOUNCEMENTS_PATH = BASE_DIR / "announcements.json"
 COVERS_DIR = BASE_DIR / "assets" / "covers"
+BANNERS_DIR = BASE_DIR / "assets" / "banners"
 COVERS_DIR.mkdir(parents=True, exist_ok=True)
+BANNERS_DIR.mkdir(parents=True, exist_ok=True)
 
 app = FastAPI(title="Mulberry Operations & CMS Portal")
+app.mount("/assets", StaticFiles(directory=str(BASE_DIR / "assets")), name="assets")
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
 # ==========================================
@@ -148,6 +154,27 @@ def save_catalog(catalog: Dict[str, Any]):
         json.dump(catalog, f, indent=2, ensure_ascii=False)
 
 
+def load_announcements() -> Dict[str, Any]:
+    if ANNOUNCEMENTS_PATH.exists():
+        try:
+            with open(ANNOUNCEMENTS_PATH, "r", encoding="utf-8") as f:
+                data = json.load(f)
+        except Exception:
+            data = {"version": 1, "lastUpdated": int(time.time() * 1000), "banners": []}
+    else:
+        data = {"version": 1, "lastUpdated": int(time.time() * 1000), "banners": []}
+    data.setdefault("version", 1)
+    data.setdefault("banners", [])
+    return data
+
+
+def save_announcements(data: Dict[str, Any]):
+    data["lastUpdated"] = int(time.time() * 1000)
+    data["version"] = int(data.get("version", 1)) + 1
+    with open(ANNOUNCEMENTS_PATH, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+
+
 def get_worker_base_url() -> str:
     """Resolves CF Worker base URL from env, existing catalog records, or default."""
     if ENV_CF_WORKER_URL:
@@ -170,7 +197,7 @@ def build_worker_url(hf_path: str) -> str:
 
 
 def sync_git(commit_message: str) -> bool:
-    """Stages catalog.json and covers, commits, and pushes to GitHub."""
+    """Stages catalog.json, announcements.json, covers, and banners, then commits and pushes to GitHub."""
     log(f"Git Sync: '{commit_message}'...")
     subprocess.run(["git", "config", "user.name", "Sahabul Mondal"], cwd=BASE_DIR, check=False)
     subprocess.run(["git", "config", "user.email", "sahabul@users.noreply.github.com"], cwd=BASE_DIR, check=False)
@@ -185,7 +212,9 @@ def sync_git(commit_message: str) -> bool:
     remote_target = f"https://x-access-token:{GH_TOKEN}@github.com/{CATALOG_REPO}.git" if GH_TOKEN else "origin"
 
     subprocess.run(["git", "pull", remote_target, "main", "--rebase"], cwd=BASE_DIR, check=False, capture_output=True)
-    subprocess.run(["git", "add", "assets/covers/", "catalog.json"], cwd=BASE_DIR, check=False)
+    subprocess.run(["git", "add", "assets/covers/", "assets/banners/", "catalog.json"], cwd=BASE_DIR, check=False)
+    if ANNOUNCEMENTS_PATH.exists():
+        subprocess.run(["git", "add", "announcements.json"], cwd=BASE_DIR, check=False)
 
     subprocess.run(
         ["git", "commit", "-m", commit_message],
@@ -224,6 +253,38 @@ def build_tags(title: str, author: str, subject: str, prof: str, book_type: str,
             if cleaned:
                 tags.add(cleaned)
     return sorted(list(filter(None, tags)))
+
+
+def decode_base64_bytes(b64_string: str) -> bytes:
+    """Safely decodes a Base64 string (stripping any data URI header if present)."""
+    if "," in b64_string:
+        b64_string = b64_string.split(",", 1)[1]
+    return base64.b64decode(b64_string)
+
+
+def save_banner_webp_16_6(banner_id: str, b64_image: str) -> str:
+    """Decodes an uploaded image, crops/resizes to 16:6 (1200x450) WebP, and saves to assets/banners/."""
+    raw_bytes = decode_base64_bytes(b64_image)
+    img = Image.open(io.BytesIO(raw_bytes)).convert("RGB")
+
+    target_w, target_h = 1200, 450
+    target_ratio = target_w / target_h
+    src_w, src_h = img.size
+    src_ratio = src_w / src_h
+
+    if src_ratio > target_ratio:
+        new_w = int(src_h * target_ratio)
+        left = (src_w - new_w) // 2
+        img = img.crop((left, 0, left + new_w, src_h))
+    else:
+        new_h = int(src_w / target_ratio)
+        top = (src_h - new_h) // 2
+        img = img.crop((0, top, src_w, top + new_h))
+
+    img = img.resize((target_w, target_h), Image.Resampling.LANCZOS)
+    dest_file = BANNERS_DIR / f"{banner_id}.webp"
+    img.save(str(dest_file), format="WEBP", quality=85)
+    return f"https://cdn.jsdelivr.net/gh/{CATALOG_REPO}@main/assets/banners/{banner_id}.webp"
 
 
 # ==========================================
@@ -478,7 +539,7 @@ def run_batch_ingestion(books_queue: List[Dict[str, Any]]):
                     fallback_mirror_url = source_id
                 else:
                     log(f"1. Downloading from Google Drive ({source_id})...")
-                    gdown.download(id=source_id, output=str(pdf_path), quiet=False, fuzzy=True)
+                    gdown.download(id=source_id, output=str(pdf_path), quiet=False)
                     fallback_mirror_url = f"https://drive.google.com/uc?export=download&id={source_id}"
             except Exception as dl_err:
                 log(f"ERROR: Download failed for '{title}': {dl_err}. Skipping.")
@@ -612,7 +673,10 @@ def run_batch_ingestion(books_queue: List[Dict[str, Any]]):
 # ==========================================
 @app.get("/", response_class=HTMLResponse)
 def index_view(request: Request):
-    return templates.TemplateResponse(request=request, name="index.html", context={})
+    index_file = BASE_DIR / "templates" / "index.html"
+    if not index_file.exists():
+        return HTMLResponse("<h1>templates/index.html not found</h1>", status_code=404)
+    return HTMLResponse(content=index_file.read_text(encoding="utf-8"))
 
 
 @app.get("/api/catalog")
@@ -740,7 +804,9 @@ def api_update_book(book_id: str, req: BookUpdateRequest):
 
 
 @app.delete("/api/books/{book_id}")
-def api_delete_book(book_id: str, mode: str = Query("soft", enum=["soft", "purge"])):
+def api_delete_book(book_id: str, mode: str = "soft"):
+    if mode not in ["soft", "purge"]:
+        raise HTTPException(status_code=400, detail="Mode must be 'soft' or 'purge'")
     catalog = load_catalog()
     target_book = next((b for b in catalog["books"] if b.get("id") == book_id), None)
     if not target_book:
@@ -780,6 +846,130 @@ def api_delete_book(book_id: str, mode: str = Query("soft", enum=["soft", "purge
 
 
 # ==========================================
+# API ROUTES: ANNOUNCEMENTS CAROUSEL CMS (16:6)
+# ==========================================
+class BannerActionModel(BaseModel):
+    type: str = "NONE"  # OPEN_URL, OPEN_BOOK, FILTER_SUBJECT, FILTER_CATEGORY, OPEN_CONTRIBUTE, NONE
+    target: str = ""
+
+
+class BannerPayload(BaseModel):
+    id: Optional[str] = None
+    title: str
+    subtitle: str = ""
+    badge: str = ""
+    imageUrl: str = ""
+    imageBase64: Optional[str] = None
+    bgColor: str = "#4a2511"
+    textColor: str = "#ffffff"
+    targetProf: str = "All"
+    priority: int = 1
+    active: bool = True
+    action: BannerActionModel = BannerActionModel()
+
+
+@app.get("/api/announcements")
+def api_get_announcements():
+    data = load_announcements()
+    banners = data.get("banners", [])
+    banners.sort(key=lambda x: (not x.get("active", True), int(x.get("priority", 99))))
+    for b in banners:
+        bid = b.get("id", "")
+        local_img = BANNERS_DIR / f"{bid}.webp"
+        b["localPreviewUrl"] = (
+            f"/assets/banners/{bid}.webp?t={int(local_img.stat().st_mtime)}"
+            if local_img.exists()
+            else b.get("imageUrl", "")
+        )
+    return data
+
+
+@app.post("/api/announcements")
+def api_create_announcement(req: BannerPayload):
+    data = load_announcements()
+    banner_id = slugify(req.id or req.title) or f"banner_{int(time.time())}"
+    if any(b.get("id") == banner_id for b in data["banners"]):
+        banner_id = f"{banner_id}_{int(time.time()) % 10000}"
+
+    image_url = req.imageUrl.strip()
+    if req.imageBase64:
+        image_url = save_banner_webp_16_6(banner_id, req.imageBase64)
+
+    new_banner = {
+        "id": banner_id,
+        "title": req.title.strip(),
+        "subtitle": req.subtitle.strip(),
+        "badge": req.badge.strip(),
+        "imageUrl": image_url,
+        "bgColor": req.bgColor.strip() or "#4a2511",
+        "textColor": req.textColor.strip() or "#ffffff",
+        "targetProf": req.targetProf.strip() or "All",
+        "priority": req.priority,
+        "active": req.active,
+        "action": {
+            "type": req.action.type.strip().upper(),
+            "target": req.action.target.strip()
+        },
+        "updatedAt": int(time.time() * 1000)
+    }
+
+    data["banners"].append(new_banner)
+    data["banners"].sort(key=lambda x: int(x.get("priority", 99)))
+    save_announcements(data)
+    sync_git(f"feat(announcements): add carousel banner '{req.title.strip()}'")
+    return {"status": "created", "banner": new_banner}
+
+
+@app.put("/api/announcements/{banner_id}")
+def api_update_announcement(banner_id: str, req: BannerPayload):
+    data = load_announcements()
+    target = next((b for b in data["banners"] if b.get("id") == banner_id), None)
+    if not target:
+        raise HTTPException(status_code=404, detail=f"Banner '{banner_id}' not found")
+
+    image_url = req.imageUrl.strip() if req.imageUrl else target.get("imageUrl", "")
+    if req.imageBase64:
+        image_url = save_banner_webp_16_6(banner_id, req.imageBase64)
+
+    target["title"] = req.title.strip()
+    target["subtitle"] = req.subtitle.strip()
+    target["badge"] = req.badge.strip()
+    target["imageUrl"] = image_url
+    target["bgColor"] = req.bgColor.strip() or "#4a2511"
+    target["textColor"] = req.textColor.strip() or "#ffffff"
+    target["targetProf"] = req.targetProf.strip() or "All"
+    target["priority"] = req.priority
+    target["active"] = req.active
+    target["action"] = {
+        "type": req.action.type.strip().upper(),
+        "target": req.action.target.strip()
+    }
+    target["updatedAt"] = int(time.time() * 1000)
+
+    data["banners"].sort(key=lambda x: int(x.get("priority", 99)))
+    save_announcements(data)
+    sync_git(f"chore(announcements): update carousel banner '{banner_id}'")
+    return {"status": "updated", "banner": target}
+
+
+@app.delete("/api/announcements/{banner_id}")
+def api_delete_announcement(banner_id: str):
+    data = load_announcements()
+    before_count = len(data["banners"])
+    data["banners"] = [b for b in data["banners"] if b.get("id") != banner_id]
+    if len(data["banners"]) == before_count:
+        raise HTTPException(status_code=404, detail=f"Banner '{banner_id}' not found")
+
+    local_img = BANNERS_DIR / f"{banner_id}.webp"
+    if local_img.exists():
+        local_img.unlink()
+
+    save_announcements(data)
+    sync_git(f"chore(announcements): remove carousel banner '{banner_id}'")
+    return {"status": "deleted", "id": banner_id}
+
+
+# ==========================================
 # API ROUTES: COMMUNITY SUBMISSIONS INBOX
 # ==========================================
 @app.get("/api/submissions")
@@ -789,18 +979,18 @@ def api_list_submissions():
         api = get_hf_api()
         hf_files = api.list_repo_files(repo_id=HF_REPO_ID, repo_type="dataset")
 
-        submission_Files_map: Dict[str, List[str]] = {}
+        submission_files_map: Dict[str, List[str]] = {}
         for f in hf_files:
             if f.startswith("submissions/"):
                 parts = f.split("/")
                 if len(parts) >= 3:
                     slug = parts[1]
-                    submission_Files_map.setdefault(slug, []).append(f)
+                    submission_files_map.setdefault(slug, []).append(f)
 
         headers = {"Authorization": f"Bearer {HF_TOKEN}"} if HF_TOKEN else {}
         submissions = []
 
-        for slug, paths in submission_Files_map.items():
+        for slug, paths in submission_files_map.items():
             meta_path = f"submissions/{slug}/metadata.json"
             bin_path = next((p for p in paths if p.endswith(".bin")), None)
             cover_path = next((p for p in paths if p.endswith(".webp")), None)
@@ -808,7 +998,7 @@ def api_list_submissions():
             if not bin_path:
                 continue
 
-            meta = {
+            meta: Dict[str, Any] = {
                 "slug": slug,
                 "title": slug.replace("_", " ").title(),
                 "author": "Community Contributor",
@@ -829,17 +1019,24 @@ def api_list_submissions():
                     r = requests.get(url, headers=headers, timeout=10)
                     if r.status_code == 200:
                         fetched_meta = r.json()
-                        meta.update(fetched_meta)
+                        if isinstance(fetched_meta.get("metadata"), dict):
+                            meta.update(fetched_meta["metadata"])
+                        for k, v in fetched_meta.items():
+                            if k != "metadata" and v is not None:
+                                meta[k] = v
                 except Exception as e:
                     print(f"Failed reading metadata for {slug}: {e}")
 
             if not meta.get("sizeMb") and meta.get("sizeBytes"):
                 meta["sizeMb"] = round(float(meta["sizeBytes"]) / (1024 * 1024), 1)
 
+            has_b64_cover = bool(meta.get("coverBase64"))
+            has_any_cover = (cover_path is not None) or has_b64_cover
+
             meta["slug"] = slug
             meta["bin_hf_path"] = bin_path
-            meta["has_cover"] = cover_path is not None
-            meta["cover_preview_url"] = f"/api/submissions/{slug}/cover" if cover_path else ""
+            meta["has_cover"] = has_any_cover
+            meta["cover_preview_url"] = f"/api/submissions/{slug}/cover" if has_any_cover else ""
             submissions.append(meta)
 
         submissions.sort(key=lambda x: x.get("submittedAt", 0), reverse=True)
@@ -850,12 +1047,33 @@ def api_list_submissions():
 
 @app.get("/api/submissions/{slug}/cover")
 def api_submission_cover(slug: str):
-    """Proxies the quarantined .webp cover image from private Hugging Face repo."""
+    """
+    Serves the quarantined cover image.
+    1. Checks `submissions/{slug}/metadata.json` for `coverBase64` and decodes it to image/webp.
+    2. Falls back to `submissions/{slug}/{slug}.webp` if stored as a separate file.
+    """
     headers = {"Authorization": f"Bearer {HF_TOKEN}"} if HF_TOKEN else {}
+
+    meta_url = f"https://huggingface.co/datasets/{HF_REPO_ID}/resolve/main/submissions/{slug}/metadata.json"
+    try:
+        meta_res = requests.get(meta_url, headers=headers, timeout=10)
+        if meta_res.status_code == 200:
+            meta_json = meta_res.json()
+            b64_str = meta_json.get("coverBase64") or (
+                meta_json.get("metadata", {}).get("coverBase64")
+                if isinstance(meta_json.get("metadata"), dict) else None
+            )
+            if b64_str:
+                img_bytes = decode_base64_bytes(b64_str)
+                return Response(content=img_bytes, media_type="image/webp")
+    except Exception as e:
+        print(f"Notice: coverBase64 decode check for {slug}: {e}")
+
     url = f"https://huggingface.co/datasets/{HF_REPO_ID}/resolve/main/submissions/{slug}/{slug}.webp"
     r = requests.get(url, headers=headers, timeout=10)
     if r.status_code == 200:
         return Response(content=r.content, media_type="image/webp")
+
     raise HTTPException(status_code=404, detail="Cover not found")
 
 
@@ -874,12 +1092,6 @@ class SubmissionApproveRequest(BaseModel):
 
 @app.post("/api/submissions/{slug}/approve")
 def api_approve_submission(slug: str, req: SubmissionApproveRequest):
-    """
-    1. Relocates submissions/<slug>/<slug>.bin -> <prof>/<type>/<book_id>.bin on HF
-    2. Downloads cover.webp into assets/covers/<book_id>.webp
-    3. Deletes submissions/<slug>/ quarantine folder on HF
-    4. Adds record to catalog.json and pushes to GitHub
-    """
     api = get_hf_api()
     hf_files = api.list_repo_files(repo_id=HF_REPO_ID, repo_type="dataset")
     sub_files = [f for f in hf_files if f.startswith(f"submissions/{slug}/")]
@@ -891,21 +1103,40 @@ def api_approve_submission(slug: str, req: SubmissionApproveRequest):
     book_id = slugify(req.title) or slug
     dest_hf_path = build_hf_path(req.prof, req.type, book_id)
 
-    # 1. Download cover from HF quarantine if present
-    cover_src = next((f for f in sub_files if f.endswith(".webp")), None)
     local_cover_path = COVERS_DIR / f"{book_id}.webp"
-    if cover_src:
-        try:
-            headers = {"Authorization": f"Bearer {HF_TOKEN}"} if HF_TOKEN else {}
-            c_url = f"https://huggingface.co/datasets/{HF_REPO_ID}/resolve/main/{cover_src}"
-            r = requests.get(c_url, headers=headers, timeout=15)
-            if r.status_code == 200 and len(r.content) > 0:
-                with open(local_cover_path, "wb") as f:
-                    f.write(r.content)
-        except Exception as e:
-            log(f"Warning: could not save submission cover for {slug}: {e}")
+    cover_saved = False
+    headers = {"Authorization": f"Bearer {HF_TOKEN}"} if HF_TOKEN else {}
 
-    # 2. Server-side move on Hugging Face (Copy .bin to production + Delete quarantine folder)
+    meta_src = f"submissions/{slug}/metadata.json"
+    if meta_src in sub_files:
+        try:
+            m_url = f"https://huggingface.co/datasets/{HF_REPO_ID}/resolve/main/{meta_src}"
+            m_res = requests.get(m_url, headers=headers, timeout=15)
+            if m_res.status_code == 200:
+                m_data = m_res.json()
+                b64_str = m_data.get("coverBase64") or (
+                    m_data.get("metadata", {}).get("coverBase64")
+                    if isinstance(m_data.get("metadata"), dict) else None
+                )
+                if b64_str:
+                    with open(local_cover_path, "wb") as f:
+                        f.write(decode_base64_bytes(b64_str))
+                    cover_saved = True
+        except Exception as e:
+            log(f"Warning: could not decode coverBase64 for {slug}: {e}")
+
+    if not cover_saved:
+        cover_src = next((f for f in sub_files if f.endswith(".webp")), None)
+        if cover_src:
+            try:
+                c_url = f"https://huggingface.co/datasets/{HF_REPO_ID}/resolve/main/{cover_src}"
+                r = requests.get(c_url, headers=headers, timeout=15)
+                if r.status_code == 200 and len(r.content) > 0:
+                    with open(local_cover_path, "wb") as f:
+                        f.write(r.content)
+            except Exception as e:
+                log(f"Warning: could not save submission cover for {slug}: {e}")
+
     log(f"Approving submission '{slug}': moving {bin_src} -> {dest_hf_path}...")
     operations = [
         CommitOperationCopy(src_path_in_repo=bin_src, path_in_repo=dest_hf_path)
@@ -923,7 +1154,6 @@ def api_approve_submission(slug: str, req: SubmissionApproveRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"HF Commit Failed: {str(e)}")
 
-    # 3. Update catalog.json
     catalog = load_catalog()
     if req.type not in catalog["filters"]["types"]:
         catalog["filters"]["types"].append(req.type)
