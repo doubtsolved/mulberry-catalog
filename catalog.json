@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1793413880292,
+  "lastUpdated": 1793413930261,
   "filters": {
     "profs": [
       "1st Prof",
@@ -45,7 +45,7 @@
       "id": "textbook_of_biochemistry_for_medical_students",
       "title": "Textbook Of Biochemistry For Medical Students",
       "author": "DM Vasudevan, Sreekumari S, and Kannan Vaidyanathan",
-      "edition": "Standard Edition",
+      "edition": "10th",
       "prof": "1st Prof",
       "year": "1st Year",
       "subject": "Biochemistry",
