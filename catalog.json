@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1793412917448,
+  "lastUpdated": 1793413880292,
   "filters": {
     "profs": [
       "1st Prof",
@@ -41,6 +41,59 @@
     ]
   },
   "books": [
+    {
+      "id": "textbook_of_biochemistry_for_medical_students",
+      "title": "Textbook Of Biochemistry For Medical Students",
+      "author": "DM Vasudevan, Sreekumari S, and Kannan Vaidyanathan",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Biochemistry",
+      "type": "Standard Textbook",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "biochemistry",
+        "biochemistry textbook",
+        "clinical biochemistry notes",
+        "dm vasudevan biochemistry",
+        "exam preparatory manual biochemistry",
+        "for",
+        "free medical books pdf",
+        "kannan",
+        "mbbs first year biochemistry",
+        "mbbs study resources",
+        "medical",
+        "medical biochemistry pdf",
+        "medical student study material",
+        "sreekumari",
+        "standard textbook",
+        "students",
+        "textbook",
+        "vaidyanathan",
+        "vasudevan",
+        "vasudevan biochemistry latest edition",
+        "vasudevan textbook of biochemistry"
+      ],
+      "totalPages": 714,
+      "sizeMb": 23.9,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/textbook_of_biochemistry_for_medical_students.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/textbooks/textbook_of_biochemistry_for_medical_students.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=textbook_of_biochemistry_for_medical_students"
+        }
+      },
+      "uploader": "Sahabul Mondal"
+    },
     {
       "id": "histology_write_up_part_1",
       "title": "Histology Write Up Part 1",
@@ -3931,55 +3984,6 @@
         ],
         "telegram": {
           "deepLink": "https://t.me/MulberryIngestionBot?start=practical_textbook_of_biochemistry_for_medical_students"
-        }
-      },
-      "uploader": "Sahabul"
-    },
-    {
-      "id": "textbook_of_biochemistry_for_medical_students",
-      "title": "Textbook of Biochemistry for Medical Students",
-      "author": "DM Vasudevan, Sreekumari S, and Kannan Vaidyanathan",
-      "edition": "7th",
-      "prof": "1st Prof",
-      "year": "1st Year",
-      "subject": "Biochemistry",
-      "type": "Standard Textbook",
-      "tags": [
-        "1st prof",
-        "1st year",
-        "and",
-        "biochemistry",
-        "for",
-        "indian author",
-        "kannan",
-        "medical",
-        "sreekumari",
-        "standard textbook",
-        "students",
-        "textbook",
-        "vaidyanathan",
-        "vasudevan"
-      ],
-      "totalPages": 809,
-      "sizeMb": 28.1,
-      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/textbook_of_biochemistry_for_medical_students.webp",
-      "download": {
-        "mirrors": [
-          {
-            "provider": "github",
-            "repo": "mulberry-vault-prof1",
-            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/textbook_of_biochemistry_for_medical_students.bin",
-            "isEncrypted": true,
-            "format": "aes-256-gcm"
-          },
-          {
-            "provider": "drive",
-            "url": "https://drive.google.com/uc?export=download&id=1JQpblz6hVJxzsETBu_hjEJkmuU4ZmqVt",
-            "isEncrypted": false
-          }
-        ],
-        "telegram": {
-          "deepLink": "https://t.me/MulberryIngestionBot?start=textbook_of_biochemistry_for_medical_students"
         }
       },
       "uploader": "Sahabul"
