@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1793117792175,
+  "lastUpdated": 1793412917448,
   "filters": {
     "profs": [
       "1st Prof",
@@ -41,6 +41,58 @@
     ]
   },
   "books": [
+    {
+      "id": "histology_write_up_part_1",
+      "title": "Histology Write Up Part 1",
+      "author": "MCK",
+      "edition": "Standard Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Atlas / Practical",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "atlas / practical",
+        "cellular structures",
+        "connective tissue",
+        "epithelium",
+        "histology",
+        "histology lab",
+        "histology practical",
+        "histopathology",
+        "mbbs physiology",
+        "mck",
+        "medical notes",
+        "medical school notes",
+        "microscopic anatomy",
+        "organ histology",
+        "part",
+        "pathology basics",
+        "tissue biology",
+        "tissue slides",
+        "write"
+      ],
+      "totalPages": 54,
+      "sizeMb": 21.1,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/histology_write_up_part_1.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/practicals/histology_write_up_part_1.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=histology_write_up_part_1"
+        }
+      },
+      "uploader": "Sahabul Mondal"
+    },
     {
       "id": "lippincotts_pocket_histology_lisa_m_j_lee",
       "title": "Lippincott's Pocket Histology, Lisa M. J. Lee",
