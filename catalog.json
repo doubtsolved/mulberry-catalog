@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1794750666551,
+  "lastUpdated": 1794750901052,
   "filters": {
     "profs": [
       "1st Prof",
@@ -41,6 +41,155 @@
     ]
   },
   "books": [
+    {
+      "id": "wbuhs_1st_prof_pyq_2010_2026",
+      "title": "Wbuhs 1St Prof Pyq (2010 2026)",
+      "author": "NMO Dakshin Banga",
+      "edition": "1th Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Question Bank (PYQ)",
+      "tags": [
+        "1st",
+        "1st prof",
+        "1st year",
+        "2010",
+        "2026",
+        "anatomy",
+        "banga",
+        "dakshin",
+        "nmo",
+        "prof",
+        "pyq",
+        "question bank (pyq)",
+        "wbuhs"
+      ],
+      "totalPages": 126,
+      "sizeMb": 7.5,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/wbuhs_1st_prof_pyq_2010_2026.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/pyqs/wbuhs_1st_prof_pyq_2010_2026.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1awTOCPC-svwdrzfwTmyTEtzI2EJgt3dW",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=wbuhs_1st_prof_pyq_2010_2026"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "wbuhs_all_clgs_1st_year_pre_prof_question_papers",
+      "title": "Wbuhs All Clgs 1St Year Pre Prof Question Papers",
+      "author": "NMO Dakshin Banga",
+      "edition": "1th Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Question Bank (PYQ)",
+      "tags": [
+        "1st",
+        "1st prof",
+        "1st year",
+        "all",
+        "anatomy",
+        "banga",
+        "clgs",
+        "dakshin",
+        "nmo",
+        "papers",
+        "pre",
+        "prof",
+        "pyq",
+        "question",
+        "question bank (pyq)",
+        "wbuhs",
+        "year"
+      ],
+      "totalPages": 215,
+      "sizeMb": 112.7,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/wbuhs_all_clgs_1st_year_pre_prof_question_papers.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/pyqs/wbuhs_all_clgs_1st_year_pre_prof_question_papers.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1ot1Pbe1z2-iqUj9WDGw2pHoXm27PEkyq",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=wbuhs_all_clgs_1st_year_pre_prof_question_papers"
+        }
+      },
+      "uploader": "Sahabul"
+    },
+    {
+      "id": "preproff_papers_1st_year_mbbs_wb_colleges",
+      "title": "Preproff Papers 1St Year Mbbs Wb Colleges",
+      "author": "NMO Dakshin Banga",
+      "edition": "1th Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Question Bank (PYQ)",
+      "tags": [
+        "1st",
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "banga",
+        "colleges",
+        "dakshin",
+        "mbbs",
+        "nmo",
+        "papers",
+        "preproff",
+        "pyq",
+        "question bank (pyq)",
+        "year"
+      ],
+      "totalPages": 112,
+      "sizeMb": 18.3,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/preproff_papers_1st_year_mbbs_wb_colleges.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/pyqs/preproff_papers_1st_year_mbbs_wb_colleges.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1NC8dvzie0ITrP3FKM4ET8tv6DVGWY_lm",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=preproff_papers_1st_year_mbbs_wb_colleges"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "anatomy_3_0_meded",
       "title": "Anatomy 3 0 Meded",
