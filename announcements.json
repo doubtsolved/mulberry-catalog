@@ -1,5 +1,5 @@
 {
-  "version": 11,
+  "version": 12,
   "updatedAt": 1729850000000,
   "banners": [
     {
@@ -35,24 +35,7 @@
         "target": "Anatomy"
       },
       "updatedAt": 1793119149576
-    },
-    {
-      "id": "banner_spotlight_jambulkar",
-      "title": "Lippincott Illustrated Reviews 8th Ed",
-      "subtitle": "High-yield rapid revision biochemistry charts",
-      "badge": "NEW DROP",
-      "imageUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/banners/banner_spotlight_jambulkar.webp",
-      "action": {
-        "type": "OPEN_BOOK",
-        "target": "medicalstudyzonecom_lippincott_illustrated_reviews_biochemistry_8th_edition"
-      },
-      "active": true,
-      "priority": 3,
-      "targetProf": "1st Prof",
-      "bgColor": "#0014a8",
-      "textColor": "#ffffff",
-      "updatedAt": 1793119158743
     }
   ],
-  "lastUpdated": 1793119158743
+  "lastUpdated": 1794750376671
 }
