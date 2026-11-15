@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": 1794411879112,
+  "lastUpdated": 1794750666551,
   "filters": {
     "profs": [
       "1st Prof",
@@ -41,6 +41,46 @@
     ]
   },
   "books": [
+    {
+      "id": "anatomy_3_0_meded",
+      "title": "Anatomy 3 0 Meded",
+      "author": "MedEd",
+      "edition": "3th Edition",
+      "prof": "1st Prof",
+      "year": "1st Year",
+      "subject": "Anatomy",
+      "type": "Handwritten Notes",
+      "tags": [
+        "1st prof",
+        "1st year",
+        "anatomy",
+        "handwritten notes",
+        "meded"
+      ],
+      "totalPages": 588,
+      "sizeMb": 251.6,
+      "coverUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/covers/anatomy_3_0_meded.webp",
+      "download": {
+        "mirrors": [
+          {
+            "provider": "mulberry-vault",
+            "repo": "sahabul1064/mulberry-archives",
+            "url": "https://mulberry-vault.sahabulmondal2023.workers.dev/prof1/notes/anatomy_3_0_meded.bin",
+            "isEncrypted": true,
+            "format": "aes-256-gcm"
+          },
+          {
+            "provider": "drive",
+            "url": "https://drive.google.com/uc?export=download&id=1Z8Sh3YqAT6Jl-p2Opye71rxu466t0yD2",
+            "isEncrypted": false
+          }
+        ],
+        "telegram": {
+          "deepLink": "https://t.me/MulberryIngestionBot?start=anatomy_3_0_meded"
+        }
+      },
+      "uploader": "Sahabul"
+    },
     {
       "id": "biochemistry_3_0_meded",
       "title": "Biochemistry 3 0 Meded",
