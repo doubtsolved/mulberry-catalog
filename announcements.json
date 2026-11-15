@@ -1,24 +1,6 @@
 {
-  "version": 13,
+  "version": 14,
   "updatedAt": 1729850000000,
-  "banners": [
-    {
-      "id": "histology_books_are_now_available_on_mulberry",
-      "title": "Histology Books Are Now Available on Mulberry! 🧬",
-      "subtitle": "Explore trusted histology textbooks, now available on the Mulberry Shelf for your medical studies.",
-      "badge": "NEW DROP",
-      "imageUrl": "https://cdn.jsdelivr.net/gh/doubtsolved/mulberry-catalog@main/assets/banners/histology_books_are_now_available_on_mulberry.webp",
-      "bgColor": "#4a2511",
-      "textColor": "#ffffff",
-      "targetProf": "1st Prof",
-      "priority": 2,
-      "active": true,
-      "action": {
-        "type": "FILTER_SUBJECT",
-        "target": "Anatomy"
-      },
-      "updatedAt": 1793119149576
-    }
-  ],
-  "lastUpdated": 1794750383078
+  "banners": [],
+  "lastUpdated": 1794750389628
 }
